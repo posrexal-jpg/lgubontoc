@@ -14,10 +14,11 @@
     
     <!-- App CSS -->  
     <link id="theme-style" rel="stylesheet" href="{{ asset('assets/css/portal.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/admin.css')}}">
 
 </head> 
 
-<body class="app"> 
+<body class="app admin-shell"> 
 
 
 	@include('layouts._topnavigation') 
@@ -25,7 +26,7 @@
     
 	<div class="app-wrapper">
 		<div class="app-content pt-3 p-md-3 p-lg-4">
-			<div class="container-xl">
+			<div class="container-fluid admin-content-container">
 
 				@yield('content')
                 
@@ -43,13 +44,24 @@
     
     <!-- Page Specific JS -->
     <script src="{{asset('assets/js/app.js')}}"></script>
-    <script src="https://cdn.tiny.cloud/1/j6jyevgfkgy3vv3q07cghue0zelbvktjfcyangfmr33vja2s/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
     <script>
-      tinymce.init({
-        selector: 'textarea',
-        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-      });
+      if (window.tinymce) {
+        tinymce.init({
+          selector: 'textarea[name="description"]',
+          branding: false,
+          promotion: false,
+          menubar: false,
+          height: 340,
+          plugins: 'advlist anchor autolink charmap code codesample fullscreen image link lists media preview searchreplace table visualblocks wordcount',
+          toolbar: 'undo redo | blocks | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media table | preview fullscreen code | removeformat',
+          content_style: 'body { font-family: Arial, Helvetica, sans-serif; font-size: 15px; line-height: 1.6; }',
+        });
+
+        document.addEventListener('submit', function () {
+          tinymce.triggerSave();
+        }, true);
+      }
     </script>
 </body>
 </html>

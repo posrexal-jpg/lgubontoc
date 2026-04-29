@@ -16,7 +16,7 @@
                 </div>
                 <div class="news-card-content">
                     <div class="news-card-meta">
-                        <a href="#">{{ $item['category'] ?? 'News' }}</a>
+                        <a href="{{ $viewAllLink ?? route('newsandupdates.news') }}">{{ $item['category'] ?? 'News' }}</a>
                         <span class="px-1">/</span>
                         <span>{{ $item['date'] ?? now()->format('M d, Y') }}</span>
                     </div>

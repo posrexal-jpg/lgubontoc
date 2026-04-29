@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UserManagementController extends Controller
 {
@@ -44,6 +45,7 @@ class UserManagementController extends Controller
 
         User::create([
             'name' => $data['name'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'role' => $data['role'],
             'permissions' => $this->permissionsForRole($data['role'], $data['permissions'] ?? []),
@@ -68,6 +70,7 @@ class UserManagementController extends Controller
 
         $payload = [
             'name' => $data['name'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'role' => $data['role'],
             'permissions' => $this->permissionsForRole($data['role'], $data['permissions'] ?? []),
@@ -97,7 +100,8 @@ class UserManagementController extends Controller
     {
         return $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', 'unique:users,email' . ($userId ? ',' . $userId : '')],
+            'username' => ['required', 'string', 'max:255', Rule::unique('users', 'username')->ignore($userId)],
+            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($userId)],
             'role' => ['required', 'in:admin,content_creator'],
             'permissions' => ['array'],
             'permissions.*' => ['string', 'in:' . implode(',', array_keys(self::availablePermissions()))],

@@ -4,36 +4,13 @@
     <div class="container">
         @include('layouts.partials.message')
 
-        <form method="POST" action="{{ route('admin.careers.jobvacancies.add') }}">
-            @csrf
-            <input type="hidden" name="id" value="{{ optional($jobvacancy)->id }}">
-
-            <div class="row card p-5">
-                <div class="bg-light p-5 rounded">
-                    <h2>{{ $jobvacancy ? 'Edit Job Vacancy' : 'Add Job Vacancy' }}</h2>
-                    <p class="mb-0">BREAD: Browse, Read, Edit, Add, Delete</p>
-                </div>
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" name="title" value="{{ old('title', optional($jobvacancy)->title) }}" class="form-control" placeholder="Title" required>
-                    </div><br>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea id="myTextarea" name="description" style="width: 100%;">{{ old('description', optional($jobvacancy)->description) }}</textarea>
-                    </div><br>
-                    <div>
-                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
-                        @if($jobvacancy)
-                            <a href="{{ route('admin.careers.jobvacancies') }}" class="btn btn-secondary btn-sm">Cancel</a>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <div class="card p-4 mt-4">
-            <h5>Browse Job Vacancies</h5>
+        <div class="card p-4">
+            <h5 class="card-title">
+                Browse Job Vacancies
+                <button type="button" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#addJobVacancyModal">
+                    Add Job Vacancy
+                </button>
+            </h5>
             <table class="table table-light">
                 <thead>
                     <tr>
@@ -51,7 +28,7 @@
                             <td>{!! $value->description !!}</td>
                             <td>
                                 <a href="{{ route('admin.careers.jobvacancies.show', $value->id) }}" class="btn btn-info btn-sm text-white">Read</a>
-                                <a href="{{ route('admin.careers.jobvacancies.edit', $value->id) }}" class="btn btn-success btn-sm text-white">Edit</a>
+                                <button type="button" class="btn btn-success btn-sm text-white" data-bs-toggle="modal" data-bs-target="#editJobVacancyModal{{ $value->id }}">Edit</button>
                                 <a onclick="return confirm('Are you sure you want to delete this record?');" href="{{ route('admin.careers.jobvacancies.delete', $value->id) }}" class="btn btn-danger btn-sm text-white">Delete</a>
                             </td>
                         </tr>
@@ -63,5 +40,64 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="modal fade" id="addJobVacancyModal" tabindex="-1" aria-labelledby="addJobVacancyModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <form method="POST" action="{{ route('admin.careers.jobvacancies.add') }}">
+                        @csrf
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addJobVacancyModalLabel">Add Job Vacancy</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group mb-3">
+                                <label>Title</label>
+                                <input type="text" name="title" value="{{ old('title') }}" class="form-control" placeholder="Title" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea name="description" class="form-control">{{ old('description') }}</textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        @foreach($jobvacancies as $value)
+            <div class="modal fade" id="editJobVacancyModal{{ $value->id }}" tabindex="-1" aria-labelledby="editJobVacancyModalLabel{{ $value->id }}" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <form method="POST" action="{{ route('admin.careers.jobvacancies.add') }}">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $value->id }}">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editJobVacancyModalLabel{{ $value->id }}">Edit Job Vacancy</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group mb-3">
+                                    <label>Title</label>
+                                    <input type="text" name="title" value="{{ $value->title }}" class="form-control" placeholder="Title" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="description" class="form-control">{{ $value->description }}</textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 @endsection

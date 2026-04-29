@@ -1,50 +1,40 @@
 @extends('layouts.frontend')
 
 @section('content')
+<div class="container-fluid pt-5 pb-4">
+    <div class="container">
+        <div class="text-center pb-2">
+            <p class="section-title px-5"><span class="px-2">Upcoming Updates</span></p>
+            <h1 class="mb-4">Announcements and Updates</h1>
+        </div>
 
-<style>
-    h1{
-        text-align: center;
-        color: #046631;
-        font-family: Helvetica; 
-    }
-
-    h3
-    {
-        font-family: Helvetica;
-    }
-</style>
-
-<div class="container-fluid py-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
-                                <h3 class="m-0">Upcoming Updates</h3>
-                                <a class="text-secondary font-weight-medium text-decoration-none" href="">View All</a>
+        <div class="row pb-3">
+            @forelse($upcomingupdates as $update)
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <article class="card border-0 shadow-sm h-100">
+                        @if(!empty($update->image_file))
+                            <img class="card-img-top" src="{{ url('uploads/'.$update->image_file) }}" alt="{{ $update->title }}">
+                        @else
+                            <img class="card-img-top" src="{{ asset('resources/bontoclogonobg.png') }}" alt="Municipality of Bontoc seal">
+                        @endif
+                        <div class="card-body bg-light text-center p-4 d-flex flex-column">
+                            <h4>{{ $update->title }}</h4>
+                            @if(!empty($update->date_posted))
+                                <small class="mb-3 text-muted"><i class="fa fa-calendar text-primary mr-1"></i>{{ $update->date_posted }}</small>
+                            @endif
+                            <div class="text-left flex-grow-1">
+                                {!! \Illuminate\Support\Str::limit(strip_tags($update->description), 180) !!}
                             </div>
+                            <a href="{{ route('newsandupdates.upcomingupdates.show', $update->id) }}" class="btn btn-primary px-4 mx-auto mt-3">Read More</a>
                         </div>
-                        <div class="col-lg-3">
-                            <div class="position-relative mb-3">
-                                @foreach($upcomingupdates as $value)
-                                <img class="img-fluid w-100" src="{{ url('uploads/'.$value->image_file) }}" style="object-fit: cover;">
-                                <div class="overlay position-relative bg-light">
-                                    <div class="mb-2" style="font-size: 14px;">
-                                        <a href="#">{{ $value->title }}</a>
-                                        <span class="px-1">/</span>
-                                        <span>{{ $value->date_posted }}</span>
-                                    </div>
-                                    <a class="h6" href="">{!! $value->description !!}</a>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
+                    </article>
                 </div>
-            </div>
+            @empty
+                <div class="col-12 text-center">
+                    <p>No upcoming updates have been published yet.</p>
+                </div>
+            @endforelse
         </div>
     </div>
-
+</div>
 @endsection

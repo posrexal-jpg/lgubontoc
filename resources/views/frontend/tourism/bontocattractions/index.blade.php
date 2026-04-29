@@ -121,10 +121,15 @@ h4{
         <div class="row">
             @forelse($bontocattractions as $attraction)
                 <div class="col-md-6 mb-4">
-                    <h4>{{ $attraction->title }}</h4>
-                    <div class="siteorigin-widget-tinymce textwidget">
-                        {!! $attraction->description !!}
-                    </div>
+                    <article class="card border-0 shadow-sm h-100">
+                        <div class="card-body bg-light p-4 d-flex flex-column">
+                            <h4>{{ $attraction->title }}</h4>
+                            <div class="siteorigin-widget-tinymce textwidget flex-grow-1">
+                                {!! \Illuminate\Support\Str::limit(strip_tags($attraction->description), 220) !!}
+                            </div>
+                            <a href="{{ route('tourism.bontocattractions.show', $attraction->id) }}" class="btn btn-primary align-self-start mt-3">Read More</a>
+                        </div>
+                    </article>
                 </div>
             @empty
                 <div class="col-12">

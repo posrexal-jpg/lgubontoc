@@ -1,0 +1,528 @@
+/* Admin experience overrides. Kept separate from the bundled portal.css. */
+:root {
+  --admin-bg: #f3f6f5;
+  --admin-surface: #ffffff;
+  --admin-border: #dfe7e3;
+  --admin-text: #1f2933;
+  --admin-muted: #6b7785;
+  --admin-primary: #0f7a4a;
+  --admin-primary-soft: #e7f5ee;
+  --admin-sidebar: #123426;
+  --admin-sidebar-hover: #1b4935;
+  --admin-danger: #b94743;
+  --admin-radius: 8px;
+  --admin-shadow: 0 10px 30px rgba(28, 46, 38, 0.08);
+}
+
+.admin-shell {
+  background:
+    linear-gradient(180deg, rgba(15, 122, 74, 0.06), rgba(15, 122, 74, 0) 220px),
+    var(--admin-bg);
+  color: var(--admin-text);
+}
+
+.admin-shell .app-header {
+  border-bottom: 1px solid var(--admin-border);
+  box-shadow: 0 4px 18px rgba(19, 52, 38, 0.08);
+}
+
+.admin-shell .app-header-inner {
+  background: var(--admin-surface);
+}
+
+.admin-header-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  color: var(--admin-text);
+}
+
+.admin-header-title strong {
+  font-size: 0.95rem;
+  letter-spacing: 0;
+}
+
+.admin-header-kicker {
+  color: var(--admin-muted);
+  font-size: 0.75rem;
+}
+
+.admin-menu-btn {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--admin-primary);
+  background: var(--admin-primary-soft);
+  border: 1px solid rgba(15, 122, 74, 0.16);
+  border-radius: var(--admin-radius);
+}
+
+.admin-header-logo {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid var(--admin-border);
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(28, 46, 38, 0.08);
+}
+
+.admin-header-logo img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.admin-shell .app-sidepanel {
+  border-right: 0;
+  z-index: 1040;
+}
+
+.admin-shell .app-sidepanel .sidepanel-inner {
+  background: var(--admin-sidebar);
+  box-shadow: 16px 0 36px rgba(18, 52, 38, 0.18);
+}
+
+.admin-shell .app-branding {
+  height: auto;
+  margin-bottom: 0.75rem;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-shell .app-branding .logo-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 5px;
+  object-fit: contain;
+}
+
+.admin-shell .app-branding .logo-text,
+.admin-shell .app-logo:hover .logo-text {
+  color: #fff;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  line-height: 1.1;
+  vertical-align: middle;
+}
+
+.admin-shell .app-branding .logo-title {
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.admin-shell .app-branding .logo-subtitle {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.admin-shell .app-nav {
+  padding: 0 0.75rem 1rem;
+}
+
+.admin-shell .app-nav .nav-link,
+.admin-shell .app-nav .submenu-link {
+  color: rgba(255, 255, 255, 0.82);
+  border-radius: var(--admin-radius);
+  border-left: 0;
+}
+
+.admin-shell .app-nav .nav-link {
+  margin-bottom: 0.25rem;
+  padding-top: 0.72rem;
+  padding-bottom: 0.72rem;
+}
+
+.admin-shell .app-nav .nav-link:hover,
+.admin-shell .app-nav .nav-link.active,
+.admin-shell .app-nav .submenu-link:hover,
+.admin-shell .app-nav .submenu-link.active {
+  color: #fff;
+  background: var(--admin-sidebar-hover);
+  border-left: 0;
+}
+
+.admin-shell .app-nav .nav-icon,
+.admin-shell .app-nav .submenu-arrow {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.admin-shell .app-nav .submenu-link {
+  margin-left: 1.85rem;
+  padding: 0.45rem 0.75rem;
+}
+
+.admin-shell .app-nav .submenu-link:before {
+  display: none;
+}
+
+.admin-content-container {
+  max-width: 1440px;
+}
+
+.admin-shell .app-content {
+  padding-top: 1rem !important;
+}
+
+.admin-shell .container,
+.admin-shell .container-xl {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.admin-shell .card,
+.admin-shell .app-card {
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  box-shadow: var(--admin-shadow);
+  background: var(--admin-surface);
+}
+
+.admin-shell .card-body {
+  padding: 1.25rem;
+}
+
+.admin-shell .bg-light.p-5.rounded {
+  background: linear-gradient(135deg, var(--admin-primary-soft), #fff) !important;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius) !important;
+  padding: 1.25rem !important;
+  margin-bottom: 1rem;
+}
+
+.admin-shell h1,
+.admin-shell h2,
+.admin-shell h3,
+.admin-shell h4,
+.admin-shell h5 {
+  letter-spacing: 0;
+}
+
+.admin-shell h2 {
+  font-size: 1.35rem;
+}
+
+.admin-shell .card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.admin-shell .card-title .btn,
+.admin-shell .card-title a.btn {
+  float: none !important;
+  margin-top: 0 !important;
+}
+
+.admin-shell form .row.card,
+.admin-shell .row.card {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.admin-shell .p-5 {
+  padding: 1.25rem !important;
+}
+
+.admin-shell label,
+.admin-shell .form-label {
+  color: var(--admin-text);
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.admin-shell .form-control,
+.admin-shell .form-select {
+  min-height: 42px;
+  border-color: var(--admin-border);
+  border-radius: var(--admin-radius);
+}
+
+.admin-shell textarea.form-control,
+.admin-shell textarea {
+  min-height: 150px;
+}
+
+.admin-shell .tox-tinymce {
+  border-color: var(--admin-border);
+  border-radius: var(--admin-radius);
+}
+
+.admin-shell .table {
+  margin-bottom: 0;
+  color: var(--admin-text);
+  vertical-align: middle;
+}
+
+.admin-shell .table thead th {
+  background: #f6faf8;
+  color: #405149;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.admin-shell .table td {
+  max-width: 360px;
+}
+
+.admin-shell .table td img {
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--admin-border);
+}
+
+.admin-shell .table td:last-child {
+  white-space: nowrap;
+}
+
+.admin-shell .table-light,
+.admin-shell .table-striped {
+  --bs-table-bg: #fff;
+}
+
+.admin-shell .card:has(.table),
+.admin-shell .card-body:has(.table) {
+  overflow-x: auto;
+}
+
+.admin-shell .btn {
+  border-radius: 7px;
+}
+
+.admin-shell .btn-primary,
+.admin-shell .btn-success,
+.admin-shell .bg-success {
+  background: var(--admin-primary) !important;
+  border-color: var(--admin-primary) !important;
+}
+
+.admin-shell .btn-danger {
+  background: var(--admin-danger);
+}
+
+.admin-shell .btn-info {
+  background: #256f9c;
+}
+
+.admin-shell .btn-sm {
+  padding: 0.35rem 0.6rem;
+}
+
+.admin-shell .alert {
+  border: 0;
+  border-radius: var(--admin-radius);
+  box-shadow: 0 8px 22px rgba(28, 46, 38, 0.06);
+}
+
+.admin-hero-card {
+  background:
+    linear-gradient(135deg, rgba(15, 122, 74, 0.12), rgba(255, 255, 255, 0.98)),
+    var(--admin-surface);
+}
+
+.admin-eyebrow {
+  display: block;
+  color: var(--admin-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.admin-page-heading {
+  font-size: 1.8rem;
+  margin-bottom: 0.35rem;
+}
+
+.admin-page-copy {
+  color: var(--admin-muted);
+  max-width: 720px;
+}
+
+.admin-user-card {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  padding: 1rem;
+}
+
+.admin-user-card span {
+  display: block;
+  color: var(--admin-muted);
+  font-size: 0.78rem;
+}
+
+.admin-user-card strong {
+  display: block;
+  color: var(--admin-text);
+  font-size: 1rem;
+  margin-top: 0.25rem;
+}
+
+.admin-shortcut-card {
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1rem;
+  color: var(--admin-text);
+}
+
+.admin-shortcut-card:hover {
+  color: var(--admin-text);
+  border-color: rgba(15, 122, 74, 0.32);
+  transform: translateY(-1px);
+}
+
+.admin-shortcut-icon {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--admin-primary);
+  background: var(--admin-primary-soft);
+  border-radius: var(--admin-radius);
+}
+
+.admin-shortcut-label {
+  font-weight: 700;
+}
+
+.admin-shortcut-action {
+  color: var(--admin-muted);
+  font-size: 0.82rem;
+}
+
+.admin-shell .app-user-dropdown img {
+  width: 34px;
+  height: 34px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--admin-border);
+}
+
+.admin-profile-avatar {
+  width: 112px;
+  height: 112px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  box-shadow: 0 10px 26px rgba(28, 46, 38, 0.14);
+}
+
+@media (max-width: 1199.98px) {
+  .admin-shell .app-header-inner {
+    margin-left: 0;
+  }
+
+  .admin-shell .app-wrapper {
+    margin-left: 0;
+  }
+
+  .admin-shell .app-sidepanel .sidepanel-inner {
+    width: min(86vw, 300px);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .admin-shell {
+    padding-top: 58px;
+  }
+
+  .admin-shell .app-content {
+    padding: 0.75rem !important;
+  }
+
+  .admin-header-title {
+    display: none;
+  }
+
+  .admin-header-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .admin-header-logo img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .admin-shell .app-utility-item {
+    margin-right: 0;
+  }
+
+  .admin-shell .app-user-dropdown .dropdown-toggle {
+    max-width: 168px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .admin-shell .card,
+  .admin-shell .app-card {
+    border-radius: 7px;
+  }
+
+  .admin-shell .card-body,
+  .admin-shell .p-4,
+  .admin-shell .p-5 {
+    padding: 1rem !important;
+  }
+
+  .admin-shell .bg-light.p-5.rounded {
+    padding: 1rem !important;
+  }
+
+  .admin-shell h2 {
+    font-size: 1.15rem;
+  }
+
+  .admin-page-heading {
+    font-size: 1.35rem;
+  }
+
+  .admin-shortcut-card {
+    grid-template-columns: auto 1fr;
+  }
+
+  .admin-shortcut-action {
+    grid-column: 2;
+  }
+
+  .admin-shell .card-title {
+    display: block;
+  }
+
+  .admin-shell .card-title .btn,
+  .admin-shell .card-title a.btn {
+    width: 100%;
+    margin-top: 0.75rem !important;
+  }
+
+  .admin-shell .table {
+    min-width: 760px;
+    font-size: 0.86rem;
+  }
+
+  .admin-shell .btn-sm {
+    padding: 0.32rem 0.5rem;
+  }
+}

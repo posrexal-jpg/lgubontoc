@@ -51,8 +51,11 @@ class ContentSeeder extends Seeder
         ], $now);
 
         $this->seedNews('newsand_updates_news', [
-            ['Municipal Service Caravan', 'The municipal government continues to bring basic services closer to barangay residents.', '2026-04-01'],
-            ['Clean and Green Program', 'Community volunteers and municipal teams joined the latest clean and green activity.', '2026-04-10'],
+            ['Municipal Service Caravan Reaches More Barangays', '<p>The municipal government continues to bring basic services closer to barangay residents through its regular service caravan. Residents received assistance for frontline transactions, public information, and community concerns.</p>', '2026-04-01'],
+            ['Clean and Green Program Strengthens Community Participation', '<p>Community volunteers, barangay officials, and municipal teams joined the latest clean and green activity to promote cleaner public spaces and stronger environmental awareness.</p>', '2026-04-10'],
+            ['Bontoc Holds Disaster Preparedness Orientation', '<p>The Municipal Disaster Risk Reduction and Management Office conducted an orientation on preparedness, early warning, and response coordination for local stakeholders.</p>', '2026-04-18'],
+            ['Local Health Outreach Serves Residents', '<p>Municipal health personnel provided basic consultations, information materials, and preventive health reminders during the latest outreach activity for residents.</p>', '2026-04-24'],
+            ['Tourism Office Highlights Bontoc Destinations', '<p>The municipal tourism team shared updates on local attractions, cultural sites, and community destinations as part of efforts to promote Bontoc to visitors and residents.</p>', '2026-04-29'],
         ], $now);
 
         $this->seedNews('newsand_updates_upcomingupdates', [

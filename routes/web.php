@@ -12,6 +12,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 { 
      //Homepage Routes
       Route::get('/', 'Frontend\HomeController@home')->name('home');
+      Route::get('/home/{id}', 'Frontend\HomeController@show')->name('home.show');
 
      // AboutUs Routes
       Route::get('/about/history', 'Frontend\AboutController@indexhistory')->name('about.history');
@@ -25,7 +26,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
      //News and Updates
      Route::get('/newsandupdates/news', 'Frontend\NewsandUpdatesController@indexnews')->name('newsandupdates.news');
+     Route::get('/newsandupdates/news/{id}', 'Frontend\NewsandUpdatesController@shownews')->name('newsandupdates.news.show');
      Route::get('/newsandupdates/upcomingupdates', 'Frontend\NewsandUpdatesController@indexupcomingupdates')->name('newsandupdates.upcomingupdates');
+     Route::get('/newsandupdates/upcomingupdates/{id}', 'Frontend\NewsandUpdatesController@showupcomingupdates')->name('newsandupdates.upcomingupdates.show');
 
      //Services
      Route::get('/services/mayorsoffice', 'Frontend\ServicesController@indexmayorsoffice')->name('services.mayorsoffice');
@@ -38,13 +41,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
      //Tourism
      Route::get('/tourism/bontocattractions', 'Frontend\TourismController@indexbontocattractions')->name('tourism.bontocattractions');
+     Route::get('/tourism/bontocattractions/{id}', 'Frontend\TourismController@showbontocattractions')->name('tourism.bontocattractions.show');
 
      //Careers
      Route::get('/careers/jobvacancies', 'Frontend\CareersController@indexjobvacancies')->name('careers.jobvacancies');
+     Route::get('/careers/jobvacancies/{id}', 'Frontend\CareersController@showjobvacancies')->name('careers.jobvacancies.show');
 
      //Others
      Route::get('/others/downloadableforms', 'Frontend\OthersController@indexdownloadableforms')->name('others.downloadableforms');
      Route::get('/others/gallery', 'Frontend\OthersController@indexgallery')->name('others.gallery');
+     Route::get('/others/gallery/{id}', 'Frontend\OthersController@showgallery')->name('others.gallery.show');
      Route::get('/others/memorandom', 'Frontend\OthersController@indexmemorandom')->name('others.memorandom');
      
 
@@ -66,6 +72,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
         // Dashboard
             Route::get('dashboard', 'DashboardController@dashboard')->name('dashboard');
+
+        // Profile
+        Route::get('profile', 'ProfileController@edit')->name('admin.profile.edit');
+        Route::put('profile', 'ProfileController@update')->name('admin.profile.update');
+        Route::put('profile/password', 'ProfileController@updatePassword')->name('admin.profile.password');
 
         // User management
         Route::resource('users', 'UserManagementController')

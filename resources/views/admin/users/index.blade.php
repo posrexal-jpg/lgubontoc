@@ -7,7 +7,7 @@
             <h1 class="app-page-title mb-1">User Accounts</h1>
             <p class="text-muted mb-0">Create admin and content creator accounts with module-level access.</p>
         </div>
-        <a href="{{ route('admin.users.create') }}" class="btn btn-primary">Add Account</a>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAccountModal">Add Account</button>
     </div>
 
     @if(session('success'))
@@ -23,6 +23,7 @@
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Username</th>
                     <th>Email</th>
                     <th>Role</th>
                     <th>Access</th>
@@ -33,6 +34,7 @@
                 @foreach($users as $user)
                     <tr>
                         <td>{{ $user->name }}</td>
+                        <td>{{ $user->username }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
                             <span class="badge bg-{{ $user->role === 'admin' ? 'success' : 'secondary' }}">
@@ -47,7 +49,7 @@
                             @endif
                         </td>
                         <td class="text-end">
-                            <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editAccountModal{{ $user->id }}">Edit</button>
                             @if(! auth()->user()->is($user))
                                 <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this account?')">
                                     @csrf
@@ -62,4 +64,41 @@
         </table>
     </div>
 </div>
+
+<div class="modal fade" id="addAccountModal" tabindex="-1" aria-labelledby="addAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <form action="{{ route('admin.users.store') }}" method="POST">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addAccountModalLabel">Add Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @include('admin.users._form', ['user' => null, 'modal' => true])
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@foreach($users as $user)
+    <div class="modal fade" id="editAccountModal{{ $user->id }}" tabindex="-1" aria-labelledby="editAccountModalLabel{{ $user->id }}" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <form action="{{ route('admin.users.update', $user) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editAccountModalLabel{{ $user->id }}">Edit Account</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @include('admin.users._form', ['user' => $user, 'modal' => true])
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endforeach
 @endsection

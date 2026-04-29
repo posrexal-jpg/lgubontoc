@@ -30,6 +30,10 @@ window.addEventListener('resize', function(){
 
 
 function responsiveSidePanel() {
+    if (!sidePanel) {
+        return;
+    }
+
     let w = window.innerWidth;
 	if(w >= 1200) {
 	    // if larger 
@@ -45,29 +49,33 @@ function responsiveSidePanel() {
 	}
 };
 
+if (sidePanelToggler && sidePanel) {
 sidePanelToggler.addEventListener('click', () => {
 	if (sidePanel.classList.contains('sidepanel-visible')) {
-		console.log('visible');
 		sidePanel.classList.remove('sidepanel-visible');
 		sidePanel.classList.add('sidepanel-hidden');
 		
 	} else {
-		console.log('hidden');
 		sidePanel.classList.remove('sidepanel-hidden');
 		sidePanel.classList.add('sidepanel-visible');
 	}
 });
+}
 
 
 
+if (sidePanelClose && sidePanelToggler) {
 sidePanelClose.addEventListener('click', (e) => {
 	e.preventDefault();
 	sidePanelToggler.click();
 });
+}
 
+if (sidePanelDrop && sidePanelToggler) {
 sidePanelDrop.addEventListener('click', (e) => {
 	sidePanelToggler.click();
 });
+}
 
 
 
@@ -75,6 +83,7 @@ sidePanelDrop.addEventListener('click', (e) => {
 const searchMobileTrigger = document.querySelector('.search-mobile-trigger');
 const searchBox = document.querySelector('.app-search-box');
 
+if (searchMobileTrigger && searchBox) {
 searchMobileTrigger.addEventListener('click', () => {
 
 	searchBox.classList.toggle('is-visible');
@@ -92,5 +101,5 @@ searchMobileTrigger.addEventListener('click', () => {
 		
 	
 });
-
+}
 

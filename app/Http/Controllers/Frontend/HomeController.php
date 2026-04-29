@@ -38,7 +38,7 @@ class HomeController extends Controller
                 'date' => $item->date_posted,
                 'description' => $item->description,
                 'image' => 'public/home/' . $item->image,
-                'link' => '#',
+                'link' => route('home.show', $item->id),
                 'category' => 'News'
             ];
         });
@@ -51,5 +51,14 @@ class HomeController extends Controller
         ];
 
         return view('frontend.home.index', $data);
+    }
+
+    public function show($id)
+    {
+        $item = HomepageModel::findOrFail($id);
+
+        return view('frontend.home.show', [
+            'item' => $item,
+        ]);
     }
 }

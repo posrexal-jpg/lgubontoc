@@ -8,14 +8,31 @@
         <div class="container-fluid py-2">
             <div class="app-header-content">
                 <div class="row justify-content-between align-items-center">
-                    <div class="app-search-box col"></div>
+                    <div class="col-auto d-xl-none">
+                        <button id="sidepanel-toggler" class="admin-menu-btn" type="button" aria-label="Open admin navigation">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                    <div class="col-auto">
+                        <a class="admin-header-logo" href="{{ url('admin/dashboard') }}" aria-label="Admin dashboard">
+                            <img src="{{ asset('assets/images/bontoclogo.png') }}" alt="Bontoc LGU logo">
+                        </a>
+                    </div>
+                    <div class="app-search-box col">
+                        <div class="admin-header-title">
+                            <span class="admin-header-kicker">Municipality of Bontoc</span>
+                            <strong>Admin Console</strong>
+                        </div>
+                    </div>
                     <div class="app-utilities col-auto">
                         <div class="app-utility-item app-user-dropdown dropdown">
                             <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                                <img src="{{ asset('resources/img/bontoclogonobg.png') }}" alt="user profile">
+                                <img src="{{ asset('assets/images/user.png') }}" alt="user profile">
                                 {{ $user->name ?? 'Account' }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
+                                <li><a class="dropdown-item" href="{{ route('admin.profile.edit') }}">Profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{ url('/logout') }}">Log Out</a></li>
                             </ul>
                         </div>
@@ -31,8 +48,11 @@
             <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
             <div class="app-branding">
                 <a class="app-logo" href="{{ url('admin/dashboard') }}">
-                    <img class="logo-icon me-2" src="{{ asset('resources/img/bontoclogonobg.png') }}" alt="logo">
-                    <span class="logo-text">{{ $user?->isAdmin() ? 'Administrator' : 'Content Creator' }}</span>
+                    <img class="logo-icon me-2" src="{{ asset('assets/images/bontoclogo.png') }}" alt="logo">
+                    <span class="logo-text">
+                        <span class="logo-title">Bontoc LGU</span>
+                        <span class="logo-subtitle">{{ $user?->isAdmin() ? 'Administrator' : 'Content Creator' }}</span>
+                    </span>
                 </a>
             </div>
 

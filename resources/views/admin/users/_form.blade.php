@@ -1,4 +1,6 @@
-@csrf
+@if(empty($modal))
+    @csrf
+@endif
 
 <div class="row g-3">
     <div class="col-md-6">
@@ -9,6 +11,11 @@
     <div class="col-md-6">
         <label class="form-label">Email</label>
         <input type="email" name="email" class="form-control" value="{{ old('email', $user->email ?? '') }}" required>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Username</label>
+        <input type="text" name="username" class="form-control" value="{{ old('username', $user->username ?? '') }}" required>
     </div>
 
     <div class="col-md-6">
@@ -61,5 +68,9 @@
 
 <div class="mt-4">
     <button type="submit" class="btn btn-primary">Save Account</button>
-    <a href="{{ route('admin.users.index') }}" class="btn btn-light">Cancel</a>
+    @if(!empty($modal))
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+    @else
+        <a href="{{ route('admin.users.index') }}" class="btn btn-light">Cancel</a>
+    @endif
 </div>

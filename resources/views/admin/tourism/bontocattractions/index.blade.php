@@ -4,36 +4,13 @@
     <div class="container">
         @include('layouts.partials.message')
 
-        <form method="POST" action="{{ route('admin.tourism.bontocattractions.add') }}">
-            @csrf
-            <input type="hidden" name="id" value="{{ optional($bontocattraction)->id }}">
-
-            <div class="row card p-5">
-                <div class="bg-light p-5 rounded">
-                    <h2>{{ $bontocattraction ? 'Edit Bontoc Attraction' : 'Add Bontoc Attraction' }}</h2>
-                    <p class="mb-0">BREAD: Browse, Read, Edit, Add, Delete</p>
-                </div>
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <label class="text-black">Title</label>
-                        <input type="text" name="title" value="{{ old('title', optional($bontocattraction)->title) }}" class="form-control" placeholder="Title" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="text-black">Description</label>
-                        <textarea id="myTextarea" name="description" style="width: 100%;">{{ old('description', optional($bontocattraction)->description) }}</textarea>
-                    </div>
-                    <div><br>
-                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
-                        @if($bontocattraction)
-                            <a href="{{ route('admin.tourism.bontocattractions') }}" class="btn btn-secondary btn-sm">Cancel</a>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <div class="card p-4 mt-4">
-            <h5>Browse Bontoc Attractions</h5>
+        <div class="card p-4">
+            <h5 class="card-title">
+                Browse Bontoc Attractions
+                <button type="button" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#addAttractionModal">
+                    Add Bontoc Attraction
+                </button>
+            </h5>
             <table class="table table-light">
                 <thead>
                     <tr>
@@ -51,7 +28,7 @@
                             <td>{!! $value->description !!}</td>
                             <td>
                                 <a href="{{ route('admin.tourism.bontocattractions.show', $value->id) }}" class="btn btn-info btn-sm text-white">Read</a>
-                                <a href="{{ route('admin.tourism.bontocattractions.edit', $value->id) }}" class="btn btn-success btn-sm text-white">Edit</a>
+                                <button type="button" class="btn btn-success btn-sm text-white" data-bs-toggle="modal" data-bs-target="#editAttractionModal{{ $value->id }}">Edit</button>
                                 <a onclick="return confirm('Are you sure you want to delete this record?');" href="{{ route('admin.tourism.bontocattractions.delete', $value->id) }}" class="btn btn-danger btn-sm text-white">Delete</a>
                             </td>
                         </tr>
@@ -63,15 +40,64 @@
                 </tbody>
             </table>
         </div>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.6.0/tinymce.min.js"></script>
-    <script>
-        tinymce.init({
-            selector: '#myTextarea',
-            plugins: 'advlist autolink lists link image code media table',
-            toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | link image code media table',
-            menubar: false,
-        });
-    </script>
+        <div class="modal fade" id="addAttractionModal" tabindex="-1" aria-labelledby="addAttractionModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <form method="POST" action="{{ route('admin.tourism.bontocattractions.add') }}">
+                        @csrf
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addAttractionModalLabel">Add Bontoc Attraction</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group mb-3">
+                                <label>Title</label>
+                                <input type="text" name="title" value="{{ old('title') }}" class="form-control" placeholder="Title" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea name="description" class="form-control">{{ old('description') }}</textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        @foreach($bontocattractions as $value)
+            <div class="modal fade" id="editAttractionModal{{ $value->id }}" tabindex="-1" aria-labelledby="editAttractionModalLabel{{ $value->id }}" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <form method="POST" action="{{ route('admin.tourism.bontocattractions.add') }}">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $value->id }}">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editAttractionModalLabel{{ $value->id }}">Edit Bontoc Attraction</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group mb-3">
+                                    <label>Title</label>
+                                    <input type="text" name="title" value="{{ $value->title }}" class="form-control" placeholder="Title" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="description" class="form-control">{{ $value->description }}</textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
 @endsection
