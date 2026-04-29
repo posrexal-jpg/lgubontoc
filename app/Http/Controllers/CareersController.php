@@ -11,7 +11,28 @@ class CareersController extends Controller
     {
         $jobvacancies = Careers_jobvacancies::all();
         return view('admin.careers.jobvacancies.index',[
-                'jobvacancies' => $jobvacancies
+                'jobvacancies' => $jobvacancies,
+                'jobvacancy' => null,
+        ]);
+    }
+
+   public function editjobvacancies($id)
+    {
+        $jobvacancies = Careers_jobvacancies::all();
+        $jobvacancy = Careers_jobvacancies::findOrFail($id);
+
+        return view('admin.careers.jobvacancies.index',[
+                'jobvacancies' => $jobvacancies,
+                'jobvacancy' => $jobvacancy,
+        ]);
+    }
+
+   public function showjobvacancies($id)
+    {
+        $jobvacancy = Careers_jobvacancies::findOrFail($id);
+
+        return view('admin.careers.jobvacancies.show',[
+                'jobvacancy' => $jobvacancy,
         ]);
     }
 
@@ -28,6 +49,13 @@ class CareersController extends Controller
             $formsave->description = $request->description;
             $formsave->save();
          }
-        return redirect()->back();
+        return redirect()->route('admin.careers.jobvacancies')->with('success', 'Job vacancy successfully saved.');
+    }
+
+   public function deletejobvacancies($id)
+    {
+        Careers_jobvacancies::findOrFail($id)->delete();
+
+        return redirect()->route('admin.careers.jobvacancies')->with('error', 'Job vacancy successfully deleted.');
     }
 }

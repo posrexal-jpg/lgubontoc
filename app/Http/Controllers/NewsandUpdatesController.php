@@ -110,7 +110,7 @@ class NewsandUpdatesController extends Controller
 
     public function listupcomingupdates() 
     {   
-        $data = NewsandUpdates_news::paginate(10);
+        $data = NewsandUpdates_upcomingupdates::paginate(10);
         return view('admin.newsandupdates.upcomingupdates.list', [
                 'upcomingupdates' => $data
         ]);
@@ -133,15 +133,15 @@ class NewsandUpdatesController extends Controller
 
         if(!empty($request->file('image_file'))){
 
-            if (!empty($updateRecord->image) && file_exists('uploads/'.$updateRecord->image)) {
-                unlink('public/uploads/'.$updateRecord->image);
+            if (!empty($updateRecord->image_file) && file_exists('uploads/'.$updateRecord->image_file)) {
+                unlink('uploads/'.$updateRecord->image_file);
             }
 
             $file = $request->file('image_file');
             $randomStr = Str::random(30);
             $filename = $randomStr . '.' . $file->
                     getClientOriginalExtension();
-            $file->move('public/uploads/',$filename);
+            $file->move('uploads/',$filename);
             $updateRecord->image_file = $filename;
 
         }
@@ -169,7 +169,7 @@ class NewsandUpdatesController extends Controller
             $randomStr = Str::random(30);
             $filename = $randomStr . '.' . $file->
                     getClientOriginalExtension();
-            $file->move('public/uploads/',$filename);
+            $file->move('uploads/',$filename);
             $insertRecord->image_file = $filename;
 
         }
@@ -183,8 +183,8 @@ class NewsandUpdatesController extends Controller
     {
         $deleteRecord = NewsandUpdates_upcomingupdates::find($id);
 
-        if (!empty($deleteRecord->image) && file_exists('uploads/'.$deleteRecord->image)) {
-            unlink('public/uploads/'.$deleteRecord->image);
+        if (!empty($deleteRecord->image_file) && file_exists('uploads/'.$deleteRecord->image_file)) {
+            unlink('uploads/'.$deleteRecord->image_file);
         }
 
         $deleteRecord->delete();

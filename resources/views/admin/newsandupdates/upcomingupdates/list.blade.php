@@ -38,7 +38,7 @@
                     <td>{{ $value->date_posted }}</td>
                     <td></td>
                     <td>
-                      <a href="{{ url('admin/newsandupdates/upcomingupdates/edit/{$id}') }}" class="btn btn-success btn-sm text-white">Edit</a>
+                      <a href="{{ route('admin.newsandupdates.upcomingupdates.edit', $value->id) }}" class="btn btn-success btn-sm text-white">Edit</a>
                       <a onclick="return confirm('Are you sure you want to delete records?');" href="{{ url('admin/newsandupdates/upcomingupdates/delete/'.$value->id) }}" class="btn btn-danger btn-sm text-white">Delete</a>
                     </td>
                   </tr>

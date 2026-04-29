@@ -116,5 +116,22 @@ h4{
                 </div><br> 
         </div>
     </div>
+
+    <div class="container py-4">
+        <div class="row">
+            @forelse($bontocattractions as $attraction)
+                <div class="col-md-6 mb-4">
+                    <h4>{{ $attraction->title }}</h4>
+                    <div class="siteorigin-widget-tinymce textwidget">
+                        {!! $attraction->description !!}
+                    </div>
+                </div>
+            @empty
+                <div class="col-12">
+                    <h4>POPULAR DESTINATIONS</h4>
+                </div>
+            @endforelse
+        </div>
+    </div>
 </div>
 @endsection

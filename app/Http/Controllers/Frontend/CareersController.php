@@ -10,7 +10,7 @@ class CareersController extends Controller
 {
     public function indexjobvacancies()
     {
-        $careers = Careers_jobvacancies::first();
+        $careers = Careers_jobvacancies::all();
         return view('frontend.careers.jobvacancies.index',[
                 'careers' => $careers
         ]);

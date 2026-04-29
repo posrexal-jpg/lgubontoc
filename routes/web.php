@@ -105,7 +105,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
         //Admin Dashboard Careers
         Route::get('/careers/jobvacancies', 'CareersController@indexjobvacancies')->name('admin.careers.jobvacancies');
+        Route::get('/careers/jobvacancies/read/{id}', 'CareersController@showjobvacancies')->name('admin.careers.jobvacancies.show');
+        Route::get('/careers/jobvacancies/edit/{id}', 'CareersController@editjobvacancies')->name('admin.careers.jobvacancies.edit');
         Route::post('/careers/jobvacancies/add', 'CareersController@addjobvacancies')->name('admin.careers.jobvacancies.add');
+        Route::get('/careers/jobvacancies/delete/{id}', 'CareersController@deletejobvacancies')->name('admin.careers.jobvacancies.delete');
 
         //Admin Dashboard Services
         Route::get('/services/mayorsoffice', 'ServicesController@indexmayorsoffice')->name('admin.services.mayorsoffice');
@@ -113,8 +116,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
         //Admin Dashboard Tourism
         Route::get('/tourism/bontocattractions', 'TourismController@indexbontocattractions')->name('admin.tourism.bontocattractions');
-
+        Route::get('/tourism/bontocattractions/read/{id}', 'TourismController@showbontocattractions')->name('admin.tourism.bontocattractions.show');
+        Route::get('/tourism/bontocattractions/edit/{id}', 'TourismController@editbontocattractions')->name('admin.tourism.bontocattractions.edit');
         Route::post('/tourism/bontocattractions/add', 'TourismController@addbontocattractions')->name('admin.tourism.bontocattractions.add');
+        Route::get('/tourism/bontocattractions/delete/{id}', 'TourismController@deletebontocattractions')->name('admin.tourism.bontocattractions.delete');
 
         //Admin News and Updates
         Route::get('/newsandupdates/news/add', 'NewsandUpdatesController@addnews')->name('admin.newsandupdates.news.add');
@@ -123,16 +128,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('/newsandupdates/news/{id}', 'NewsandUpdatesController@addnews')->name('admin.newsandupdates.news');
         Route::post('/newsandupdates/news/add', 'NewsandUpdatesController@insertnews')->name('admin.newsandupdates.news.insert');
         Route::get('/newsandupdates/news/list', 'NewsandUpdatesController@listnews')->name('admin.newsandupdates.news.list');
+        Route::get('/newsandupdates/news/read/{id}', 'NewsandUpdatesController@shownews')->name('admin.newsandupdates.news.show');
         Route::get('/newsandupdates/news/edit/{id}', 'NewsandUpdatesController@editnews')->name('admin.newsandupdates.news.edit');
         Route::post('/newsandupdates/news/edit/{id}', 'NewsandUpdatesController@updatenews')->name('admin.newsandupdates.news.edit.update');
         Route::get('/newsandupdates/news/delete/{id}', 'NewsandUpdatesController@deletenews')->name('admin.newsandupdates.news.edit.delete');
 
-        Route::get('/newsandupdates/upcomingupdates/add', 'NewsandUpdatesController@addnews')->name('admin.newsandupdates.upcomingupdates.add');
-        Route::get('/newsandupdates/upcomingupdates/list', 'NewsandUpdatesController@list')->name('admin.newsandupdates.upcomingupdates.list');
-        // Route::get('/newsandupdates/upcomingupdates/list', 'NewsandUpdatesController@addnews')->name('admin.newsandupdates.upcomingupdates.list');
-        Route::get('/newsandupdates/upcomingupdates/{id}', 'NewsandUpdatesController@addupcomingupdates')->name('admin.newsandupdates.upcomingupdates');
+        Route::get('/newsandupdates/upcomingupdates/add', 'NewsandUpdatesController@addupcomingupdates')->name('admin.newsandupdates.upcomingupdates.add');
         Route::post('/newsandupdates/upcomingupdates/add', 'NewsandUpdatesController@insertupcomingupdates')->name('admin.newsandupdates.upcomingupdates.insert');
         Route::get('/newsandupdates/upcomingupdates/list', 'NewsandUpdatesController@listupcomingupdates')->name('admin.newsandupdates.upcomingupdates.list');
+        Route::get('/newsandupdates/upcomingupdates/read/{id}', 'NewsandUpdatesController@showupcomingupdates')->name('admin.newsandupdates.upcomingupdates.show');
         Route::get('/newsandupdates/upcomingupdates/edit/{id}', 'NewsandUpdatesController@editupcomingupdates')->name('admin.newsandupdates.upcomingupdates.edit');
         Route::post('/newsandupdates/upcomingupdates/edit/{id}', 'NewsandUpdatesController@updateupcomingupdates')->name('admin.newsandupdates.upcomingupdates.edit.update');
         Route::get('/newsandupdates/upcomingupdates/delete/{id}', 'NewsandUpdatesController@deleteupcomingupdates')->name('admin.newsandupdates.upcomingupdates.edit.delete');
