@@ -97,8 +97,9 @@
 	</a>
 		<div id="submenu-3" class="collapse submenu submenu-3" data-bs-parent="#menu-accordion">
 			<ul class="submenu-list list-unstyled">
+				<li class="submenu-item"><a class="submenu-link" href="{{route('admin.transparency.budget')}}">Budget Documents</a></li>
 				<li class="submenu-item"><a class="submenu-link" href="{{route('admin.transparency.municipalordinances')}}">Municipal Ordinances</a></li>
-				<li class="submenu-item"><a class="submenu-link" href="{{route('admin.transparency.resolutions')}}">Resolutions</a></li>  
+				<li class="submenu-item"><a class="submenu-link" href="{{route('admin.transparency.resolutions')}}">Resolutions</a></li>
 			</ul>
 		</div>
 </li>
@@ -183,8 +184,50 @@
 		<div id="submenu-8" class="collapse submenu submenu-8" data-bs-parent="#menu-accordion">
 			<ul class="submenu-list list-unstyled">
 				<li class="submenu-item"><a class="submenu-link" href="{{ route('admin.others.downloadableforms') }}">Downloadable Forms</a></li>
-				<li class="submenu-item"><a class="submenu-link" href="{{ route('admin.others.gallery') }}">Gallery</a></li> 
+				<li class="submenu-item"><a class="submenu-link" href="{{ route('admin.others.gallery') }}">Gallery</a></li>
 				<li class="submenu-item"><a class="submenu-link" href="{{ route('admin.others.memorandom') }}">Memorandum</a></li>
+			</ul>
+		</div>
+	</li>
+	<li class="nav-item has-submenu">
+		<a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-9" aria-expanded="false" aria-controls="submenu-9">
+			<span class="nav-icon">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
+				<path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"/>
+				</svg>
+			</span>
+			<span class="nav-link-text">Government</span>
+			<span class="submenu-arrow">
+				<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+				</svg>
+			</span>
+		</a>
+		<div id="submenu-9" class="collapse submenu submenu-9" data-bs-parent="#menu-accordion">
+			<ul class="submenu-list list-unstyled">
+				<li class="submenu-item"><a class="submenu-link" href="{{ route('admin.government.officials') }}">Elected Officials</a></li>
+				<li class="submenu-item"><a class="submenu-link" href="{{ route('admin.barangays') }}">Barangays</a></li>
+			</ul>
+		</div>
+	</li>
+	<li class="nav-item has-submenu">
+		<a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-10" aria-expanded="false" aria-controls="submenu-10">
+			<span class="nav-icon">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-megaphone" viewBox="0 0 16 16">
+				<path d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0v-.214c-2.162-1.241-4.49-1.843-6.912-2.083l.405 2.712A1 1 0 0 1 5.51 15.1h-.548a1 1 0 0 1-.916-.599l-1.85-3.49-.202-.003A2.014 2.014 0 0 1 0 9V7a2.02 2.02 0 0 1 1.992-2.013 75 75 0 0 0 2.483-.075c3.043-.154 6.148-.849 8.525-2.199zm1 0v11a.5.5 0 0 0 1 0v-11a.5.5 0 0 0-1 0m-1 1.35c-2.344 1.205-5.209 1.842-8 2.033v4.233c2.791.19 5.656.827 8 2.033zm-9 7.215v-4.13a95 95 0 0 1-1.992.052A1.02 1.02 0 0 0 1 7v2c0 .55.448 1.002 1.006 1.009A61 61 0 0 1 4 10.065m-.657.975 1.609 3.037.01.024h.548l-.002-.014-.443-2.966a68 68 0 0 0-1.722-.08z"/>
+				</svg>
+			</span>
+			<span class="nav-link-text">Announcements</span>
+			<span class="submenu-arrow">
+				<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+				</svg>
+			</span>
+		</a>
+		<div id="submenu-10" class="collapse submenu submenu-10" data-bs-parent="#menu-accordion">
+			<ul class="submenu-list list-unstyled">
+				<li class="submenu-item"><a class="submenu-link" href="{{ route('admin.announcements') }}">All Announcements</a></li>
+				<li class="submenu-item"><a class="submenu-link" href="{{ route('admin.announcements.add') }}">Add Announcement</a></li>
 			</ul>
 		</div>
 	</li>
