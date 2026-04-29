@@ -260,6 +260,22 @@
   border-radius: var(--admin-radius);
 }
 
+.admin-shell .modal-dialog-scrollable .modal-content {
+  max-height: calc(100vh - 3.5rem);
+}
+
+.admin-shell .modal-dialog-scrollable .modal-body {
+  overflow-y: auto;
+}
+
+.admin-shell .modal-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 3;
+  background: var(--admin-surface);
+  border-top: 1px solid var(--admin-border);
+}
+
 .admin-shell .table {
   margin-bottom: 0;
   color: var(--admin-text);

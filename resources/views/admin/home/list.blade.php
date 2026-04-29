@@ -6,10 +6,10 @@
             <div class="card-body">
               @include('layouts.partials.message')
               <h5 class="card-title">
-                Browse Home
-                <button type="button" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#addHomeModal">Add Home</button>
+                Homepage News & Featured Items
+                <button type="button" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#addHomeModal">Add Homepage Item</button>
               </h5>
-              <p>Description</p><br>
+              <p class="text-muted">These records appear on the public homepage under Latest News & Announcements. This page does not control the homepage hero banner.</p><br>
               <table class="table table-light">
                 <thead>
                   <tr>
@@ -61,7 +61,7 @@
           <form action="{{ url('admin/home/add') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="modal-header">
-              <h5 class="modal-title" id="addHomeModalLabel">Add Home</h5>
+              <h5 class="modal-title" id="addHomeModalLabel">Add Homepage Item</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -72,6 +72,7 @@
               <div class="mb-3">
                 <label class="form-label">Image</label>
                 <input type="file" class="form-control" name="image">
+                @include('admin.partials.image-upload-guideline', ['type' => 'homepage'])
               </div>
               <div class="mb-3">
                 <label class="form-label">Description</label>
@@ -98,7 +99,7 @@
             <form action="{{ url('admin/home/edit/'.$value->id) }}" method="post" enctype="multipart/form-data">
               {{ csrf_field() }}
               <div class="modal-header">
-                <h5 class="modal-title" id="editHomeModalLabel{{ $value->id }}">Edit Home</h5>
+                <h5 class="modal-title" id="editHomeModalLabel{{ $value->id }}">Edit Homepage Item</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -109,6 +110,7 @@
                 <div class="mb-3">
                   <label class="form-label">Image</label>
                   <input type="file" class="form-control" name="image">
+                  @include('admin.partials.image-upload-guideline', ['type' => 'homepage'])
                   @if(!empty($value->image))
                     <img src="{{ url('public/home/'.$value->image) }}" class="mt-2" style="height: 56px; width: 56px;">
                   @endif

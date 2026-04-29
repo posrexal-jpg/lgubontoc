@@ -23,6 +23,7 @@ class User extends Authenticatable
         'username',
         'role',
         'permissions',
+        'profile_picture',
         'password',
     ];
 
@@ -57,6 +58,13 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
+    }
+
+    public function getProfilePictureUrlAttribute(): string
+    {
+        return $this->profile_picture
+            ? url('uploads/profile-pictures/'.$this->profile_picture)
+            : asset('assets/images/user.png');
     }
 
     public function hasPermission(string $permission): bool

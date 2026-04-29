@@ -2,18 +2,17 @@
 
 @section('content')
 
-<style>
-    h1{
-        text-align: center;
-        color: #046631;
-        font-family: Helvetica; 
-    }
-</style>
+@include('frontend.partials.page-header', [
+    'title' => isset($memorandom->title) ? $memorandom->title : 'Memorandum',
+    'description' => 'Read memoranda and public notices issued for the Municipality of Bontoc.',
+    'breadcrumbs' => [
+        ['label' => 'Others'],
+        ['label' => 'Memorandum'],
+    ],
+])
 
-
-<div class="container">
+<div class="container frontend-page-content">
   @if(isset($memorandom->title))
-        <h1><span>{{$memorandom->title}}</span></h1>
         <div class="siteorigin-widget-tinymce textwidget">
             {!! $memorandom->description !!}
         </div>

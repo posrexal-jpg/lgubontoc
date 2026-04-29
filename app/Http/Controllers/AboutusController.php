@@ -39,15 +39,34 @@ class AboutusController extends Controller
 
     public function indexlocation() 
     {
-       return $this->browseSimpleContent(Aboutus_location::class, 'Location', $this->routes('location'));
+       return view('admin.shared.simple-content.index', [
+            'items' => Aboutus_location::latest()->get(),
+            'item' => null,
+            'heading' => 'Location',
+            'routes' => $this->routes('location'),
+            'supportsMap' => true,
+        ]);
     }
 
     public function addlocation(Request $request) 
     {
-        return $this->saveSimpleContent($request, Aboutus_location::class, 'admin.aboutus.location');
+        $data = $request->validate([
+            'title' => ['nullable', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'latitude' => ['nullable', 'numeric', 'between:-90,90'],
+            'longitude' => ['nullable', 'numeric', 'between:-180,180'],
+            'map_embed_url' => ['nullable', 'url'],
+        ]);
+
+        $record = $request->id ? Aboutus_location::findOrFail($request->id) : new Aboutus_location();
+        $record->fill($data);
+        $record->save();
+
+        return redirect()->route('admin.aboutus.location')->with('success', 'Location successfully saved.');
     }
     public function showlocation($id) { return $this->readSimpleContent(Aboutus_location::class, 'Location', $this->routes('location'), $id); }
-    public function editlocation($id) { return $this->browseSimpleContent(Aboutus_location::class, 'Location', $this->routes('location'), Aboutus_location::findOrFail($id)); }
+    public function editlocation($id) { return $this->indexlocation(); }
     public function deletelocation($id) { return $this->deleteSimpleContent(Aboutus_location::class, 'admin.aboutus.location', $id); }
 
 

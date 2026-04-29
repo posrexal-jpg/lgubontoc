@@ -4,7 +4,7 @@
 <div class="row g-4">
     <div class="col-lg-4">
         <div class="app-card shadow-sm p-4 text-center h-100">
-            <img class="admin-profile-avatar mb-3" src="{{ asset('assets/images/user.png') }}" alt="Default user profile picture">
+            <img class="admin-profile-avatar mb-3" src="{{ $user->profile_picture_url }}" alt="{{ $user->name }} profile picture">
             <h1 class="app-page-title mb-1">{{ $user->name }}</h1>
             <p class="text-muted mb-2">{{ $user->email }}</p>
             <span class="badge bg-{{ $user->role === 'admin' ? 'success' : 'secondary' }}">
@@ -32,11 +32,17 @@
                 </div>
             @endif
 
-            <form action="{{ route('admin.profile.update') }}" method="POST">
+            <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
                 <div class="row g-3">
+                    <div class="col-md-12">
+                        <label class="form-label">Profile Picture</label>
+                        <input type="file" name="profile_picture" class="form-control" accept="image/*">
+                        @include('admin.partials.image-upload-guideline', ['type' => 'profile'])
+                    </div>
+
                     <div class="col-md-6">
                         <label class="form-label">Name</label>
                         <input type="text" name="name" class="form-control" value="{{ old('name', $user->name) }}" required>

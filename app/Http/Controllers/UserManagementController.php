@@ -10,17 +10,43 @@ class UserManagementController extends Controller
 {
     public static function availablePermissions(): array
     {
+        return collect(self::permissionGroups())
+            ->flatMap(fn ($group) => $group)
+            ->all();
+    }
+
+    public static function permissionGroups(): array
+    {
         return [
-            'home' => 'Homepage content',
-            'news' => 'News and updates',
-            'about' => 'About us pages',
-            'services' => 'Services',
-            'transparency' => 'Transparency',
-            'tourism' => 'Tourism',
-            'careers' => 'Careers',
-            'downloadable_forms' => 'Downloadable forms',
-            'gallery' => 'Gallery',
-            'memorandum' => 'Memorandum',
+            'Home' => [
+                'home' => 'Banners, hero images, and homepage items',
+            ],
+            'Government' => [
+                'government' => 'Government officials and legislative',
+            ],
+            'About Us' => [
+                'about' => 'About us pages',
+                'careers' => 'Careers',
+            ],
+            'News and Updates' => [
+                'news' => 'News and announcements',
+            ],
+            'Services and Transactions' => [
+                'services' => 'Services',
+                'transaction_links' => 'Transaction menu links',
+            ],
+            'Transparency' => [
+                'transparency' => 'Transparency and FDP reports',
+                'downloadable_forms' => 'Downloadable forms',
+            ],
+            'Tourism and Media' => [
+                'tourism' => 'Tourism',
+                'gallery' => 'Gallery',
+                'memorandum' => 'Memorandum',
+            ],
+            'Administration' => [
+                'activity_logs' => 'Activity logs and reports',
+            ],
         ];
     }
 
@@ -29,6 +55,7 @@ class UserManagementController extends Controller
         return view('admin.users.index', [
             'users' => User::orderBy('name')->get(),
             'permissions' => self::availablePermissions(),
+            'permissionGroups' => self::permissionGroups(),
         ]);
     }
 
@@ -36,6 +63,7 @@ class UserManagementController extends Controller
     {
         return view('admin.users.create', [
             'permissions' => self::availablePermissions(),
+            'permissionGroups' => self::permissionGroups(),
         ]);
     }
 
@@ -61,6 +89,7 @@ class UserManagementController extends Controller
         return view('admin.users.edit', [
             'user' => $user,
             'permissions' => self::availablePermissions(),
+            'permissionGroups' => self::permissionGroups(),
         ]);
     }
 

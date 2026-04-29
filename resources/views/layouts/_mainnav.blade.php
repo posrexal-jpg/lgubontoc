@@ -22,6 +22,8 @@
                     <li class="has-dropdown dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Government</a>
                         <ul class="dropdown-menu dropdown">
+                            <li><a class="dropdown-item" href="{{ route('government.elected-officials') }}">Elected Officials</a></li>
+                            <li><a class="dropdown-item" href="{{ route('government.legislative') }}">Legislative</a></li>
                             <li><a class="dropdown-item" href="{{ route('about.directory') }}">Directory</a></li>
                             <li><a class="dropdown-item" href="{{ route('about.mandate') }}">Mandate</a></li>
                             <li><a class="dropdown-item" href="{{ route('about.missionandvision') }}">Mission and Vision</a></li>
@@ -35,9 +37,13 @@
                         <ul class="dropdown-menu dropdown">
                             <li><a class="dropdown-item" href="{{ route('services.citizenscharter') }}">Citizen's Charter</a></li>
                             <li><a class="dropdown-item" href="{{ route('services.mayorsoffice') }}">Mayor's Office</a></li>
-                            <li><a class="dropdown-item" target="_blank" rel="noopener" href="https://brgyprofiling.bitsorg.info/login">Barangay Information System</a></li>
-                            <li><a class="dropdown-item" target="_blank" rel="noopener" href="https://bomwasa.bitsorg.info/billinquiry">BOMWASA Billing Inquiry</a></li>
-                            <li><a class="dropdown-item" target="_blank" rel="noopener" href="https://hrmis.bitsorg.info/login">Document Tracking System</a></li>
+                            @foreach(\App\Models\TransactionLink::where('is_active', true)->orderBy('sort_order')->orderBy('title')->get() as $transactionLink)
+                                <li>
+                                    <a class="dropdown-item" href="{{ $transactionLink->url }}" @if($transactionLink->opens_new_tab) target="_blank" rel="noopener" @endif>
+                                        {{ $transactionLink->title }}
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
                     <li class="divider"></li>
@@ -45,8 +51,7 @@
                     <li class="has-dropdown dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Transparency</a>
                         <ul class="dropdown-menu dropdown">
-                            <li><a class="dropdown-item" href="{{ route('transparency.municipalordinances') }}">Municipal Ordinances</a></li>
-                            <li><a class="dropdown-item" href="{{ route('transparency.resolutions') }}">Resolutions</a></li>
+                            <li><a class="dropdown-item" href="{{ route('transparency.fdp-reports') }}">Full Disclosure Policy Reports</a></li>
                             <li><a class="dropdown-item" href="{{ route('others.downloadableforms') }}">Downloadable Forms</a></li>
                         </ul>
                     </li>
@@ -54,7 +59,9 @@
 
                     <li><a href="{{ route('newsandupdates.news') }}">News</a></li>
                     <li class="divider"></li>
-                    <li><a href="{{ route('tourism.bontocattractions') }}">Tourism</a></li>
+                    <li><a href="{{ route('newsandupdates.upcomingupdates') }}">Announcements</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{{ route('tourism.index') }}">Tourism</a></li>
                     <li class="divider"></li>
 
                     <li class="has-dropdown dropdown">
@@ -71,11 +78,10 @@
                 </ul>
 
                 <ul class="right">
-                    <li class="search">
-                        <a href="#site-search-input" aria-label="Search"><i class="fa fa-search"></i></a>
-                    </li>
                     <li class="accessibility">
-                        <a href="#main-content" aria-label="Accessibility"><i class="fa fa-universal-access"></i></a>
+                        <button type="button" id="accessibility-toggle" aria-label="Open accessibility tools" aria-expanded="false">
+                            <i class="fa fa-universal-access"></i>
+                        </button>
                     </li>
                 </ul>
             </section>

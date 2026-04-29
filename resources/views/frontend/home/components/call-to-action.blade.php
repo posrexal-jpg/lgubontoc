@@ -18,10 +18,10 @@
                 </a>
             </div>
             <div class="col-md-3 col-sm-6 mb-3">
-                <a href="{{ route('transparency.resolutions') }}" class="d-block text-center p-3" style="background:#f1f5f9;border-radius:8px;color:#003366;text-decoration:none;">
+                <a href="{{ route('transparency.fdp-reports') }}" class="d-block text-center p-3" style="background:#f1f5f9;border-radius:8px;color:#003366;text-decoration:none;">
                     <div style="font-size:28px; margin-bottom:8px;"><i class="fa fa-gavel"></i></div>
                     <div style="font-weight:700;">Transparency & Documents</div>
-                    <div class="text-muted" style="font-size:0.9rem;">Resolutions, Ordinances, Budgets</div>
+                    <div class="text-muted" style="font-size:0.9rem;">FDP Reports and public records</div>
                 </a>
             </div>
             <div class="col-md-3 col-sm-6 mb-3">

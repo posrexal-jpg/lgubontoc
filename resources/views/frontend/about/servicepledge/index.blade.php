@@ -2,18 +2,15 @@
 
 @section('content')
 
-<style>
-    h1{
-        text-align: center;
-        color: #046631;
-        font-family: Helvetica; 
-    }
-</style>
+@include('frontend.about.partials.page-header', [
+    'current' => 'Service Pledge',
+    'title' => 'Service Pledge',
+    'description' => 'Know the municipality\'s pledge to deliver courteous, transparent, and responsive service to every citizen.'
+])
 
-
-<div class="container">
+<div class="container about-page-content">
   @if(isset($servicepledge->title))
-        <h1><span>{{$servicepledge->title}}</span></h1>
+        <h2><span>{{$servicepledge->title}}</span></h2>
         <div class="siteorigin-widget-tinymce textwidget">
             {!! $servicepledge->description !!}
         </div>

@@ -3,140 +3,411 @@
 @section('content')
 
 <style>
+    .tourism-hero {
+        position: relative;
+        overflow: hidden;
+        background: #0b3d2a;
+        color: #fff;
+    }
 
-h3{
-  color: white;
-}
+    .tourism-hero__media {
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(90deg, rgba(5, 35, 23, .9), rgba(5, 35, 23, .6), rgba(5, 35, 23, .18)), url('{{ $heroImageUrl }}');
+        background-position: center;
+        background-size: cover;
+        transform: scale(1.02);
+    }
 
-h4{
-  color: #046631;
-  text-align: center;
-  font-family: Helvetica;
-}
+    .tourism-hero__content {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
+        gap: 2rem;
+        align-items: end;
+        min-height: 440px;
+        padding-top: 4rem;
+        padding-bottom: 3.5rem;
+    }
 
+    .tourism-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        margin-bottom: .85rem;
+        color: #f2b705;
+        font-weight: 800;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+    }
+
+    .tourism-hero h1 {
+        max-width: 760px;
+        color: #fff;
+        font-size: clamp(2.25rem, 5vw, 4.75rem);
+        font-weight: 800;
+        line-height: 1;
+        margin-bottom: 1rem;
+    }
+
+    .tourism-hero p {
+        max-width: 680px;
+        color: rgba(255,255,255,.88);
+        font-size: 1.12rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .tourism-breadcrumb {
+        display: flex;
+        gap: .5rem;
+        flex-wrap: wrap;
+        color: rgba(255,255,255,.78);
+        font-weight: 700;
+    }
+
+    .tourism-breadcrumb a {
+        color: #fff;
+    }
+
+    .tourism-stat-panel {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,.2);
+        background: rgba(255,255,255,.16);
+        backdrop-filter: blur(10px);
+    }
+
+    .tourism-stat-panel div {
+        min-height: 118px;
+        padding: 1.25rem;
+        background: rgba(3, 28, 18, .45);
+    }
+
+    .tourism-stat-panel strong {
+        display: block;
+        color: #fff;
+        font-size: 2rem;
+        line-height: 1;
+    }
+
+    .tourism-stat-panel span {
+        color: rgba(255,255,255,.8);
+        font-weight: 700;
+    }
+
+    .tourism-section {
+        padding: 4rem 0;
+        background: #fff;
+    }
+
+    .tourism-section--soft {
+        background: #f6faf7;
+    }
+
+    .tourism-section__header {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .tourism-section__header span {
+        display: block;
+        color: #1f7a3f;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .04em;
+    }
+
+    .tourism-section__header h2 {
+        color: #143226;
+        font-size: clamp(1.8rem, 3vw, 2.75rem);
+        font-weight: 800;
+        margin: 0;
+    }
+
+    .tourism-section__header p {
+        max-width: 560px;
+        color: #5f6b76;
+        margin: .35rem 0 0;
+    }
+
+    .featured-spots-grid,
+    .tourism-category-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    .tourism-card {
+        display: flex;
+        min-height: 100%;
+        flex-direction: column;
+        border: 1px solid #dce3ea;
+        background: #fff;
+        box-shadow: 0 12px 28px rgba(11, 61, 42, .08);
+    }
+
+    .tourism-card__media {
+        aspect-ratio: 16 / 10;
+        overflow: hidden;
+        background: #edf8e7;
+    }
+
+    .tourism-card__media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .tourism-card__placeholder {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        color: #1f7a3f;
+        font-size: 2rem;
+    }
+
+    .tourism-card__body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        padding: 1.35rem;
+    }
+
+    .tourism-card h3 {
+        color: #143226;
+        font-size: 1.25rem;
+        font-weight: 800;
+        margin-bottom: .7rem;
+    }
+
+    .tourism-card p {
+        color: #5f6b76;
+        margin-bottom: 1rem;
+    }
+
+    .tourism-card .btn {
+        margin-top: auto;
+        align-self: flex-start;
+    }
+
+    .tourism-card__icon {
+        display: inline-flex;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        background: #edf8e7;
+        color: #1f7a3f;
+        font-size: 1.1rem;
+    }
+
+    .tourism-card__category {
+        display: inline-flex;
+        width: fit-content;
+        margin-bottom: .7rem;
+        padding: .22rem .6rem;
+        background: #edf8e7;
+        color: #1f7a3f;
+        font-size: .78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .03em;
+    }
+
+    .tourism-empty {
+        border: 1px dashed #b8c9bd;
+        padding: 2rem;
+        background: #fff;
+        color: #5f6b76;
+    }
+
+    .tourism-directory-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .tourism-directory-item {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem 1.1rem;
+        border: 1px solid #dce3ea;
+        background: #fff;
+        color: #143226;
+        font-weight: 800;
+    }
+
+    .tourism-directory-item span {
+        color: #5f6b76;
+        font-weight: 600;
+    }
+
+    @media (max-width: 991px) {
+        .tourism-hero__content,
+        .featured-spots-grid,
+        .tourism-category-grid,
+        .tourism-directory-list {
+            grid-template-columns: 1fr;
+        }
+
+        .tourism-section__header {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+
+    @media (max-width: 575px) {
+        .tourism-stat-panel {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
 
-<div class="container-fluid"><br>
+@php
+    $attractionCount = $bontocattractions->count();
+    $featuredAttractions = $bontocattractions->take(6);
+    $groupedAttractions = $bontocattractions->groupBy(fn ($item) => $item->category ?: 'Uncategorized');
+@endphp
 
-<h4>POPULAR DESTINATIONS</h4><br>
-
-    <div class="row" style="padding:0px;">
-        <div class="col-lg-12">
-                <div id="slides" class="carousel slide" data-ride="carousel">
-                    <ul class="carousel-indicators">
-                    <li data-target="#slides" data-slide-to="0" class="active"></li>
-                    <li data-target="#slides" data-slide-to="1" class=""></li>
-                    <li data-target="#slides" data-slide-to="2" class=""></li>
-                    <li data-target="#slides" data-slide-to="3" class=""></li>
-                    <li data-target="#slides" data-slide-to="4" class=""></li>
-                    <li data-target="#slides" data-slide-to="5" class=""></li>
-                     <li data-target="#slides" data-slide-to="6" class=""></li>
-                     <li data-target="#slides" data-slide-to="8" class=""></li>
-                     <li data-target="#slides" data-slide-to="9" class=""></li>
-                     <li data-target="#slides" data-slide-to="10" class=""></li>
-                    </ul>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{asset('resources/img/LGUBontocTourismPage/357726720_255738203858362_6916040560477426120_n.jpg')}}" class="img-fluid" style="width: 100%; height: 100%;">
-                            <div class="carousel-caption">
-                              <h3>Bontoc Boulevard</h3>
-                              <p>We'd love to serve you!</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{asset('resources/img/LGUBontocTourismPage/357758985_255738227191693_7770152592398406372_n.jpg')}}" class="img-fluid" style="width: 100%; height: 100%;">
-                            <div class="carousel-caption">
-                              <h3>Floating Cottage</h3>
-                              <p>We'd love to serve you!</p>
-                            </div> 
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{asset('resources/img/LGUBontocTourismPage/358088530_255737810525068_4706605546751720629_n.jpg')}}" class="img-fluid" style="width: 100%; height: 100%;">
-                            <div class="carousel-caption">
-                              <h3>Floating Cottage</h3>
-                              <p>Thank you for visiting Kapalong!</p>
-                            </div>  
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{asset('resources/img/LGUBontocTourismPage/357715021_255741877191328_557352104818833066_n.jpg')}}" class="img-fluid" style="width: 100%; height: 100%;">
-                            <div class="carousel-caption">
-                              <h3>Santo Nino Parish Church</h3>
-                              <!-- <p>We'd love to see you again!</p> -->
-                            </div> 
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{asset('resources/img/LGUBontocTourismPage/357721356_255738340525015_724184738969647289_n.jpg')}}" class="img-fluid" style="width: 100%; height: 100%;">
-                            <div class="carousel-caption">
-                              <h3>Kawayan Festival</h3>
-                              <!-- <p>Thank you for visiting Kapalong!</p> -->
-                            </div> 
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{asset('resources/img/LGUBontocTourismPage/358098180_255737537191762_511096645561435252_n.jpg')}}" class="img-fluid" style="width: 100%; height: 100%;">
-                            <div class="carousel-caption">
-                              <h3>Catmon Cave</h3>
-                              <p>We'd love to see you again!</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{asset('resources/img/LGUBontocTourismPage/358098598_255737790525070_3866223464367922328_n.jpg')}}" class="img-fluid" style="width: 100%; height: 100%;">
-                            <div class="carousel-caption">
-                              <h3>Sunset View at Bontoc Port</h3>
-                              <p>We'd love to see you again!</p>
-                            </div> 
-                        </div>
-                         <div class="carousel-item">
-                            <img src="{{asset('resources/img/LGUBontocTourismPage/357558305_255741803858002_2033430698253589036_n.jpg')}}" class="img-fluid" style="width: 100%; height: 100%;">
-                            <div class="carousel-caption">
-                              <h3>Tag-Abaka Falls</h3>
-                              <p>Pamigsian, Bontoc, So. Leyte</p>
-                            </div> 
-                        </div>
-                         <div class="carousel-item">
-                            <img src="{{asset('resources/img/LGUBontocTourismPage/292065104_125257293537656_1015438326623572769_n.jpg')}}" class="img-fluid" style="width: 100%; height: 100%;">
-                            <div class="carousel-caption">
-                              <h3>Elysian Floating Cottage</h3>
-                              <p>Bontoc Boulevard</p>
-                            </div> 
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{asset('resources/img/LGUBontocTourismPage/378390320_295662333199282_8291648439619282409_n.jpg')}}" class="img-fluid" style="width: 100%; height: 100%;">
-                            <div class="carousel-caption">
-                              <h3>Day View at Bontoc Boulevard</h3>
-                              <p>We'd love to see you again!</p>
-                            </div> 
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#slides" data-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#slides" data-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </a>
-                </div><br> 
+<section class="tourism-hero">
+    <div class="tourism-hero__media"></div>
+    <div class="container tourism-hero__content">
+        <div>
+            <span class="tourism-kicker"><i class="fa fa-map-marker-alt"></i> Bontoc, Southern Leyte</span>
+            <h1>Places to Visit</h1>
+            <p>Discover Bontoc's natural attractions, waterfront views, local heritage, and community destinations in one tourism guide.</p>
+            <div class="tourism-breadcrumb" aria-label="breadcrumb">
+                <a href="{{ route('home') }}">Home</a>
+                <span>/</span>
+                <span>Tourism</span>
+            </div>
         </div>
-    </div>
 
-    <div class="container py-4">
-        <div class="row">
-            @forelse($bontocattractions as $attraction)
-                <div class="col-md-6 mb-4">
-                    <article class="card border-0 shadow-sm h-100">
-                        <div class="card-body bg-light p-4 d-flex flex-column">
-                            <h4>{{ $attraction->title }}</h4>
-                            <div class="siteorigin-widget-tinymce textwidget flex-grow-1">
-                                {!! \Illuminate\Support\Str::limit(strip_tags($attraction->description), 220) !!}
-                            </div>
-                            <a href="{{ route('tourism.bontocattractions.show', $attraction->id) }}" class="btn btn-primary align-self-start mt-3">Read More</a>
+        <aside class="tourism-stat-panel" aria-label="Tourism highlights">
+            <div>
+                <strong>{{ $attractionCount }}</strong>
+                <span>Places to Visit</span>
+            </div>
+            <div>
+                <strong>{{ $groupedAttractions->count() }}</strong>
+                <span>Categories</span>
+            </div>
+            <div>
+                <strong>Year</strong>
+                <span>Round</span>
+            </div>
+            <div>
+                <strong>Bontoc</strong>
+                <span>Southern Leyte</span>
+            </div>
+        </aside>
+    </div>
+</section>
+
+<section class="tourism-section">
+    <div class="container">
+        <div class="tourism-section__header">
+            <div>
+                <span>Featured Spots</span>
+                <h2>Explore the beauty of Bontoc</h2>
+            </div>
+            <p>Browse destinations maintained through the tourism content records in the admin panel.</p>
+        </div>
+
+        @if($featuredAttractions->isNotEmpty())
+            <div class="featured-spots-grid">
+                @foreach($featuredAttractions as $attraction)
+                    <article class="tourism-card">
+                        <div class="tourism-card__media">
+                            @if(!empty($attraction->image_file))
+                                <img src="{{ url('uploads/'.$attraction->image_file) }}" alt="{{ $attraction->title }}">
+                            @elseif($attraction->photos->isNotEmpty())
+                                <img src="{{ url('uploads/'.$attraction->photos->first()->image_file) }}" alt="{{ $attraction->title }}">
+                            @else
+                                <div class="tourism-card__placeholder"><i class="fa fa-map-marked-alt"></i></div>
+                            @endif
+                        </div>
+                        <div class="tourism-card__body">
+                            <span class="tourism-card__category">{{ $attraction->category ?: 'Destination' }}</span>
+                            <h3>{{ $attraction->title }}</h3>
+                            <p>{{ \Illuminate\Support\Str::limit(strip_tags($attraction->description), 170) }}</p>
+                            <a href="{{ route('tourism.bontocattractions.show', $attraction->id) }}" class="btn btn-primary">View Destination</a>
                         </div>
                     </article>
-                </div>
-            @empty
-                <div class="col-12">
-                    <h4>POPULAR DESTINATIONS</h4>
-                </div>
-            @endforelse
-        </div>
+                @endforeach
+            </div>
+        @else
+            <div class="tourism-empty">
+                Tourism destinations will appear here once they are added in the admin panel.
+            </div>
+        @endif
     </div>
-</div>
+</section>
+
+<section class="tourism-section tourism-section--soft">
+    <div class="container">
+        <div class="tourism-section__header">
+            <div>
+                <span>Categories</span>
+                <h2>Browse by travel theme</h2>
+            </div>
+            <p>Use these themes as a quick way to plan visits across Bontoc's nature, culture, and waterfront destinations.</p>
+        </div>
+
+        @if($groupedAttractions->isNotEmpty())
+            <div class="tourism-category-grid">
+                @foreach($groupedAttractions as $category => $items)
+                    <article class="tourism-card">
+                        <div class="tourism-card__body">
+                            <span class="tourism-card__icon"><i class="fa fa-layer-group"></i></span>
+                            <h3>{{ $category }}</h3>
+                            <p>{{ $items->count() }} destination{{ $items->count() === 1 ? '' : 's' }} listed in this category.</p>
+                        </div>
+                    </article>
+                @endforeach
+            </div>
+        @else
+            <div class="tourism-empty">
+                Categories will appear here once tourism destinations are added in the admin panel.
+            </div>
+        @endif
+    </div>
+</section>
+
+<section class="tourism-section">
+    <div class="container">
+        <div class="tourism-section__header">
+            <div>
+                <span>Destination Directory</span>
+                <h2>All places to visit</h2>
+            </div>
+            <p>Open a destination page to read the full tourism description.</p>
+        </div>
+
+        @if($bontocattractions->isNotEmpty())
+            <div class="tourism-directory-list">
+                @foreach($bontocattractions as $attraction)
+                    <a href="{{ route('tourism.bontocattractions.show', $attraction->id) }}" class="tourism-directory-item">
+                        {{ $attraction->title }}
+                        <span>{{ $attraction->category ?: 'View' }}</span>
+                    </a>
+                @endforeach
+            </div>
+        @else
+            <div class="tourism-empty">
+                No tourism destinations are published yet.
+            </div>
+        @endif
+    </div>
+</section>
 @endsection

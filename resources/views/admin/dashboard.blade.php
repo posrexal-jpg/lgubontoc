@@ -25,12 +25,14 @@
         <div class="row g-3">
             @php
                 $quickLinks = [
-                    ['label' => 'Homepage', 'icon' => 'fa-house', 'url' => url('admin/home'), 'permission' => 'home'],
+                    ['label' => 'Homepage Items', 'icon' => 'fa-house', 'url' => url('admin/home'), 'permission' => 'home'],
                     ['label' => 'News', 'icon' => 'fa-newspaper', 'url' => route('admin.newsandupdates.news.list'), 'permission' => 'news'],
                     ['label' => 'Tourism', 'icon' => 'fa-map-location-dot', 'url' => route('admin.tourism.bontocattractions'), 'permission' => 'tourism'],
                     ['label' => 'Careers', 'icon' => 'fa-briefcase', 'url' => route('admin.careers.jobvacancies'), 'permission' => 'careers'],
-                    ['label' => 'Transparency', 'icon' => 'fa-scale-balanced', 'url' => route('admin.transparency.municipalordinances'), 'permission' => 'transparency'],
+                    ['label' => 'Transparency', 'icon' => 'fa-scale-balanced', 'url' => route('admin.transparency.fdp-reports.index'), 'permission' => 'transparency'],
+                    ['label' => 'Government', 'icon' => 'fa-landmark', 'url' => route('admin.government.officials.index'), 'permission' => 'government'],
                     ['label' => 'Users', 'icon' => 'fa-users-gear', 'url' => route('admin.users.index'), 'permission' => null],
+                    ['label' => 'Activity Logs', 'icon' => 'fa-clipboard-list', 'url' => route('admin.logs.index'), 'permission' => 'activity_logs'],
                 ];
             @endphp
 

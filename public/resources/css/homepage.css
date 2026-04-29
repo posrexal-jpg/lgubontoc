@@ -100,6 +100,7 @@ a:hover {
 
 .govph-bar__links {
     display: flex;
+    align-items: center;
     gap: 1rem;
     flex-wrap: wrap;
 }
@@ -107,6 +108,12 @@ a:hover {
 .govph-bar a {
     color: #fff;
     font-weight: 600;
+}
+
+.philippine-time {
+    color: rgba(255,255,255,.86);
+    font-weight: 600;
+    white-space: nowrap;
 }
 
 .site-header {
@@ -158,6 +165,24 @@ a:hover {
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+.site-header-banner {
+    flex: 1 1 420px;
+    max-width: 520px;
+    aspect-ratio: 5 / 1;
+    min-height: 86px;
+    background: #eef4ec;
+    border: 1px dashed #b9ccb5;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.site-header-banner img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
 }
 
 .bagong-logo {
@@ -272,6 +297,7 @@ a:hover {
 }
 
 #main-nav .top-bar-section li:not(.has-form) > a:not(.button),
+#main-nav .top-bar-section li:not(.has-form) > button,
 #main-nav .top-bar-section li.active:not(.has-form) > a:not(.button) {
     display: flex;
     min-height: 58px;
@@ -282,6 +308,88 @@ a:hover {
     font-size: 1.12rem;
     font-weight: 800;
     line-height: 58px;
+}
+
+#main-nav .top-bar-section li:not(.has-form) > button {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.accessibility-panel {
+    position: fixed;
+    right: 1rem;
+    top: 13rem;
+    z-index: 1000;
+    width: min(280px, calc(100vw - 2rem));
+    border: 1px solid var(--line);
+    background: #fff;
+    box-shadow: var(--shadow);
+    transform: translateX(calc(100% + 1.25rem));
+    transition: transform .2s ease;
+}
+
+.accessibility-panel[aria-hidden="false"] {
+    transform: translateX(0);
+}
+
+.accessibility-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .85rem 1rem;
+    background: var(--gov-green);
+    color: #fff;
+}
+
+.accessibility-panel__header button {
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-size: 1.4rem;
+}
+
+.accessibility-panel__actions {
+    display: grid;
+    gap: .6rem;
+    padding: 1rem;
+}
+
+.accessibility-panel__actions button {
+    border: 1px solid var(--line);
+    padding: .65rem .8rem;
+    background: #f8fbf7;
+    color: var(--ink);
+    font-weight: 700;
+    text-align: left;
+}
+
+body.accessibility-high-contrast {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+body.accessibility-high-contrast a,
+body.accessibility-high-contrast h1,
+body.accessibility-high-contrast h2,
+body.accessibility-high-contrast h3,
+body.accessibility-high-contrast h4,
+body.accessibility-high-contrast h5,
+body.accessibility-high-contrast h6 {
+    color: #ffe66d !important;
+}
+
+body.accessibility-high-contrast .site-header,
+body.accessibility-high-contrast .site-footer,
+body.accessibility-high-contrast section,
+body.accessibility-high-contrast article,
+body.accessibility-high-contrast .card,
+body.accessibility-high-contrast .tourism-card,
+body.accessibility-high-contrast .search-result-card {
+    background: #000 !important;
+    color: #fff !important;
+    border-color: #fff !important;
 }
 
 #main-nav .top-bar-section li.active:not(.has-form) > a:not(.button),
@@ -894,6 +1002,11 @@ a:hover {
         width: 100%;
     }
 
+    .site-header-banner {
+        width: 100%;
+        max-width: none;
+    }
+
     .home-hero__content,
     .content-grid,
     .direction-grid,
@@ -962,9 +1075,13 @@ a:hover {
 }
 
 @media (max-width: 767px) {
-    .govph-bar__links,
+    .govph-bar__links a,
     .bagong-logo {
         display: none;
+    }
+
+    .philippine-time {
+        white-space: normal;
     }
 
     .site-brand img {

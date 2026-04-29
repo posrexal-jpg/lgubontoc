@@ -40,6 +40,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Image</label>
                                 <input type="file" class="form-control" name="image">
+                                @include('admin.partials.image-upload-guideline', ['type' => 'homepage'])
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Description</label>

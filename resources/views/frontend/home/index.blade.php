@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="home-hero">
-    <div class="home-hero__media" style="background-image: url('{{ asset('uploads/m1KQTRPgOCyDRFpmPxdKqjcs5rYeBN.jfif') }}');"></div>
+    <div class="home-hero__media" style="background-image: url('{{ $heroImageUrl }}');"></div>
     <div class="container home-hero__content">
         <div class="home-hero__copy">
             <span class="eyebrow">Official LGU Portal</span>
@@ -10,7 +10,7 @@
             <p>Access public services, announcements, transparency documents, tourism information, and municipal resources from one official source.</p>
             <div class="home-hero__actions">
                 <a href="{{ route('services.citizenscharter') }}" class="btn btn-primary">Citizen's Charter</a>
-                <a href="{{ route('transparency.resolutions') }}" class="btn btn-outline-light">Transparency</a>
+                <a href="{{ route('transparency.fdp-reports') }}" class="btn btn-outline-light">Transparency</a>
             </div>
         </div>
         <aside class="home-hero__panel" aria-label="Municipal quick facts">
@@ -67,10 +67,10 @@
                 <strong>Downloadable Forms</strong>
                 <span>Forms, templates, and public transaction documents.</span>
             </a>
-            <a href="{{ route('transparency.municipalordinances') }}" class="service-card">
+            <a href="{{ route('transparency.fdp-reports') }}" class="service-card">
                 <i class="fa fa-balance-scale"></i>
-                <strong>Ordinances</strong>
-                <span>Municipal ordinances and legislative records.</span>
+                <strong>Transparency</strong>
+                <span>FDP reports and public transparency records.</span>
             </a>
             <a href="{{ route('about.directory') }}" class="service-card">
                 <i class="fa fa-address-book"></i>
@@ -112,7 +112,7 @@
                     <h3>Prepare complete requirements</h3>
                     <p>Review the Citizen's Charter before visiting municipal offices for faster processing.</p>
                 </article>
-                <a href="{{ route('newsandupdates.upcomingupdates') }}" class="panel-link">View upcoming events</a>
+                <a href="{{ route('newsandupdates.upcomingupdates') }}" class="panel-link">View announcements</a>
             </aside>
         </div>
     </div>

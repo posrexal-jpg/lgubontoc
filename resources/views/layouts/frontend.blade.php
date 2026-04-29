@@ -18,6 +18,12 @@
 <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
+    @php
+        $headerBanner = \App\Models\HeroImage::where('page_key', 'header_banner')
+            ->where('is_active', true)
+            ->first();
+    @endphp
+
     <div class="govph-bar">
         <div class="container govph-bar__inner">
             <div>
@@ -25,6 +31,9 @@
                 <span class="govph-bar__text">A Philippine Government Website</span>
             </div>
             <div class="govph-bar__links">
+                <time class="philippine-time" id="philippine-time" datetime="{{ now('Asia/Manila')->toIso8601String() }}">
+                    Philippine Standard Time: {{ now('Asia/Manila')->format('l, F j, Y h:i A') }}
+                </time>
                 <a href="https://www.gov.ph/" target="_blank" rel="noopener">National Portal</a>
                 <a href="{{ route('services.citizenscharter') }}">Citizen's Charter</a>
                 <a href="{{ route('about.directory') }}">Contact</a>
@@ -42,11 +51,16 @@
                     <em>Province of Southern Leyte</em>
                 </span>
             </a>
+            <div class="site-header-banner" aria-label="Municipal leadership banner">
+                @if($headerBanner)
+                    <img src="{{ $headerBanner->image_url }}" alt="{{ $headerBanner->title }}">
+                @endif
+            </div>
             <div class="site-header__actions">
                 <img src="{{ asset('resources/BagongPilipinas.png') }}" alt="Bagong Pilipinas" class="bagong-logo">
-                <form action="{{ route('home') }}" method="GET" class="site-search">
+                <form action="{{ route('search') }}" method="GET" class="site-search">
                     <label class="sr-only" for="site-search-input">Search</label>
-                    <input id="site-search-input" type="search" name="q" placeholder="Search website">
+                    <input id="site-search-input" type="search" name="q" value="{{ request('q') }}" placeholder="Search website">
                     <button type="submit" aria-label="Search"><i class="fa fa-search"></i></button>
                 </form>
             </div>
@@ -54,6 +68,19 @@
     </header>
 
     @include('layouts._mainnav')
+
+    <div class="accessibility-panel" id="accessibility-panel" aria-hidden="true">
+        <div class="accessibility-panel__header">
+            <strong>Accessibility Tools</strong>
+            <button type="button" id="accessibility-close" aria-label="Close accessibility tools">&times;</button>
+        </div>
+        <div class="accessibility-panel__actions">
+            <button type="button" data-accessibility-action="increase-font">Increase Text</button>
+            <button type="button" data-accessibility-action="decrease-font">Decrease Text</button>
+            <button type="button" data-accessibility-action="contrast">High Contrast</button>
+            <button type="button" data-accessibility-action="reset">Reset</button>
+        </div>
+    </div>
 
     <main id="main-content">
         @yield('content')
@@ -91,8 +118,7 @@
                 <div>
                     <h5>Transparency</h5>
                     <ul>
-                        <li><a href="{{ route('transparency.municipalordinances') }}">Municipal Ordinances</a></li>
-                        <li><a href="{{ route('transparency.resolutions') }}">Resolutions</a></li>
+                        <li><a href="{{ route('transparency.fdp-reports') }}">FDP Reports</a></li>
                         <li><a href="{{ route('others.downloadableforms') }}">Downloadable Forms</a></li>
                         <li><a href="{{ route('services.citizenscharter') }}">Citizen's Charter</a></li>
                     </ul>
@@ -126,5 +152,90 @@
     <script src="{{ asset('resources/mail/jqBootstrapValidation.min.js') }}"></script>
     <script src="{{ asset('resources/mail/contact.js') }}"></script>
     <script src="{{ asset('resources/js/main.js') }}"></script>
+    <script>
+        (function () {
+            var timeElement = document.getElementById('philippine-time');
+
+            if (!timeElement) {
+                return;
+            }
+
+            var formatter = new Intl.DateTimeFormat('en-PH', {
+                timeZone: 'Asia/Manila',
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+
+            function updatePhilippineTime() {
+                var now = new Date();
+                timeElement.textContent = 'Philippine Standard Time: ' + formatter.format(now);
+                timeElement.setAttribute('datetime', now.toISOString());
+            }
+
+            updatePhilippineTime();
+            setInterval(updatePhilippineTime, 1000);
+        })();
+    </script>
+    <script>
+        (function () {
+            var toggle = document.getElementById('accessibility-toggle');
+            var panel = document.getElementById('accessibility-panel');
+            var close = document.getElementById('accessibility-close');
+            var actions = document.querySelectorAll('[data-accessibility-action]');
+            var fontScale = Number(localStorage.getItem('accessibilityFontScale') || 1);
+            var contrast = localStorage.getItem('accessibilityContrast') === '1';
+
+            function applySettings() {
+                document.documentElement.style.fontSize = (fontScale * 100) + '%';
+                document.body.classList.toggle('accessibility-high-contrast', contrast);
+                localStorage.setItem('accessibilityFontScale', String(fontScale));
+                localStorage.setItem('accessibilityContrast', contrast ? '1' : '0');
+            }
+
+            function setPanel(open) {
+                panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            }
+
+            if (toggle && panel) {
+                toggle.addEventListener('click', function () {
+                    setPanel(panel.getAttribute('aria-hidden') === 'true');
+                });
+            }
+
+            if (close) {
+                close.addEventListener('click', function () {
+                    setPanel(false);
+                });
+            }
+
+            actions.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var action = button.getAttribute('data-accessibility-action');
+
+                    if (action === 'increase-font') {
+                        fontScale = Math.min(1.25, fontScale + 0.1);
+                    } else if (action === 'decrease-font') {
+                        fontScale = Math.max(0.9, fontScale - 0.1);
+                    } else if (action === 'contrast') {
+                        contrast = !contrast;
+                    } else if (action === 'reset') {
+                        fontScale = 1;
+                        contrast = false;
+                    }
+
+                    applySettings();
+                });
+            });
+
+            applySettings();
+        })();
+    </script>
 </body>
 </html>

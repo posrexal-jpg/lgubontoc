@@ -16,8 +16,10 @@
                     <th scope="col"></th>
                     <th scope="col">Image</th>
                     <th scope="col">Title</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Author</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Is Published</th>
                     <th scope="col">Date Posted</th>
                     <th scope="col"></th>
                     <th scope="col">Action</th>
@@ -34,8 +36,10 @@
                         @endif
                     </td>
                     <td>{{ $value->title }}</td>
+                    <td>{{ $value->category ?? 'Municipal News' }}</td>
+                    <td>{{ $value->author ?? 'Bontoc LGU' }}</td>
                     <td>{!! $value->description !!}</td>
-                    <td>{{ $value->status }}</td>
+                    <td>{{ $value->status ? 'Yes' : 'No' }}</td>
                     <td>{{ $value->date_posted }}</td>
                     <td></td>
                     <td>
@@ -46,7 +50,9 @@
                   </tr>
                   @endforeach
                 </tbody>
-            </table><br><br>
+            </table>
+            {{ $news->links() }}
+            <br><br>
         </div>
 
         <div class="modal fade" id="addNewsModal" tabindex="-1" aria-labelledby="addNewsModalLabel" aria-hidden="true">
@@ -63,9 +69,20 @@
                                 <label class="form-label">Title</label>
                                 <input type="text" class="form-control" name="title" required>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">News Category</label>
+                                    <input type="text" class="form-control" name="category" value="Municipal News" placeholder="Municipal News">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Author</label>
+                                    <input type="text" class="form-control" name="author" value="Bontoc LGU" placeholder="Bontoc LGU">
+                                </div>
+                            </div>
                             <div class="mb-3">
                                 <label class="form-label">Image</label>
                                 <input type="file" class="form-control" name="image_file">
+                                @include('admin.partials.image-upload-guideline', ['type' => 'news'])
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Description</label>
@@ -76,7 +93,7 @@
                                 <input type="date" name="date_posted" class="form-control" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Status</label>
+                                <label class="form-label">Is Published</label>
                                 <select class="form-control" name="status" required>
                                     <option value="1">Yes</option>
                                     <option value="0">No</option>
@@ -107,9 +124,20 @@
                                     <label class="form-label">Title</label>
                                     <input type="text" class="form-control" name="title" value="{{ $value->title }}" required>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">News Category</label>
+                                        <input type="text" class="form-control" name="category" value="{{ $value->category ?? 'Municipal News' }}" placeholder="Municipal News">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Author</label>
+                                        <input type="text" class="form-control" name="author" value="{{ $value->author ?? 'Bontoc LGU' }}" placeholder="Bontoc LGU">
+                                    </div>
+                                </div>
                                 <div class="mb-3">
                                     <label class="form-label">Image</label>
                                     <input type="file" class="form-control" name="image_file">
+                                    @include('admin.partials.image-upload-guideline', ['type' => 'news'])
                                     @if($value->image_file)
                                         <img src="{{ url('uploads/'.$value->image_file) }}" class="mt-2" style="height: 56px; width: 56px;">
                                     @endif
@@ -123,7 +151,7 @@
                                     <input type="date" name="date_posted" value="{{ $value->date_posted }}" class="form-control" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Status</label>
+                                    <label class="form-label">Is Published</label>
                                     <select class="form-control" name="status" required>
                                         <option value="1" @selected($value->status == 1)>Yes</option>
                                         <option value="0" @selected($value->status == 0)>No</option>

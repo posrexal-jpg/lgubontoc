@@ -2,18 +2,17 @@
 
 @section('content')
 
-<style>
-    h1{
-        text-align: center;
-        color: #046631;
-        font-family: Helvetica; 
-    }
-</style>
+@include('frontend.partials.page-header', [
+    'title' => isset($mayorsoffice->title) ? $mayorsoffice->title : "Mayor's Office",
+    'description' => "Find information, services, and updates from the Office of the Municipal Mayor.",
+    'breadcrumbs' => [
+        ['label' => 'Services'],
+        ['label' => "Mayor's Office"],
+    ],
+])
 
-
-<div class="container">
+<div class="container frontend-page-content">
   @if(isset($mayorsoffice->title))
-        <h1><span>{{$mayorsoffice->title}}</span></h1>
         <div class="siteorigin-widget-tinymce textwidget">
             {!! $mayorsoffice->description !!}
         </div>

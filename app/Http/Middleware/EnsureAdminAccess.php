@@ -40,10 +40,15 @@ class EnsureAdminAccess
         if ($routeName) {
             $permission = match (true) {
                 str_starts_with($routeName, 'admin.users.') => 'users',
+                str_starts_with($routeName, 'admin.logs.') => 'activity_logs',
                 str_starts_with($routeName, 'admin.home') => 'home',
+                str_starts_with($routeName, 'admin.hero-images') => 'home',
+                str_starts_with($routeName, 'admin.header-banner') => 'home',
                 str_starts_with($routeName, 'admin.aboutus.') => 'about',
+                str_starts_with($routeName, 'admin.government.') => 'government',
                 str_starts_with($routeName, 'admin.careers.') => 'careers',
                 str_starts_with($routeName, 'admin.services.') => 'services',
+                str_starts_with($routeName, 'admin.transactions.') => 'transaction_links',
                 str_starts_with($routeName, 'admin.tourism.') => 'tourism',
                 str_starts_with($routeName, 'admin.newsandupdates.') => 'news',
                 str_starts_with($routeName, 'admin.transparency.') => 'transparency',
@@ -60,10 +65,15 @@ class EnsureAdminAccess
 
         return match (true) {
             str_starts_with($path, 'admin/users') => 'users',
+            str_starts_with($path, 'admin/logs') => 'activity_logs',
             str_starts_with($path, 'admin/home') => 'home',
+            str_starts_with($path, 'admin/hero-images') => 'home',
+            str_starts_with($path, 'admin/header-banner') => 'home',
             str_starts_with($path, 'admin/aboutus') => 'about',
+            str_starts_with($path, 'admin/government') => 'government',
             str_starts_with($path, 'admin/careers') => 'careers',
             str_starts_with($path, 'admin/services') => 'services',
+            str_starts_with($path, 'admin/transactions') => 'transaction_links',
             str_starts_with($path, 'admin/tourism') => 'tourism',
             str_starts_with($path, 'admin/newsandupdates') => 'news',
             str_starts_with($path, 'admin/transparency') => 'transparency',

@@ -17,7 +17,9 @@
                   </div>
                 <div class="col-12">
                   <label class="form-label">Image <span style="color: red"> *</span></label>
-                    <input type="file" class="form-control" name="image"><br>                  
+                    <input type="file" class="form-control" name="image">
+                    @include('admin.partials.image-upload-guideline', ['type' => 'homepage'])
+                    <br>
                 </div>
                 <div class="col-12">
                   <label class="form-label">Description <span style="color: red"> *</span></label>

@@ -1,11 +1,16 @@
 @extends('layouts.frontend')
 
 @section('content')
-<div class="container py-5">
-    <div class="text-center pb-2">
-        <p class="section-title px-5"><span class="px-2">Careers</span></p>
-        <h1 class="mb-4">Job Vacancies</h1>
-    </div>
+@include('frontend.partials.page-header', [
+    'title' => 'Job Vacancies',
+    'description' => 'Browse career opportunities and hiring announcements from the Municipal Government of Bontoc.',
+    'breadcrumbs' => [
+        ['label' => 'Careers'],
+        ['label' => 'Job Vacancies'],
+    ],
+])
+
+<div class="container frontend-page-content">
 
     <div class="row">
         @forelse($careers as $jobvacancy)

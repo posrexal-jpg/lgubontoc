@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class ContentSeeder extends Seeder
 {
@@ -13,14 +14,13 @@ class ContentSeeder extends Seeder
 
         $singlePages = [
             'aboutus_histories' => ['History', 'Bontoc is a municipality with a rich local history and a community shaped by public service, agriculture, trade, and culture.'],
-            'aboutus_locations' => ['Location', 'Bontoc is located in Southern Leyte and serves residents through accessible municipal offices and local services.'],
+            'aboutus_locations' => ['Location', '<p>Bontoc is a coastal municipality in the Province of Southern Leyte, Philippines. It is positioned along the province\'s western corridor and serves as a local center for public services, community activities, agriculture, trade, and access to nearby barangays.</p><p>The Municipal Hall and key government offices are accessible through the main road network connecting Bontoc with neighboring towns and provincial service centers. Public transportation and local routes support residents, visitors, and stakeholders traveling to municipal offices, schools, markets, health facilities, and barangay communities.</p><p>Its location gives Bontoc access to coastal resources, upland communities, and regional connections within Southern Leyte, making it an important gateway for local governance, livelihood, tourism, and community development.</p>'],
             'aboutus_missionandvisions' => ['Mission and Vision', 'A progressive, resilient, and service-oriented municipality committed to transparent governance and inclusive development.'],
             'aboutus_municipalityseals' => ['Municipality Seal', 'The official seal represents the identity, values, livelihood, and aspirations of the Municipality of Bontoc.'],
             'aboutus_mandates' => ['Mandate', 'The municipal government delivers basic services, promotes public welfare, and implements programs for sustainable local development.'],
             'aboutus_servicepledges' => ['Service Pledge', 'We commit to serve the people with integrity, courtesy, accountability, and timely public service.'],
             'aboutus_directories' => ['Directory', 'Municipal offices and personnel are available to assist residents with services, documents, and public concerns.'],
             'services_mayorsoffices' => ["Mayor's Office", 'The Office of the Municipal Mayor leads local governance, public service delivery, and community development programs.'],
-            'transparency_municipalordinances' => ['Municipal Ordinances', 'Published municipal ordinances are available for public information and transparency.'],
             'transparency_resolutions' => ['Resolutions', 'Approved resolutions are published to keep residents informed about local legislative actions.'],
             'others_downloadableforms' => ['Downloadable Forms', 'Common municipal forms and documents are available for convenient public access.'],
             'others_galleries' => ['Gallery', 'Photos and updates from municipal events, programs, and community activities.'],
@@ -37,6 +37,34 @@ class ContentSeeder extends Seeder
                     'updated_at' => $now,
                 ]
             );
+        }
+
+        if (Schema::hasTable('transparency_fdp_reports')) {
+            DB::table('transparency_fdp_reports')->updateOrInsert(
+                ['id' => 1],
+                [
+                    'title' => 'Full Disclosure Policy Reports',
+                    'quarter' => 'Annual',
+                    'year' => (int) date('Y'),
+                    'description' => 'Published Full Disclosure Policy reports will be posted here for public access and transparency.',
+                    'file_path' => null,
+                    'file_name' => null,
+                    'sort_order' => 1,
+                    'is_published' => true,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ]
+            );
+        }
+
+        if (Schema::hasColumn('aboutus_locations', 'latitude')) {
+            DB::table('aboutus_locations')->where('id', 1)->update([
+                'address' => 'Municipal Hall, Bontoc, Southern Leyte, Philippines',
+                'latitude' => 10.3556,
+                'longitude' => 124.9697,
+                'map_embed_url' => null,
+                'updated_at' => $now,
+            ]);
         }
 
         $this->seedList('careers_jobvacancies', [
@@ -66,6 +94,7 @@ class ContentSeeder extends Seeder
         $this->seedHomes($now);
         $this->seedCarouselItems($now);
         $this->seedFeaturedItems($now);
+        $this->seedTransactionLinks($now);
     }
 
     private function seedList(string $table, array $items, $now): void
@@ -164,6 +193,33 @@ class ContentSeeder extends Seeder
                     'date_posted' => $datePosted,
                     'sort_order' => $index + 1,
                     'active' => true,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ]
+            );
+        }
+    }
+
+    private function seedTransactionLinks($now): void
+    {
+        if (! Schema::hasTable('transaction_links')) {
+            return;
+        }
+
+        $links = [
+            ['Barangay Information System', 'https://brgyprofiling.bitsorg.info/login'],
+            ['BOMWASA Billing Inquiry', 'https://bomwasa.bitsorg.info/billinquiry'],
+            ['Document Tracking System', 'https://hrmis.bitsorg.info/login'],
+        ];
+
+        foreach ($links as $index => [$title, $url]) {
+            DB::table('transaction_links')->updateOrInsert(
+                ['title' => $title],
+                [
+                    'url' => $url,
+                    'sort_order' => $index + 1,
+                    'opens_new_tab' => true,
+                    'is_active' => true,
                     'created_at' => $now,
                     'updated_at' => $now,
                 ]

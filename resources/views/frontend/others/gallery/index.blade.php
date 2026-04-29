@@ -1,13 +1,17 @@
 @extends('layouts.frontend')
 
 @section('content')
-<div class="container-fluid pt-5 pb-4">
-    <div class="container">
-        <div class="text-center pb-2">
-            <p class="section-title px-5"><span class="px-2">Gallery</span></p>
-            <h1 class="mb-4">Bontoc Gallery</h1>
-        </div>
+@include('frontend.partials.page-header', [
+    'title' => 'Bontoc Gallery',
+    'description' => 'View photo stories, activities, and community highlights from Bontoc.',
+    'breadcrumbs' => [
+        ['label' => 'Others'],
+        ['label' => 'Gallery'],
+    ],
+])
 
+<div class="container-fluid pb-4">
+    <div class="container">
         <div class="row pb-3">
             @forelse($gallery as $item)
                 <div class="col-lg-4 col-md-6 mb-4">

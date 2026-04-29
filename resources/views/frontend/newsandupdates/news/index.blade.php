@@ -9,6 +9,7 @@
 <style>
     .news-page {
         background: #f5f7f2;
+        /* padding: 4rem 0; */
     }
 
     .news-layout {
@@ -122,13 +123,17 @@
     }
 </style>
 
-<div class="news-page py-5">
-    <div class="container">
-        <div class="text-center pb-4">
-            <p class="section-title px-5"><span class="px-2">News</span></p>
-            <h1 class="mb-2">Municipality of Bontoc News</h1>
-        </div>
+@include('frontend.partials.page-header', [
+    'title' => 'Municipality of Bontoc News',
+    'description' => 'Read the latest news, programs, announcements, and public information from the Municipal Government of Bontoc.',
+    'breadcrumbs' => [
+        ['label' => 'News and Updates'],
+        ['label' => 'News'],
+    ],
+])
 
+<div class="news-page">
+    <div class="container">
         @if($featuredNews)
             <div class="news-layout">
                 <main>
@@ -179,11 +184,19 @@
                 <aside class="news-sidebar">
                     <section class="news-sidebar-box">
                         <h4>Weather Updates</h4>
-                        <p class="mb-0">Monitor official advisories and local weather bulletins for Bontoc, Southern Leyte.</p>
+                        @if($weather)
+                            <p class="mb-2"><strong>Bontoc, Southern Leyte</strong></p>
+                            <p class="mb-1">{{ $weather['condition'] }} · {{ $weather['temperature'] }}&deg;C</p>
+                            <p class="mb-1">Humidity: {{ $weather['humidity'] }}%</p>
+                            <p class="mb-0">Wind: {{ $weather['wind_speed'] }} km/h</p>
+                            <small class="text-muted">Source: Open-Meteo</small>
+                        @else
+                            <p class="mb-0">Weather updates for Bontoc, Southern Leyte are temporarily unavailable. Monitor official advisories for urgent bulletins.</p>
+                        @endif
                     </section>
 
                     <section class="news-sidebar-box">
-                        <h4>Advisories</h4>
+                        <h4>Announcements</h4>
                         @if($advisories->isNotEmpty())
                             <ul class="advisory-list">
                                 @foreach($advisories as $advisory)

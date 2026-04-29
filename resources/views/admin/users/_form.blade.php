@@ -43,13 +43,18 @@
     <p class="text-muted mb-3">Administrators automatically receive access to all modules. For content creators, select only the modules they can manage.</p>
 
     @php($selectedPermissions = old('permissions', $user->permissions ?? []))
-    <div class="row">
-        @foreach($permissions as $key => $label)
-            <div class="col-md-4 mb-2">
-                <label class="form-check">
-                    <input type="checkbox" name="permissions[]" value="{{ $key }}" class="form-check-input" @checked(in_array($key, $selectedPermissions, true) || in_array('*', $selectedPermissions, true))>
-                    <span class="form-check-label">{{ $label }}</span>
-                </label>
+    <div class="row g-3">
+        @foreach(($permissionGroups ?? ['Modules' => $permissions]) as $groupLabel => $groupPermissions)
+            <div class="col-md-6 col-xl-4">
+                <div class="border rounded p-3 h-100">
+                    <strong class="d-block mb-2">{{ $groupLabel }}</strong>
+                    @foreach($groupPermissions as $key => $label)
+                        <label class="form-check mb-2">
+                            <input type="checkbox" name="permissions[]" value="{{ $key }}" class="form-check-input" @checked(in_array($key, $selectedPermissions, true) || in_array('*', $selectedPermissions, true))>
+                            <span class="form-check-label">{{ $label }}</span>
+                        </label>
+                    @endforeach
+                </div>
             </div>
         @endforeach
     </div>

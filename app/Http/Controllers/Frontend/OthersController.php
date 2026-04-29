@@ -12,7 +12,11 @@ class OthersController extends Controller
 {
     public function indexdownloadableforms()
     {
-        $downloadableforms = Others_downloadableforms::latest()->get();
+        $downloadableforms = Others_downloadableforms::where('is_published', true)
+            ->orderBy('sort_order')
+            ->orderBy('title')
+            ->get();
+
         return view('frontend.others.downloadableforms.index',[
                 'downloadableforms' => $downloadableforms
         ]);

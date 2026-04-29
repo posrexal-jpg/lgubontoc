@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\ActivityLog;
 use Hash;
 use Session;
 
@@ -32,8 +33,12 @@ class AuthController extends Controller
         $checkLoginCredentials = $request->only('email','password');
         if(Auth::attempt($checkLoginCredentials))
         {
+            ActivityLog::record('Authentication', 'Login', 'User logged in successfully.', $request);
             return redirect('admin/dashboard')->withSuccess('You are successfully loggedin.');
         }
+        ActivityLog::record('Authentication', 'Failed Login', 'Failed login attempt for '.$request->email.'.', $request, [
+            'email' => $request->email,
+        ]);
         return redirect('login')->withSuccess('You login credentials are incorrect.');
     }
 
@@ -59,8 +64,9 @@ class AuthController extends Controller
         return view('auth.forgot');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
+        ActivityLog::record('Authentication', 'Logout', 'User logged out.', $request);
         Session::flush();
         Auth::logout();
         return redirect('/login');

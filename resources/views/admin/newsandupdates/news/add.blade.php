@@ -15,9 +15,19 @@
                   <label class="form-label">Title *</label>
                   <input type="text" class="form-control" name="title" value="{{ @$getrecord[0]->title }}" required="">
                   </div>
+                <div class="col-md-6">
+                  <label class="form-label">News Category</label>
+                  <input type="text" class="form-control" name="category" value="Municipal News">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Author</label>
+                  <input type="text" class="form-control" name="author" value="Bontoc LGU">
+                </div>
                 <div class="col-12">
                   <label class="form-label">Image *</label>
-                    <input type="file" class="form-control" name="image_file" required=""><br>
+                    <input type="file" class="form-control" name="image_file" required="">
+                    @include('admin.partials.image-upload-guideline', ['type' => 'news'])
+                    <br>
                     @if(@$getrecord[0]->image_file)
                     <img src="{{ url('uploads/' .@$getrecord[0]->image_file) }}" width="100" height="100" />
                     @endif
@@ -31,7 +41,7 @@
                   <input type="date" name="date_posted" value="{{ @$getrecord[0]->title }}" class="form-control" required="">
                 </div>
                 <div class="col-12" style="margin-top: 30px;">
-                  <label for="inputPassword4" class="form-label">Status *</label>
+                  <label for="inputPassword4" class="form-label">Is Published *</label>
                   <select class="form-control" name="status" required="">
                     <option value="1">Yes</option>
                     <option value="0">No</option>

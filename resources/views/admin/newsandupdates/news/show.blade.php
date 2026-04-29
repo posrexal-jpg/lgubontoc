@@ -12,7 +12,12 @@
                 <img src="{{ url('uploads/'.$news->image_file) }}" class="mb-3" style="max-width: 240px;">
             @endif
             <h4>{{ $news->title }}</h4>
-            <p><strong>Date Posted:</strong> {{ $news->date_posted }} | <strong>Status:</strong> {{ $news->status ? 'Yes' : 'No' }}</p>
+            <p>
+                <strong>Category:</strong> {{ $news->category ?? 'Municipal News' }} |
+                <strong>Author:</strong> {{ $news->author ?? 'Bontoc LGU' }} |
+                <strong>Date Posted:</strong> {{ $news->date_posted }} |
+                <strong>Is Published:</strong> {{ $news->status ? 'Yes' : 'No' }}
+            </p>
             <div class="siteorigin-widget-tinymce textwidget">
                 {!! $news->description !!}
             </div>
@@ -37,9 +42,20 @@
                                 <label class="form-label">Title</label>
                                 <input type="text" class="form-control" name="title" value="{{ $news->title }}" required>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">News Category</label>
+                                    <input type="text" class="form-control" name="category" value="{{ $news->category ?? 'Municipal News' }}">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Author</label>
+                                    <input type="text" class="form-control" name="author" value="{{ $news->author ?? 'Bontoc LGU' }}">
+                                </div>
+                            </div>
                             <div class="mb-3">
                                 <label class="form-label">Image</label>
                                 <input type="file" class="form-control" name="image_file">
+                                @include('admin.partials.image-upload-guideline', ['type' => 'news'])
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Description</label>
@@ -50,7 +66,7 @@
                                 <input type="date" name="date_posted" value="{{ $news->date_posted }}" class="form-control" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Status</label>
+                                <label class="form-label">Is Published</label>
                                 <select class="form-control" name="status" required>
                                     <option value="1" @selected($news->status == 1)>Yes</option>
                                     <option value="0" @selected($news->status == 0)>No</option>

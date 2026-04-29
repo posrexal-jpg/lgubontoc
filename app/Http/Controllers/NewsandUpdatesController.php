@@ -9,6 +9,20 @@ use Str;
 
 class NewsandUpdatesController extends Controller
 {
+    private function uploadPath(?string $filename = null): string
+    {
+        $path = public_path('uploads');
+
+        if (!is_dir($path)) {
+            mkdir($path, 0755, true);
+        }
+
+        if (!is_writable($path)) {
+            @chmod($path, 0775);
+        }
+
+        return $filename ? $path.DIRECTORY_SEPARATOR.$filename : $path;
+    }
 
 	public function addnews(Request $request) 
     {
@@ -47,18 +61,20 @@ class NewsandUpdatesController extends Controller
         // dd($request->all());
         $updateRecord =  NewsandUpdates_news::find($id);
         $updateRecord->title = $request->title;
+        $updateRecord->author = $request->author ?: 'Bontoc LGU';
+        $updateRecord->category = $request->category ?: 'Municipal News';
 
         if(!empty($request->file('image_file'))){
 
-            if (!empty($updateRecord->image_file) && file_exists('uploads/'.$updateRecord->image_file)) {
-                unlink('uploads/'.$updateRecord->image_file);
+            if (!empty($updateRecord->image_file) && file_exists($this->uploadPath($updateRecord->image_file))) {
+                unlink($this->uploadPath($updateRecord->image_file));
             }
 
             $file = $request->file('image_file');
             $randomStr = Str::random(30);
             $filename = $randomStr . '.' . $file->
                     getClientOriginalExtension();
-            $file->move('uploads/',$filename);
+            $file->move($this->uploadPath(), $filename);
             $updateRecord->image_file = $filename;
 
         }
@@ -77,6 +93,8 @@ class NewsandUpdatesController extends Controller
         $insertRecord                   = new NewsandUpdates_news;
     	$insertRecord->id 			    = $request->id;
     	$insertRecord->title 			= $request->title;
+        $insertRecord->author           = $request->author ?: 'Bontoc LGU';
+        $insertRecord->category         = $request->category ?: 'Municipal News';
     	$insertRecord->description 		= $request->description;
     	$insertRecord->status 			= $request->status;
     	$insertRecord->date_posted 		= $request->date_posted;
@@ -86,7 +104,7 @@ class NewsandUpdatesController extends Controller
             $randomStr = Str::random(30);
             $filename = $randomStr . '.' . $file->
                     getClientOriginalExtension();
-            $file->move('uploads/',$filename);
+            $file->move($this->uploadPath(), $filename);
             $insertRecord->image_file = $filename;
 
         }
@@ -100,8 +118,8 @@ class NewsandUpdatesController extends Controller
     {
         $deleteRecord = NewsandUpdates_news::find($id);
 
-        if (!empty($deleteRecord->image_file) && file_exists('uploads/'.$deleteRecord->image_file)) {
-            unlink('uploads/'.$deleteRecord->image_file);
+        if (!empty($deleteRecord->image_file) && file_exists($this->uploadPath($deleteRecord->image_file))) {
+            unlink($this->uploadPath($deleteRecord->image_file));
         }
 
         $deleteRecord->delete();
@@ -109,7 +127,7 @@ class NewsandUpdatesController extends Controller
         return redirect()->back()->with('error', 'News successfully deleted.');
     }
 
-    // Upcoming Updates
+    // Announcements
 
     public function addupcomingupdates(Request $request) 
     {
@@ -148,18 +166,20 @@ class NewsandUpdatesController extends Controller
         // dd($request->all());
         $updateRecord =  NewsandUpdates_upcomingupdates::find($id);
         $updateRecord->title = $request->title;
+        $updateRecord->author = $request->author ?: 'Bontoc LGU';
+        $updateRecord->category = $request->category ?: 'Announcement';
 
         if(!empty($request->file('image_file'))){
 
-            if (!empty($updateRecord->image_file) && file_exists('uploads/'.$updateRecord->image_file)) {
-                unlink('uploads/'.$updateRecord->image_file);
+            if (!empty($updateRecord->image_file) && file_exists($this->uploadPath($updateRecord->image_file))) {
+                unlink($this->uploadPath($updateRecord->image_file));
             }
 
             $file = $request->file('image_file');
             $randomStr = Str::random(30);
             $filename = $randomStr . '.' . $file->
                     getClientOriginalExtension();
-            $file->move('uploads/',$filename);
+            $file->move($this->uploadPath(), $filename);
             $updateRecord->image_file = $filename;
 
         }
@@ -169,7 +189,7 @@ class NewsandUpdatesController extends Controller
         $updateRecord->date_posted      = $request->date_posted;
         $updateRecord->save();
 
-        return redirect('admin/newsandupdates/upcomingupdates/list')->with('success', 'Upcoming Updates feature successfully updated.');
+        return redirect('admin/newsandupdates/upcomingupdates/list')->with('success', 'Announcement successfully updated.');
     }
 
     public function insertupcomingupdates(Request $request) 
@@ -178,6 +198,8 @@ class NewsandUpdatesController extends Controller
         $insertRecord                   = new NewsandUpdates_upcomingupdates;
         $insertRecord->id               = $request->id;
         $insertRecord->title            = $request->title;
+        $insertRecord->author           = $request->author ?: 'Bontoc LGU';
+        $insertRecord->category         = $request->category ?: 'Announcement';
         $insertRecord->description      = $request->description;
         $insertRecord->status           = $request->status;
         $insertRecord->date_posted      = $request->date_posted;
@@ -187,27 +209,27 @@ class NewsandUpdatesController extends Controller
             $randomStr = Str::random(30);
             $filename = $randomStr . '.' . $file->
                     getClientOriginalExtension();
-            $file->move('uploads/',$filename);
+            $file->move($this->uploadPath(), $filename);
             $insertRecord->image_file = $filename;
 
         }
 
         $insertRecord->save();
 
-        return redirect('admin/newsandupdates/upcomingupdates/list')->with('success', 'Successfully uploaded to upcomingupdates feature.');
+        return redirect('admin/newsandupdates/upcomingupdates/list')->with('success', 'Announcement successfully uploaded.');
     }
 
     public function deleteupcomingupdates($id, Request $request) 
     {
         $deleteRecord = NewsandUpdates_upcomingupdates::find($id);
 
-        if (!empty($deleteRecord->image_file) && file_exists('uploads/'.$deleteRecord->image_file)) {
-            unlink('uploads/'.$deleteRecord->image_file);
+        if (!empty($deleteRecord->image_file) && file_exists($this->uploadPath($deleteRecord->image_file))) {
+            unlink($this->uploadPath($deleteRecord->image_file));
         }
 
         $deleteRecord->delete();
 
-        return redirect()->back()->with('error', 'Upcoming Updates successfully deleted.');
+        return redirect()->back()->with('error', 'Announcement successfully deleted.');
     }
 }
 

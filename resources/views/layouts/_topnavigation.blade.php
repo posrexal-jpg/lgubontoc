@@ -13,11 +13,6 @@
                             <i class="fas fa-bars"></i>
                         </button>
                     </div>
-                    <div class="col-auto">
-                        <a class="admin-header-logo" href="{{ url('admin/dashboard') }}" aria-label="Admin dashboard">
-                            <img src="{{ asset('assets/images/bontoclogo.png') }}" alt="Bontoc LGU logo">
-                        </a>
-                    </div>
                     <div class="app-search-box col">
                         <div class="admin-header-title">
                             <span class="admin-header-kicker">Municipality of Bontoc</span>
@@ -27,7 +22,7 @@
                     <div class="app-utilities col-auto">
                         <div class="app-utility-item app-user-dropdown dropdown">
                             <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                                <img src="{{ asset('assets/images/user.png') }}" alt="user profile">
+                                <img src="{{ $user?->profile_picture_url ?? asset('assets/images/user.png') }}" alt="user profile">
                                 {{ $user->name ?? 'Account' }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
@@ -63,13 +58,33 @@
                 </a>
 
                 @if($can('home'))
+                    <a class="nav-link" href="{{ route('admin.hero-images.index') }}">
+                        <span class="nav-icon"><i class="fas fa-images"></i></span>
+                        <span class="nav-link-text">Banners & Hero Images</span>
+                    </a>
+
                     <a class="nav-link" href="{{ url('admin/home') }}">
                         <span class="nav-icon"><i class="fas fa-house"></i></span>
-                        <span class="nav-link-text">Homepage</span>
+                        <span class="nav-link-text">Homepage Items</span>
                     </a>
                 @endif
 
-                @if($can('about'))
+                @if($can('government'))
+                    <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-government" aria-expanded="false">
+                        <span class="nav-icon"><i class="fas fa-landmark"></i></span>
+                        <span class="nav-link-text">Government</span>
+                        <span class="submenu-arrow"><i class="fas fa-chevron-down"></i></span>
+                    </a>
+                    <div id="submenu-government" class="collapse submenu" data-bs-parent="#app-nav-main">
+                        <ul class="submenu-list list-unstyled">
+                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.government.officials.index', ['category' => 'elected']) }}">Elected Officials</a></li>
+                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.government.officials.index', ['category' => 'legislative']) }}">Legislative</a></li>
+                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.government.officials.index') }}">All Officials</a></li>
+                        </ul>
+                    </div>
+                @endif
+
+                @if($can('about') || $can('careers'))
                     <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-about" aria-expanded="false">
                         <span class="nav-icon"><i class="fas fa-building-columns"></i></span>
                         <span class="nav-link-text">About Us</span>
@@ -77,13 +92,18 @@
                     </a>
                     <div id="submenu-about" class="collapse submenu" data-bs-parent="#app-nav-main">
                         <ul class="submenu-list list-unstyled">
-                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.aboutus.history') }}">History</a></li>
-                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.aboutus.location') }}">Location</a></li>
-                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.aboutus.missionandvision') }}">Mission and Vision</a></li>
-                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.aboutus.municipalityseal') }}">Municipality Seal</a></li>
-                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.aboutus.servicepledge') }}">Service Pledge</a></li>
-                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.aboutus.mandate') }}">Mandate</a></li>
-                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.aboutus.directory') }}">Directory</a></li>
+                            @if($can('about'))
+                                <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.aboutus.history') }}">History</a></li>
+                                <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.aboutus.location') }}">Location</a></li>
+                                <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.aboutus.missionandvision') }}">Mission and Vision</a></li>
+                                <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.aboutus.municipalityseal') }}">Municipality Seal</a></li>
+                                <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.aboutus.servicepledge') }}">Service Pledge</a></li>
+                                <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.aboutus.mandate') }}">Mandate</a></li>
+                                <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.aboutus.directory') }}">Directory</a></li>
+                            @endif
+                            @if($can('careers'))
+                                <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.careers.jobvacancies') }}">Careers</a></li>
+                            @endif
                         </ul>
                     </div>
                 @endif
@@ -97,7 +117,7 @@
                     <div id="submenu-news" class="collapse submenu" data-bs-parent="#app-nav-main">
                         <ul class="submenu-list list-unstyled">
                             <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.newsandupdates.news.list') }}">News</a></li>
-                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.newsandupdates.upcomingupdates.list') }}">Upcoming Updates</a></li>
+                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.newsandupdates.upcomingupdates.list') }}">Announcements</a></li>
                         </ul>
                     </div>
                 @endif
@@ -110,30 +130,33 @@
                     </a>
                     <div id="submenu-transparency" class="collapse submenu" data-bs-parent="#app-nav-main">
                         <ul class="submenu-list list-unstyled">
-                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.transparency.municipalordinances') }}">Municipal Ordinances</a></li>
-                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.transparency.resolutions') }}">Resolutions</a></li>
+                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.transparency.fdp-reports.index') }}">FDP Reports</a></li>
                         </ul>
                     </div>
                 @endif
 
-                @if($can('services'))
-                    <a class="nav-link" href="{{ route('admin.services.mayorsoffice') }}">
+                @if($can('services') || $can('transaction_links'))
+                    <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-services" aria-expanded="false">
                         <span class="nav-icon"><i class="fas fa-handshake"></i></span>
-                        <span class="nav-link-text">Services</span>
+                        <span class="nav-link-text">Services & Transactions</span>
+                        <span class="submenu-arrow"><i class="fas fa-chevron-down"></i></span>
                     </a>
+                    <div id="submenu-services" class="collapse submenu" data-bs-parent="#app-nav-main">
+                        <ul class="submenu-list list-unstyled">
+                            @if($can('services'))
+                                <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.services.mayorsoffice') }}">Services</a></li>
+                            @endif
+                            @if($can('transaction_links'))
+                                <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.transactions.links.index') }}">Transaction Links</a></li>
+                            @endif
+                        </ul>
+                    </div>
                 @endif
 
                 @if($can('tourism'))
                     <a class="nav-link" href="{{ route('admin.tourism.bontocattractions') }}">
                         <span class="nav-icon"><i class="fas fa-map-location-dot"></i></span>
                         <span class="nav-link-text">Tourism</span>
-                    </a>
-                @endif
-
-                @if($can('careers'))
-                    <a class="nav-link" href="{{ route('admin.careers.jobvacancies') }}">
-                        <span class="nav-icon"><i class="fas fa-briefcase"></i></span>
-                        <span class="nav-link-text">Careers</span>
                     </a>
                 @endif
 
@@ -162,6 +185,13 @@
                     <a class="nav-link" href="{{ route('admin.users.index') }}">
                         <span class="nav-icon"><i class="fas fa-users-gear"></i></span>
                         <span class="nav-link-text">User Accounts</span>
+                    </a>
+                @endif
+
+                @if($can('activity_logs'))
+                    <a class="nav-link" href="{{ route('admin.logs.index') }}">
+                        <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
+                        <span class="nav-link-text">Activity Logs</span>
                     </a>
                 @endif
             </nav>

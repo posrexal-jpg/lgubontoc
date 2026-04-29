@@ -17,7 +17,9 @@
                   </div>
                 <div class="col-12">
                   <label class="form-label">Image <span style="color: red"> *</span></label>
-                    <input type="file" class="form-control" name="image"><br>
+                    <input type="file" class="form-control" name="image">
+                    @include('admin.partials.image-upload-guideline', ['type' => 'homepage'])
+                    <br>
                     @if(!empty($getrecord->image))
                         <img src="{{ url('public/home/'.$getrecord->image) }}" style="height: 50px; width: 50px;">
                        @endif               

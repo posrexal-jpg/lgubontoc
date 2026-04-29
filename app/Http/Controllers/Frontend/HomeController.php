@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\HomepageModel;
 use App\Models\CarouselItem;
 use App\Models\FeaturedItem;
+use App\Models\HeroImage;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
@@ -47,7 +48,8 @@ class HomeController extends Controller
             'carouselItems' => $carouselItems,
             'featuredItems' => $featuredItemsData,
             'getrecord' => $featuredItemsData, // For backward compatibility
-            'pagination' => $featuredItems // For pagination links
+            'pagination' => $featuredItems, // For pagination links
+            'heroImageUrl' => HeroImage::imageUrlFor('home', 'uploads/m1KQTRPgOCyDRFpmPxdKqjcs5rYeBN.jfif'),
         ];
 
         return view('frontend.home.index', $data);

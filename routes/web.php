@@ -10,9 +10,11 @@ use App\Http\Controllers\HomepageController;
 
 Route::group(['namespace' => 'App\Http\Controllers'], function()
 { 
-     //Homepage Routes
+      //Homepage Routes
       Route::get('/', 'Frontend\HomeController@home')->name('home');
-      Route::get('/home/{id}', 'Frontend\HomeController@show')->name('home.show');
+      Route::get('/updates/{id}', 'Frontend\HomeController@show')->name('home.show');
+      Route::redirect('/home/{id}', '/updates/{id}');
+      Route::get('/search', 'Frontend\SearchController@index')->name('search');
 
      // AboutUs Routes
       Route::get('/about/history', 'Frontend\AboutController@indexhistory')->name('about.history');
@@ -22,6 +24,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
       Route::get('/about/mandate', 'Frontend\AboutController@indexmandate')->name('about.mandate');
       Route::get('/about/servicepledge', 'Frontend\AboutController@indexservicepledge')->name('about.servicepledge');
       Route::get('/about/directory', 'Frontend\AboutController@indexdirectory')->name('about.directory');
+      Route::get('/government/elected-officials', 'Frontend\GovernmentController@electedOfficials')->name('government.elected-officials');
+      Route::get('/government/legislative', 'Frontend\GovernmentController@legislative')->name('government.legislative');
 
 
      //News and Updates
@@ -36,10 +40,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
      Route::get('/services/bomwasa','Frontend\ServicesController@indexbomwasa')->name('services.bomwasa');
 
      //Transparency
+     Route::get('/transparency/fdp-reports', 'Frontend\TransparencyController@indexFdpReports')->name('transparency.fdp-reports');
      Route::get('/transparency/municipalordinances', 'Frontend\TransparencyController@indexmunicipalordinances')->name('transparency.municipalordinances');
-     Route::get('/transparency/resolutions', 'Frontend\TransparencyController@indexresolutions')->name('transparency.resolutions');
+     Route::redirect('/transparency/resolutions', '/transparency/fdp-reports');
 
      //Tourism
+     Route::get('/tourism', 'Frontend\TourismController@indexbontocattractions')->name('tourism.index');
      Route::get('/tourism/bontocattractions', 'Frontend\TourismController@indexbontocattractions')->name('tourism.bontocattractions');
      Route::get('/tourism/bontocattractions/{id}', 'Frontend\TourismController@showbontocattractions')->name('tourism.bontocattractions.show');
 
@@ -68,10 +74,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     //Forgot
         Route::get('forgot-password' , [AuthController::class, 'forgot']); 
 
-    Route::group(['middleware' => ['auth', 'admin.access'],'prefix'=> 'admin'], function() {
+    Route::group(['middleware' => ['auth', 'admin.access', 'admin.activity'],'prefix'=> 'admin'], function() {
 
         // Dashboard
             Route::get('dashboard', 'DashboardController@dashboard')->name('dashboard');
+
+        // Activity logs
+        Route::get('logs', 'ActivityLogController@index')->name('admin.logs.index');
 
         // Profile
         Route::get('profile', 'ProfileController@edit')->name('admin.profile.edit');
@@ -84,6 +93,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
             ->names('admin.users');
 
         // Home
+        Route::get('hero-images', 'HeroImageController@index')->name('admin.hero-images.index');
+        Route::post('hero-images', 'HeroImageController@update')->name('admin.hero-images.update');
+        Route::get('header-banner', 'HeroImageController@index')->name('admin.header-banner.index');
         Route::get('home', [HomepageController::class, 'home']);
         Route::get('home/add', [HomepageController::class, 'home_add']);
         Route::post('home/add', [HomepageController::class, 'home_add_post']);
@@ -136,6 +148,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('/aboutus/directory/edit/{id}', 'AboutusController@editdirectory')->name('admin.aboutus.directory.edit');
         Route::get('/aboutus/directory/delete/{id}', 'AboutusController@deletedirectory')->name('admin.aboutus.directory.delete');
 
+        //Admin Dashboard Government Officials
+        Route::get('/government/officials', 'GovernmentOfficialController@index')->name('admin.government.officials.index');
+        Route::post('/government/officials', 'GovernmentOfficialController@store')->name('admin.government.officials.store');
+        Route::post('/government/officials/{id}', 'GovernmentOfficialController@update')->name('admin.government.officials.update');
+        Route::get('/government/officials/delete/{id}', 'GovernmentOfficialController@destroy')->name('admin.government.officials.delete');
+
         //Admin Dashboard Careers
         Route::get('/careers/jobvacancies', 'CareersController@indexjobvacancies')->name('admin.careers.jobvacancies');
         Route::get('/careers/jobvacancies/read/{id}', 'CareersController@showjobvacancies')->name('admin.careers.jobvacancies.show');
@@ -149,12 +167,17 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('/services/mayorsoffice/read/{id}', 'ServicesController@showmayorsoffice')->name('admin.services.mayorsoffice.show');
         Route::get('/services/mayorsoffice/edit/{id}', 'ServicesController@editmayorsoffice')->name('admin.services.mayorsoffice.edit');
         Route::get('/services/mayorsoffice/delete/{id}', 'ServicesController@deletemayorsoffice')->name('admin.services.mayorsoffice.delete');
+        Route::get('/transactions/links', 'TransactionLinkController@index')->name('admin.transactions.links.index');
+        Route::post('/transactions/links', 'TransactionLinkController@store')->name('admin.transactions.links.store');
+        Route::post('/transactions/links/{id}', 'TransactionLinkController@update')->name('admin.transactions.links.update');
+        Route::get('/transactions/links/delete/{id}', 'TransactionLinkController@destroy')->name('admin.transactions.links.delete');
 
         //Admin Dashboard Tourism
         Route::get('/tourism/bontocattractions', 'TourismController@indexbontocattractions')->name('admin.tourism.bontocattractions');
         Route::get('/tourism/bontocattractions/read/{id}', 'TourismController@showbontocattractions')->name('admin.tourism.bontocattractions.show');
         Route::get('/tourism/bontocattractions/edit/{id}', 'TourismController@editbontocattractions')->name('admin.tourism.bontocattractions.edit');
         Route::post('/tourism/bontocattractions/add', 'TourismController@addbontocattractions')->name('admin.tourism.bontocattractions.add');
+        Route::get('/tourism/bontocattractions/photo/delete/{id}', 'TourismController@deletebontocattractionphoto')->name('admin.tourism.bontocattractions.photo.delete');
         Route::get('/tourism/bontocattractions/delete/{id}', 'TourismController@deletebontocattractions')->name('admin.tourism.bontocattractions.delete');
 
         //Admin News and Updates
@@ -181,6 +204,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         // Route::post('/newsandupdates/upcomingupdates/add', 'NewsandUpdatesController@addupcomingupdates')->name('admin.newsandupdates.upcomingupdates.add');
 
         //Admin Dashboard Transparency
+        Route::get('/transparency/fdp-reports', 'FdpReportController@index')->name('admin.transparency.fdp-reports.index');
+        Route::post('/transparency/fdp-reports', 'FdpReportController@store')->name('admin.transparency.fdp-reports.store');
+        Route::post('/transparency/fdp-reports/{id}', 'FdpReportController@update')->name('admin.transparency.fdp-reports.update');
+        Route::get('/transparency/fdp-reports/delete/{id}', 'FdpReportController@destroy')->name('admin.transparency.fdp-reports.delete');
         Route::get('/transparency/municipalordinances', 'TransparencyController@indexmunicipalordinances')->name('admin.transparency.municipalordinances');
         Route::post('/transparency/municipalordinances/add', 'TransparencyController@addmunicipalordinances')->name('admin.transparency.municipalordinances.add');
         Route::get('/transparency/municipalordinances/read/{id}', 'TransparencyController@showmunicipalordinances')->name('admin.transparency.municipalordinances.show');

@@ -2,18 +2,15 @@
 
 @section('content')
 
-<style>
-    h1{
-        text-align: center;
-        color: #046631;
-        font-family: Helvetica; 
-    }
-</style>
+@include('frontend.about.partials.page-header', [
+    'current' => 'Municipality Seal',
+    'title' => 'Municipality Seal',
+    'description' => 'Learn about the official seal of Bontoc and the symbols that represent the municipality\'s identity and heritage.'
+])
 
-
-<div class="container">
+<div class="container about-page-content">
   @if(isset($municipalityseal->title))
-        <h1><span>{{$municipalityseal->title}}</span></h1>
+        <h2><span>{{$municipalityseal->title}}</span></h2>
         <div class="siteorigin-widget-tinymce textwidget">
             {!! $municipalityseal->description !!}
         </div>

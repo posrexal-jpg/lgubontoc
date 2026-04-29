@@ -59,6 +59,27 @@
                                 <label>Description</label>
                                 <textarea name="description" class="form-control">{{ old('description') }}</textarea>
                             </div>
+                            @if($supportsMap ?? false)
+                                <div class="form-group mt-3">
+                                    <label>Address</label>
+                                    <input type="text" name="address" value="{{ old('address') }}" class="form-control" placeholder="Municipal Hall, Bontoc, Southern Leyte">
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <label>Latitude</label>
+                                        <input type="number" step="0.0000001" name="latitude" value="{{ old('latitude') }}" class="form-control" placeholder="10.3556">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Longitude</label>
+                                        <input type="number" step="0.0000001" name="longitude" value="{{ old('longitude') }}" class="form-control" placeholder="124.9697">
+                                    </div>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label>Map Embed URL</label>
+                                    <input type="url" name="map_embed_url" value="{{ old('map_embed_url') }}" class="form-control" placeholder="https://www.openstreetmap.org/export/embed.html?...">
+                                    <small class="text-muted">Optional. If blank, the map will use the latitude and longitude above.</small>
+                                </div>
+                            @endif
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -89,6 +110,27 @@
                                     <label>Description</label>
                                     <textarea name="description" class="form-control">{{ $value->description }}</textarea>
                                 </div>
+                                @if($supportsMap ?? false)
+                                    <div class="form-group mt-3">
+                                        <label>Address</label>
+                                        <input type="text" name="address" value="{{ old('address', $value->address) }}" class="form-control" placeholder="Municipal Hall, Bontoc, Southern Leyte">
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label>Latitude</label>
+                                            <input type="number" step="0.0000001" name="latitude" value="{{ old('latitude', $value->latitude) }}" class="form-control" placeholder="10.3556">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Longitude</label>
+                                            <input type="number" step="0.0000001" name="longitude" value="{{ old('longitude', $value->longitude) }}" class="form-control" placeholder="124.9697">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label>Map Embed URL</label>
+                                        <input type="url" name="map_embed_url" value="{{ old('map_embed_url', $value->map_embed_url) }}" class="form-control" placeholder="https://www.openstreetmap.org/export/embed.html?...">
+                                        <small class="text-muted">Optional. If blank, the map will use the latitude and longitude above.</small>
+                                    </div>
+                                @endif
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

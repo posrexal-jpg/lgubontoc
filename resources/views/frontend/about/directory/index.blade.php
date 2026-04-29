@@ -2,18 +2,15 @@
 
 @section('content')
 
-<style>
-    h1{
-        text-align: center;
-        color: #046631;
-        font-family: Helvetica; 
-    }
-</style>
+@include('frontend.about.partials.page-header', [
+    'current' => 'Directory',
+    'title' => 'Office Directory',
+    'description' => 'Access the CAM directory for quick contact information, office locations, and public assistance channels within the Municipal Government of Bontoc.'
+])
 
-
-<div class="container">
+<div class="container about-page-content">
   @if(isset($directory->title))
-        <h1><span>{{$directory->title}}</span></h1>
+        <h2><span>{{$directory->title}}</span></h2>
         <div class="siteorigin-widget-tinymce textwidget">
             {!! $directory->description !!}
         </div>
