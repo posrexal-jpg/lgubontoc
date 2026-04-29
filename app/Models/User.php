@@ -20,6 +20,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
+        'permissions',
         'password',
     ];
 
@@ -40,11 +42,28 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'permissions' => 'array',
         'password' => 'hashed',
     ];
 
     public function setPasswordAttribute($value)
     {
-       $this->attributes['password'] = bcrypt($value);
+       $this->attributes['password'] = \Illuminate\Support\Facades\Hash::needsRehash($value)
+           ? bcrypt($value)
+           : $value;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function hasPermission(string $permission): bool
+    {
+        $permissions = $this->permissions ?? [];
+
+        return $this->isAdmin()
+            || in_array('*', $permissions, true)
+            || in_array($permission, $permissions, true);
     }
 }

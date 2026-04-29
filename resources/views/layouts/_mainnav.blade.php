@@ -1,66 +1,84 @@
-<nav class="site-nav navbar navbar-expand-lg" aria-label="Primary navigation">
-    <div class="container">
-        <a href="{{ route('home') }}" class="navbar-brand d-lg-none">Bontoc LGU</a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+{{-- Adapted from iGovPhil/gwt-static P2.0.0 top-bar navigation structure. --}}
+<div id="main-nav" class="gwt-main-nav">
+    <div class="gwt-nav-row">
+        <nav class="top-bar navbar navbar-expand-lg" aria-label="Primary navigation">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="{{ route('home') }}">BONTOCLGU</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon">
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#gwtNavbar" aria-controls="gwtNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </li>
+            </ul>
 
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav">
-                <a href="{{ route('home') }}" class="nav-item nav-link">Home</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Government</a>
-                    <div class="dropdown-menu">
-                        <a href="{{ route('about.directory') }}" class="dropdown-item">Directory</a>
-                        <a href="{{ route('about.history') }}" class="dropdown-item">History</a>
-                        <a href="{{ route('about.missionandvision') }}" class="dropdown-item">Mission and Vision</a>
-                        <a href="{{ route('about.mandate') }}" class="dropdown-item">Mandate</a>
-                        <a href="{{ route('about.municipalityseal') }}" class="dropdown-item">Municipality Seal</a>
-                        <a href="{{ route('about.servicepledge') }}" class="dropdown-item">Service Pledge</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Services</a>
-                    <div class="dropdown-menu">
-                        <a href="{{ route('services.citizenscharter') }}" class="dropdown-item">Citizen's Charter</a>
-                        <a href="{{ route('services.mayorsoffice') }}" class="dropdown-item">Mayor's Office</a>
-                        <a class="dropdown-item" target="_blank" rel="noopener" href="https://brgyprofiling.bitsorg.info/login">Barangay Information System</a>
-                        <a class="dropdown-item" target="_blank" rel="noopener" href="https://bomwasa.bitsorg.info/billinquiry">BOMWASA Billing Inquiry</a>
-                        <a class="dropdown-item" target="_blank" rel="noopener" href="https://hrmis.bitsorg.info/login">Document Tracking System</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Transparency</a>
-                    <div class="dropdown-menu">
-                        <a href="{{ route('transparency.municipalordinances') }}" class="dropdown-item">Municipal Ordinances</a>
-                        <a href="{{ route('transparency.resolutions') }}" class="dropdown-item">Resolutions</a>
-                        <a href="{{ route('others.downloadableforms') }}" class="dropdown-item">Downloadable Forms</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">News</a>
-                    <div class="dropdown-menu">
-                        <a href="{{ route('newsandupdates.news') }}" class="dropdown-item">News and Announcements</a>
-                        <a href="{{ route('newsandupdates.upcomingupdates') }}" class="dropdown-item">Upcoming Events</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tourism</a>
-                    <div class="dropdown-menu">
-                        <a href="{{ route('tourism.bontocattractions') }}" class="dropdown-item">Bontoc Attractions</a>
-                        <a target="_blank" rel="noopener" href="https://www.facebook.com/BontocTourismOffice" class="dropdown-item">Tourism Facebook Page</a>
-                    </div>
-                </div>
-                <a href="{{ route('careers.jobvacancies') }}" class="nav-item nav-link">Careers</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Resources</a>
-                    <div class="dropdown-menu">
-                        <a href="{{ route('others.gallery') }}" class="dropdown-item">Gallery</a>
-                        <a href="{{ route('others.memorandom') }}" class="dropdown-item">Memorandum</a>
-                        <a href="{{ route('about.location') }}" class="dropdown-item">Location</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <section class="top-bar-section collapse navbar-collapse" id="gwtNavbar">
+                <ul class="left">
+                    <li class="divider"></li>
+                    <li class="active"><a href="{{ route('home') }}">Home</a></li>
+                    <li class="divider"></li>
+
+                    <li class="has-dropdown dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Government</a>
+                        <ul class="dropdown-menu dropdown">
+                            <li><a class="dropdown-item" href="{{ route('about.directory') }}">Directory</a></li>
+                            <li><a class="dropdown-item" href="{{ route('about.mandate') }}">Mandate</a></li>
+                            <li><a class="dropdown-item" href="{{ route('about.missionandvision') }}">Mission and Vision</a></li>
+                            <li><a class="dropdown-item" href="{{ route('about.servicepledge') }}">Service Pledge</a></li>
+                        </ul>
+                    </li>
+                    <li class="divider"></li>
+
+                    <li class="has-dropdown dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Transactions</a>
+                        <ul class="dropdown-menu dropdown">
+                            <li><a class="dropdown-item" href="{{ route('services.citizenscharter') }}">Citizen's Charter</a></li>
+                            <li><a class="dropdown-item" href="{{ route('services.mayorsoffice') }}">Mayor's Office</a></li>
+                            <li><a class="dropdown-item" target="_blank" rel="noopener" href="https://brgyprofiling.bitsorg.info/login">Barangay Information System</a></li>
+                            <li><a class="dropdown-item" target="_blank" rel="noopener" href="https://bomwasa.bitsorg.info/billinquiry">BOMWASA Billing Inquiry</a></li>
+                            <li><a class="dropdown-item" target="_blank" rel="noopener" href="https://hrmis.bitsorg.info/login">Document Tracking System</a></li>
+                        </ul>
+                    </li>
+                    <li class="divider"></li>
+
+                    <li class="has-dropdown dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Transparency</a>
+                        <ul class="dropdown-menu dropdown">
+                            <li><a class="dropdown-item" href="{{ route('transparency.municipalordinances') }}">Municipal Ordinances</a></li>
+                            <li><a class="dropdown-item" href="{{ route('transparency.resolutions') }}">Resolutions</a></li>
+                            <li><a class="dropdown-item" href="{{ route('others.downloadableforms') }}">Downloadable Forms</a></li>
+                        </ul>
+                    </li>
+                    <li class="divider"></li>
+
+                    <li><a href="{{ route('newsandupdates.news') }}">News</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{{ route('tourism.bontocattractions') }}">Tourism</a></li>
+                    <li class="divider"></li>
+
+                    <li class="has-dropdown dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About us</a>
+                        <ul class="dropdown-menu dropdown">
+                            <li><a class="dropdown-item" href="{{ route('about.history') }}">History</a></li>
+                            <li><a class="dropdown-item" href="{{ route('about.location') }}">Location</a></li>
+                            <li><a class="dropdown-item" href="{{ route('about.municipalityseal') }}">Municipality Seal</a></li>
+                            <li><a class="dropdown-item" href="{{ route('others.gallery') }}">Gallery</a></li>
+                            <li><a class="dropdown-item" href="{{ route('careers.jobvacancies') }}">Careers</a></li>
+                        </ul>
+                    </li>
+                    <li class="divider"></li>
+                </ul>
+
+                <ul class="right">
+                    <li class="search">
+                        <a href="#site-search-input" aria-label="Search"><i class="fa fa-search"></i></a>
+                    </li>
+                    <li class="accessibility">
+                        <a href="#main-content" aria-label="Accessibility"><i class="fa fa-universal-access"></i></a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
     </div>
-</nav>
+</div>

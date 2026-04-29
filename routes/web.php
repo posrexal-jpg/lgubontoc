@@ -62,10 +62,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     //Forgot
         Route::get('forgot-password' , [AuthController::class, 'forgot']); 
 
-    Route::group(['middleware' => ['auth'],'prefix'=> 'admin'], function() {
+    Route::group(['middleware' => ['auth', 'admin.access'],'prefix'=> 'admin'], function() {
 
         // Dashboard
             Route::get('dashboard', 'DashboardController@dashboard')->name('dashboard');
+
+        // User management
+        Route::resource('users', 'UserManagementController')
+            ->except(['show'])
+            ->names('admin.users');
 
         // Home
         Route::get('home', [HomepageController::class, 'home']);
