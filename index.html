@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Municipality of Bontoc | Official Website</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span>Republic of the Philippines &bull; Province of South Cotabato</span>
+      <div class="topbar-links">
+        <a href="#contact">Contact Us</a>
+        <a href="#news">News</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="header" id="top">
+    <div class="container header-inner">
+      <div class="logo">
+        <div class="logo-seal">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="40" cy="40" r="38" stroke="#1a5276" stroke-width="3" fill="#eaf0fb"/>
+            <circle cx="40" cy="40" r="28" stroke="#1a5276" stroke-width="1.5" fill="none"/>
+            <text x="40" y="36" text-anchor="middle" font-size="9" fill="#1a5276" font-weight="bold" font-family="serif">LGU</text>
+            <text x="40" y="48" text-anchor="middle" font-size="7" fill="#1a5276" font-family="serif">BONTOC</text>
+            <path d="M20 55 Q40 65 60 55" stroke="#1a5276" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Municipality of Bontoc</span>
+          <span class="logo-tagline">South Cotabato, Philippines</span>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Main navigation">
+        <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleNav()">&#9776;</button>
+        <ul class="nav-list" id="navList">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#officials" class="nav-link">Officials</a></li>
+          <li><a href="#news" class="nav-link">News</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <p class="hero-label">Welcome to the Official Website of</p>
+      <h1 class="hero-title">Municipality of<br /><span>Bontoc</span></h1>
+      <p class="hero-subtitle">Serving our community with integrity, transparency, and dedication to progress.</p>
+      <div class="hero-actions">
+        <a href="#services" class="btn btn-primary">Explore Services</a>
+        <a href="#contact" class="btn btn-outline">Contact Us</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll to explore</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="container stats-inner">
+      <div class="stat">
+        <span class="stat-number">28</span>
+        <span class="stat-label">Barangays</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">45K+</span>
+        <span class="stat-label">Population</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">1972</span>
+        <span class="stat-label">Year Founded</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">24/7</span>
+        <span class="stat-label">Emergency Hotline</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="container about-grid">
+      <div class="about-image-wrap">
+        <div class="about-image-placeholder">
+          <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="300" fill="#dce8f7"/>
+            <rect x="40" y="80" width="120" height="160" rx="4" fill="#1a5276" opacity="0.3"/>
+            <rect x="80" y="60" width="80" height="180" rx="4" fill="#1a5276" opacity="0.5"/>
+            <rect x="170" y="100" width="100" height="140" rx="4" fill="#1a5276" opacity="0.4"/>
+            <rect x="280" y="70" width="80" height="170" rx="4" fill="#1a5276" opacity="0.3"/>
+            <rect x="0" y="240" width="400" height="60" fill="#1a5276" opacity="0.15"/>
+            <ellipse cx="60" cy="80" rx="25" ry="40" fill="#27ae60" opacity="0.4"/>
+            <ellipse cx="340" cy="90" rx="30" ry="45" fill="#27ae60" opacity="0.3"/>
+            <ellipse cx="200" cy="70" rx="20" ry="35" fill="#27ae60" opacity="0.35"/>
+          </svg>
+        </div>
+        <div class="about-badge">
+          <span class="badge-year">Est. 1972</span>
+        </div>
+      </div>
+      <div class="about-content">
+        <span class="section-label">About Bontoc</span>
+        <h2 class="section-title">A Community Built on Tradition &amp; Progress</h2>
+        <p>Bontoc is a vibrant municipality nestled in the highlands of South Cotabato, Philippines. Known for its rich cultural heritage, scenic landscapes, and warm, industrious people, Bontoc continues to grow as a model of sustainable local governance.</p>
+        <p>Our local government is committed to delivering efficient public services, fostering economic development, and preserving the environment for future generations.</p>
+        <div class="about-pillars">
+          <div class="pillar">
+            <div class="pillar-icon">&#127981;</div>
+            <div>
+              <strong>Transparency</strong>
+              <span>Open governance for all residents</span>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">&#127807;</div>
+            <div>
+              <strong>Sustainability</strong>
+              <span>Protecting our natural heritage</span>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">&#128106;</div>
+            <div>
+              <strong>Community</strong>
+              <span>Empowering every Bontocano</span>
+            </div>
+          </div>
+        </div>
+        <a href="#officials" class="btn btn-primary">Meet Our Officials</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section section-alt" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">What We Offer</span>
+        <h2 class="section-title">Government Services</h2>
+        <p class="section-desc">Accessible, efficient services for every resident of Bontoc.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">&#128196;</div>
+          <h3>Civil Registry</h3>
+          <p>Birth certificates, marriage records, death certificates, and other civil documents.</p>
+          <a href="#contact" class="service-link">Learn more &rarr;</a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#127968;</div>
+          <h3>Business Permits</h3>
+          <p>New business registration, renewal of permits, and business clearance processing.</p>
+          <a href="#contact" class="service-link">Learn more &rarr;</a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#128657;</div>
+          <h3>Social Welfare</h3>
+          <p>Assistance programs for seniors, PWDs, solo parents, and indigent families.</p>
+          <a href="#contact" class="service-link">Learn more &rarr;</a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#127973;</div>
+          <h3>Health Services</h3>
+          <p>Free consultations, immunization, maternal care, and community health programs.</p>
+          <a href="#contact" class="service-link">Learn more &rarr;</a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#127959;</div>
+          <h3>Infrastructure</h3>
+          <p>Road construction, drainage systems, public facility maintenance and development.</p>
+          <a href="#contact" class="service-link">Learn more &rarr;</a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#128218;</div>
+          <h3>Education</h3>
+          <p>Scholarship programs, literacy initiatives, and support for public schools.</p>
+          <a href="#contact" class="service-link">Learn more &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Officials -->
+  <section class="section" id="officials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Leadership</span>
+        <h2 class="section-title">Municipal Officials</h2>
+        <p class="section-desc">Dedicated public servants working for the people of Bontoc.</p>
+      </div>
+      <div class="officials-grid">
+        <div class="official-card official-card--featured">
+          <div class="official-avatar">
+            <div class="avatar-placeholder mayor">
+              <span>M</span>
+            </div>
+          </div>
+          <div class="official-info">
+            <span class="official-position">Municipal Mayor</span>
+            <h3 class="official-name">Hon. [Mayor's Name]</h3>
+            <p class="official-desc">Leading Bontoc toward inclusive growth, improved public services, and a brighter future for all residents.</p>
+          </div>
+        </div>
+        <div class="official-card">
+          <div class="official-avatar">
+            <div class="avatar-placeholder vmayor">
+              <span>VM</span>
+            </div>
+          </div>
+          <span class="official-position">Vice Mayor</span>
+          <h3 class="official-name">Hon. [Vice Mayor's Name]</h3>
+        </div>
+        <div class="official-card">
+          <div class="official-avatar">
+            <div class="avatar-placeholder council">
+              <span>SB</span>
+            </div>
+          </div>
+          <span class="official-position">Sangguniang Bayan</span>
+          <h3 class="official-name">8 Councilors</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- News -->
+  <section class="section section-alt" id="news">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Latest Updates</span>
+        <h2 class="section-title">News &amp; Announcements</h2>
+        <p class="section-desc">Stay informed with the latest from the Municipal Government of Bontoc.</p>
+      </div>
+      <div class="news-grid">
+        <article class="news-card news-card--featured">
+          <div class="news-image-placeholder news-image-placeholder--large">
+            <span>&#128240;</span>
+          </div>
+          <div class="news-content">
+            <span class="news-tag">Announcement</span>
+            <h3>LGU Bontoc Launches New Online Service Portal</h3>
+            <p>Residents can now access key government services digitally, reducing transaction times and improving convenience for all Bontocanos.</p>
+            <div class="news-meta">
+              <span>April 28, 2026</span>
+              <a href="#" class="news-read">Read more &rarr;</a>
+            </div>
+          </div>
+        </article>
+        <article class="news-card">
+          <div class="news-image-placeholder">
+            <span>&#127795;</span>
+          </div>
+          <div class="news-content">
+            <span class="news-tag">Environment</span>
+            <h3>Tree-Planting Drive Reaches 10,000 Seedlings</h3>
+            <div class="news-meta">
+              <span>April 20, 2026</span>
+              <a href="#" class="news-read">Read more &rarr;</a>
+            </div>
+          </div>
+        </article>
+        <article class="news-card">
+          <div class="news-image-placeholder">
+            <span>&#127973;</span>
+          </div>
+          <div class="news-content">
+            <span class="news-tag">Health</span>
+            <h3>Free Medical Mission Scheduled for May 2026</h3>
+            <div class="news-meta">
+              <span>April 15, 2026</span>
+              <a href="#" class="news-read">Read more &rarr;</a>
+            </div>
+          </div>
+        </article>
+        <article class="news-card">
+          <div class="news-image-placeholder">
+            <span>&#127959;</span>
+          </div>
+          <div class="news-content">
+            <span class="news-tag">Infrastructure</span>
+            <h3>Road Improvement Project Completed in Barangay 5</h3>
+            <div class="news-meta">
+              <span>April 10, 2026</span>
+              <a href="#" class="news-read">Read more &rarr;</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <span class="section-label">Get in Touch</span>
+        <h2 class="section-title">Contact Us</h2>
+        <p>We are here to serve you. Reach out to the Municipal Government of Bontoc for any inquiries, concerns, or assistance.</p>
+        <ul class="contact-list">
+          <li>
+            <span class="contact-icon">&#128205;</span>
+            <div>
+              <strong>Address</strong>
+              <span>Municipal Hall, Bontoc, South Cotabato, Philippines</span>
+            </div>
+          </li>
+          <li>
+            <span class="contact-icon">&#128222;</span>
+            <div>
+              <strong>Phone</strong>
+              <span>(083) XXX-XXXX</span>
+            </div>
+          </li>
+          <li>
+            <span class="contact-icon">&#128231;</span>
+            <div>
+              <strong>Email</strong>
+              <span>info@bontoc.gov.ph</span>
+            </div>
+          </li>
+          <li>
+            <span class="contact-icon">&#128336;</span>
+            <div>
+              <strong>Office Hours</strong>
+              <span>Monday – Friday, 8:00 AM – 5:00 PM</span>
+            </div>
+          </li>
+        </ul>
+        <div class="emergency-box">
+          <span>&#128680;</span>
+          <div>
+            <strong>Emergency Hotline</strong>
+            <span>911 / (083) XXX-XXXX</span>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleFormSubmit(event)">
+        <h3>Send a Message</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" placeholder="Juan" required />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" placeholder="Dela Cruz" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="juan@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <select id="subject">
+            <option value="">Select a subject</option>
+            <option>General Inquiry</option>
+            <option>Business Permit</option>
+            <option>Civil Registry</option>
+            <option>Social Services</option>
+            <option>Infrastructure Concern</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" rows="4" placeholder="Write your message here..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+        <p class="form-note" id="formNote"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="logo-seal logo-seal--sm">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="40" cy="40" r="38" stroke="#fff" stroke-width="3" fill="rgba(255,255,255,0.1)"/>
+            <circle cx="40" cy="40" r="28" stroke="#fff" stroke-width="1.5" fill="none"/>
+            <text x="40" y="36" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold" font-family="serif">LGU</text>
+            <text x="40" y="48" text-anchor="middle" font-size="7" fill="#fff" font-family="serif">BONTOC</text>
+          </svg>
+        </div>
+        <div>
+          <strong>Municipality of Bontoc</strong>
+          <span>South Cotabato, Philippines</span>
+        </div>
+      </div>
+      <div class="footer-links-group">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#officials">Officials</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-group">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Annual Reports</a></li>
+          <li><a href="#">Ordinances</a></li>
+          <li><a href="#">Transparency Seal</a></li>
+          <li><a href="#">PDRRMO</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-group">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">Facebook Page</a></li>
+          <li><a href="#">YouTube Channel</a></li>
+          <li><a href="#news">News &amp; Updates</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <span>&copy; 2026 Municipal Government of Bontoc, South Cotabato. All rights reserved.</span>
+        <span>Powered by the LGU Bontoc Web Team</span>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#top" class="back-to-top" id="backToTop" aria-label="Back to top">&#8679;</a>
+
+  <script src="app.js"></script>
+</body>
+</html>
