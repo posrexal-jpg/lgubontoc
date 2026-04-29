@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\HomepageModel;
 use App\Models\CarouselItem;
 use App\Models\FeaturedItem;
+use App\Models\Announcement;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
@@ -43,11 +44,20 @@ class HomeController extends Controller
             ];
         });
 
+        // Get latest announcements for the ticker
+        $announcements = Cache::remember('homepage_announcements', 3600, function () {
+            return Announcement::where('status', 'active')
+                ->orderBy('date_posted', 'desc')
+                ->limit(10)
+                ->get();
+        });
+
         $data = [
             'carouselItems' => $carouselItems,
             'featuredItems' => $featuredItemsData,
             'getrecord' => $featuredItemsData, // For backward compatibility
-            'pagination' => $featuredItems // For pagination links
+            'pagination' => $featuredItems, // For pagination links
+            'announcements' => $announcements
         ];
 
         return view('frontend.home.index', $data);

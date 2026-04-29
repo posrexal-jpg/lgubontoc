@@ -35,6 +35,19 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
      //Transparency
      Route::get('/transparency/municipalordinances', 'Frontend\TransparencyController@indexmunicipalordinances')->name('transparency.municipalordinances');
      Route::get('/transparency/resolutions', 'Frontend\TransparencyController@indexresolutions')->name('transparency.resolutions');
+     Route::get('/transparency/budget', 'Frontend\BudgetController@index')->name('transparency.budget');
+
+     //Government
+     Route::get('/government/officials', 'Frontend\GovernmentController@indexofficials')->name('government.officials');
+
+     //Barangays
+     Route::get('/barangays', 'Frontend\BarangayController@index')->name('barangays.index');
+
+     //Announcements
+     Route::get('/announcements', 'Frontend\AnnouncementController@index')->name('announcements.index');
+
+     //Contact
+     Route::get('/contact', 'Frontend\ContactController@index')->name('contact.index');
 
      //Tourism
      Route::get('/tourism/bontocattractions', 'Frontend\TourismController@indexbontocattractions')->name('tourism.bontocattractions');
@@ -140,6 +153,38 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::post('/transparency/municipalordinances/add', 'TransparencyController@addmunicipalordinances')->name('admin.transparency.municipalordinances.add');
         Route::get('/transparency/resolutions', 'TransparencyController@indexresolutions')->name('admin.transparency.resolutions');
         Route::post('/transparency/resolutions/add', 'TransparencyController@addresolutions')->name('admin.transparency.resolutions.add');
+
+        // Admin Budget Documents
+        Route::get('/transparency/budget', 'BudgetController@index')->name('admin.transparency.budget');
+        Route::get('/transparency/budget/add', 'BudgetController@add')->name('admin.transparency.budget.add');
+        Route::post('/transparency/budget/add', 'BudgetController@add');
+        Route::get('/transparency/budget/edit/{id}', 'BudgetController@edit')->name('admin.transparency.budget.edit');
+        Route::post('/transparency/budget/edit/{id}', 'BudgetController@edit');
+        Route::get('/transparency/budget/delete/{id}', 'BudgetController@delete')->name('admin.transparency.budget.delete');
+
+        // Admin Government Officials
+        Route::get('/government/officials', 'GovernmentController@indexofficials')->name('admin.government.officials');
+        Route::get('/government/officials/add', 'GovernmentController@addofficial')->name('admin.government.officials.add');
+        Route::post('/government/officials/add', 'GovernmentController@addofficial');
+        Route::get('/government/officials/edit/{id}', 'GovernmentController@editofficial')->name('admin.government.officials.edit');
+        Route::post('/government/officials/edit/{id}', 'GovernmentController@editofficial');
+        Route::get('/government/officials/delete/{id}', 'GovernmentController@deleteofficial')->name('admin.government.officials.delete');
+
+        // Admin Barangays
+        Route::get('/barangays', 'BarangayController@index')->name('admin.barangays');
+        Route::get('/barangays/add', 'BarangayController@add')->name('admin.barangays.add');
+        Route::post('/barangays/add', 'BarangayController@add');
+        Route::get('/barangays/edit/{id}', 'BarangayController@edit')->name('admin.barangays.edit');
+        Route::post('/barangays/edit/{id}', 'BarangayController@edit');
+        Route::get('/barangays/delete/{id}', 'BarangayController@delete')->name('admin.barangays.delete');
+
+        // Admin Announcements
+        Route::get('/announcements', 'AnnouncementController@index')->name('admin.announcements');
+        Route::get('/announcements/add', 'AnnouncementController@add')->name('admin.announcements.add');
+        Route::post('/announcements/add', 'AnnouncementController@add');
+        Route::get('/announcements/edit/{id}', 'AnnouncementController@edit')->name('admin.announcements.edit');
+        Route::post('/announcements/edit/{id}', 'AnnouncementController@edit');
+        Route::get('/announcements/delete/{id}', 'AnnouncementController@delete')->name('admin.announcements.delete');
 
         //Admin Dashboard Others
         Route::get('/others/downloadableforms', 'OthersController@indexdownloadableforms')->name('admin.others.downloadableforms');

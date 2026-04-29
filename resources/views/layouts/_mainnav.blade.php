@@ -45,27 +45,36 @@
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">News and Updates</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Government</a>
                         <div class="dropdown-menu rounded-0 m-0">
+                            <a href="{{route('government.officials')}}" class="dropdown-item">Elected Officials</a>
+                            <a href="{{route('barangays.index')}}" class="dropdown-item">Barangays</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">News &amp; Updates</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="{{route('announcements.index')}}" class="dropdown-item">Announcements &amp; Advisories</a>
                             <a href="{{route('newsandupdates.news')}}" class="dropdown-item">News</a>
-                            <a href="{{route('newsandupdates.upcomingupdates')}}" class="dropdown-item">Upcoming Updates</a>
+                            <a href="{{route('newsandupdates.upcomingupdates')}}" class="dropdown-item">Upcoming Events</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Services</a>
                         <div class="dropdown-menu rounded-0 m-0">
-                            <a class="dropdown-item" target="_black" href="https://brgyprofiling.bitsorg.info/login">Barangay Inhabitant Information System</a>
-                            <a class="dropdown-item" target="_black" href="https://bomwasa.bitsorg.info/billinquiry">Bontoc Municipal Waterworks System  Administration (BOMWASA)</a>
+                            <a class="dropdown-item" target="_blank" href="https://brgyprofiling.bitsorg.info/login">Barangay Inhabitant Information System</a>
+                            <a class="dropdown-item" target="_blank" href="https://bomwasa.bitsorg.info/billinquiry">BOMWASA Water Bill Inquiry</a>
                             <a href="{{route('services.citizenscharter')}}" class="dropdown-item">Citizen's Charter</a>
-                            <a class="dropdown-item" target="_black" href="https://hrmis.bitsorg.info/login">Document Tracking System</a>
-                            <a class="dropdown-item" target="_black" href="https://hrmis.bitsorg.info/login">Employee Information System</a>
+                            <a class="dropdown-item" target="_blank" href="https://hrmis.bitsorg.info/login">Document Tracking System</a>
+                            <a class="dropdown-item" target="_blank" href="https://hrmis.bitsorg.info/login">Employee Information System</a>
                             <a href="{{route('services.mayorsoffice')}}" class="dropdown-item">Mayor's Office</a>
-                            <a class="dropdown-item" target="_black" href="https://lgusupply.bitsorg.info/login">Supply Management System</a>
+                            <a class="dropdown-item" target="_blank" href="https://lgusupply.bitsorg.info/login">Supply Management System</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Transparency</a>
                         <div class="dropdown-menu rounded-0 m-0">
+                            <a href="{{route('transparency.budget')}}" class="dropdown-item">Budget &amp; Financial Reports</a>
                             <a href="{{route('transparency.municipalordinances')}}" class="dropdown-item">Municipal Ordinances</a>
                             <a href="{{route('transparency.resolutions')}}" class="dropdown-item">Resolutions</a>
                         </div>
@@ -78,19 +87,15 @@
                         </div>
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Careers</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More</a>
                         <div class="dropdown-menu rounded-0 m-0">
                             <a target="_blank" href="https://cscro8.weebly.com/december-2021-bulletin-of-vacant-position.html" class="dropdown-item">Job Vacancies</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Others</a>
-                        <div class="dropdown-menu rounded-0 m-0">
                             <a href="{{route('others.downloadableforms')}}" class="dropdown-item">Downloadable Forms</a>
                             <a href="{{route('others.gallery')}}" class="dropdown-item">Gallery</a>
                             <a href="{{route('others.memorandom')}}" class="dropdown-item">Memorandum</a>
                         </div>
                     </div>
+                    <a href="{{ route('contact.index')}}" class="nav-item nav-link">Contact</a>
                 </div>
                 <!-- <div class="input-group ml-auto" style="width: 100%; max-width: 150px;">
                     <input type="text" class="form-control" placeholder="Search">
