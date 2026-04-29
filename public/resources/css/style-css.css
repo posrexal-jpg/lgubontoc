@@ -1,0 +1,723 @@
+/*Custom Font*/
+
+/*@font-face {
+	font-family: 'BodoniBold';
+	src: url('./resources/font/bodoni/LibreBodoni-Bold.ttf') format('truetype');
+}*/
+
+
+/*End custom Font*/
+body {
+	font-family: 'Raleway', sans-serif;
+	font-size: 15px;
+}
+
+#table-design {
+	font-color:000000;
+}
+
+#header-holder {
+	 background-image: linear-gradient(to right , #f44336, #ffcdd2);
+	padding: 10px;
+}
+
+#navbar-button {
+	/*background-image: linear-gradient(to right , #f44336, #f44336);*/
+	/*background-image: linear-gradient(to right , #145374, #a9c6de);*/
+	background-color: #be0003;
+
+}
+
+#navbar-button-content {
+	/*margin-left: -30px;*/
+}
+
+#navbar-button-content ul li .nav-link {
+	color: #ffffff;
+	/*padding: 10px;*/
+	/*background-image: linear-gradient(to right , #f44336, #f44336);*/
+	/*background-image: linear-gradient(to right , #145374, #a9c6de);*/
+	/*padding: 10px;*/
+}
+
+#events-card {
+background-color: transparent;
+border-style: none;
+
+}
+
+#slider-cont {
+background-color: #000000;
+
+}
+
+.export-button {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+.export-option {
+    /* Additional styles for individual buttons within the collection */
+  }
+
+#teaser-sub-text {
+	margin-top:10px;
+	color: #bebebe;
+}
+
+#submit-button {
+	/*background-image: linear-gradient(to right , #3c9d9b, #52de97);*/
+	/*background-image: linear-gradient(to right , #145374, #a9c6de);*/
+	background-color: #005d64;
+}
+
+#sub-footer{
+	/*background-image: linear-gradient(to right , #145374, #a9c6de);*/
+	background-color: #1c3d3d;
+	padding: 10px;
+	color: #000000;
+}
+
+#header-logo{
+	padding: 10px;
+	/*margin-left: 20px;*/
+}
+
+#header-logo img{
+	min-width: 50px;
+	min-height: 50px;
+	max-height: 50px;
+	max-width: 50px;
+}
+
+#navbar-header-text {
+	font-family: 'Archivo Black', sans-serif;
+	color: #000000;
+}
+
+#header-text {
+	font-family: 'Archivo Black', sans-serif;
+	/*padding-left: 15px;*/
+	padding-top: 15px;
+	/*padding-left: 15px; */
+}
+
+#header-text h4{
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+#header-text h6{
+	color: white;
+	font-size: 10px;
+}
+
+#cont-vlog {
+	background: url('../img/bg-vlog.png');
+	font-size: 12px;
+}
+
+#cont-loc {
+	background-color: white; 
+	font-size: 12px;
+}
+#cont-photo {
+	margin-top: 10px;
+	background: url('../img/bg1.png');
+	color: #999999;
+	font-size: 12px;
+}
+
+
+#cont-photo-teaser {
+	background: url('../img/bg19.png');
+	color: #999999;
+	font-size: 12px;
+}
+
+#opportunities-cont {
+	background: url('../img/bg13.png');
+	color: #999999;
+	font-size: 12px;
+}
+
+#cont-upkcast {
+	margin-top: 10px;
+	background: url('../img/bg-kcast.html');
+	color: #999999;
+	width: 100%;
+}
+
+
+#capungagan-cont {
+	background: url('../img/bg-brgy/capungagan.png');
+	width: 100%;
+	color: #000000;
+}
+
+.border-capungagan {
+	width:180px;
+	height:5px;
+	background: #f6eb5a;
+	margin: 10px auto;
+}
+
+
+#florida-cont {
+	background: url('../img/bg-brgy/florida.png');
+	width: 100%;
+	color: #000000;
+}
+
+.border-florida {
+	width:180px;
+	height:5px;
+	background: #66b6dd;
+	margin: 10px auto;
+}
+
+#gabuyan-cont {
+	background: url('../img/bg-brgy/gabuyan.png');
+	width: 100%;
+	color: #000000;
+}
+
+.border-gabuyan {
+	width:180px;
+	height:5px;
+	background: #0e1f6e;
+	margin: 10px auto;
+}
+
+#gupitan-cont {
+	background: url('../img/bg-brgy/gupitan.png');
+	width: 100%;
+	color: #000000;
+}
+
+.border-gupitan {
+	width:180px;
+	height:5px;
+	background: #931d38;
+	margin: 10px auto;
+}
+
+#katipunan-cont {
+	background: url('../img/bg-brgy/katipunan.png');
+	width: 100%;
+	color: #000000;
+}
+
+.border-katipunan {
+	width:180px;
+	height:5px;
+	background: #2fc222;
+	margin: 10px auto;
+}
+
+#luna-cont {
+	background: url('../img/bg-brgy/luna.png');
+	width: 100%;
+	color: #000000;
+}
+
+.border-luna {
+	width:180px;
+	height:5px;
+	background: #194948;
+	margin: 10px auto;
+}
+
+#mamacao-cont {
+	background: url('../img/bg-brgy/mamacao.png');
+	width: 100%;
+	color: #000000;
+}
+
+.border-mamacao {
+	width:180px;
+	height:5px;
+	background: #dc0012;
+	margin: 10px auto;
+}
+
+#maniki-cont {
+	background: url('../img/bg-brgy/maniki.png');
+	width: 100%;
+	color: #000000;
+}
+
+.border-maniki {
+	width:180px;
+	height:5px;
+	background: #004898;
+	margin: 10px auto;
+}
+
+#pagasa-cont {
+	background: url('../img/bg-brgy/pagasa.png');
+	width: 100%;
+	color: #000000;
+}
+
+.border-pagasa {
+	width:180px;
+	height:5px;
+	background: #0e1f6e;
+	margin: 10px auto;
+}
+
+#sampao-cont {
+	background: url('../img/bg-brgy/sampao.png');
+	width: 100%;
+	color: #000000;
+}
+
+.border-sampao {
+	width:180px;
+	height:5px;
+	background: #2f5929;
+	margin: 10px auto;
+}
+
+#suaon-cont {
+	background: url('../img/bg-brgy/suaon.png');
+	width: 100%;
+	color: #000000;
+}
+
+.border-suaon {
+	width:180px;
+	height:5px;
+	background: #feff00;
+	margin: 10px auto;
+}
+
+#tiburcia-cont {
+	background: url('../img/bg-brgy/tiburcia.png');
+	width: 100%;
+	color: #000000;
+}
+
+.border-tiburcia {
+	width:180px;
+	height:5px;
+	background: #0e1f6e;
+	margin: 10px auto;
+}
+
+
+#student-kcast-cont {
+	background: url('../img/student.png');
+	width: 100%;
+	color: #000000;
+}
+
+#offices-bg {
+	background: url('../img/officebg.png');
+	width: 100%;
+	color: #000000;
+}
+
+#indigenous-bg {
+	background: url('../img/indigenous-bg.png');
+	width: 100%;
+	color: #000000;
+}
+
+
+#table-kcast {
+	background-color: #ffffff;
+}
+
+
+#sub-header-text{
+	font-family: 'Archivo Black', sans-serif;
+	padding-top: 30px;
+	padding-bottom: 15px;
+}
+
+
+#sub-header-logo-text{
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding-top: 30px;
+	padding-bottom: 15px;
+	color: #ffffff;
+}
+
+.border {
+	width:160px;
+	height:2px;
+	background: #6a9dc3;
+	margin: 10px auto;
+}
+
+.border-upkcast {
+	width:180px;
+	height:5px;
+	background: #ff0052;
+	margin: 10px auto;
+}
+
+
+#kcast-button {
+	background-color: #ff0052;
+	font-color:#ffffff;
+}
+
+#kcast-button-text {
+	color:#ffffff;
+}
+
+#gen-info-button {
+	background-color: #006c93;
+	font-color:#ffffff;
+}
+
+#gen-info-button-text {
+	color: #ffffff;
+}
+
+#eco-prof-button {
+	background-color: #00ad5e;
+	font-color:#ffffff;
+}
+
+#eco-prof-button-text {
+	color: #ffffff;
+}
+
+.border-gen-info {
+	width:200px;
+	height:5px;
+	background: #006c93;
+	margin: 10px auto;
+	margin-top: 15px;
+	margin-bottom: 30px;
+}
+
+.border-eco-prof {
+	width:200px;
+	height:5px;
+	background: #00ad5e;
+	margin: 10px auto;
+	margin-top: 15px;
+	margin-bottom: 30px;
+}
+
+
+#organizational-holder-logo{
+	padding: 0px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	text-align: center;
+
+}
+
+#organizational-holder-logo a{
+	color: #000000;
+}
+
+#organizational-holder-logo .card{
+	/*box-shadow: 0px 0px 20px 1px #999999;*/
+	transition: .3s;
+	background-color: transparent;
+	border-color: transparent;
+	margin-bottom: 5px;
+
+}
+
+#organizational-holder-logo .card-body{
+	padding-bottom: 5px;
+}
+
+#organizational-holder-logo .card:hover{
+	box-shadow: 0px 0px 20px 1px #111111;
+	transform: scale(1.1);
+}
+
+#organizational-holder-logo p{
+	font-size: 13px;
+	color: #ffffff;
+}
+
+
+#organizational-holder-logo img{
+	/*width: 250px;
+	height: 250px;*/
+	display: block;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#slider-text {
+	float: left;
+    background: linear-gradient(to right, #ffffff 40%, transparent) transparent;
+}
+
+
+#cont-kcast-icons {
+	background: url('../img/kcast-bg5.jpg');
+	font-size: 12px;
+}
+
+#cont-aip {
+	background: url('../img/bg-ts.png');
+	color: #999999;
+	font-size: 12px;
+}
+
+
+#sub-header-kcast-text{
+	font-family: inherit;
+		font-weight: bold;
+	padding-top: 40px;
+	margin-top: 30px;
+	padding-bottom: 15px;
+	color: #1f5b42;
+}
+
+#sub-header-ts-text{
+	font-family: inherit;
+		font-weight: bold;
+	color: #000000;
+}
+
+
+#sub-header-tourism-text{
+	font-family: inherit;
+		font-weight: bold;
+	padding-top: 40px;
+	margin-top: 30px;
+	padding-bottom: 15px;
+	color: #ffffff;
+}
+
+.border-kcast {
+	width:250px;
+	height:2px;
+	background: #1f5b42;
+	margin: 20px auto;
+}
+
+
+#organizational-holder-kcast{
+	padding: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+#organizational-holder-kcast a{
+	color: #000000;
+}
+
+#organizational-holder-kcast .card{
+	/*box-shadow: 0px 0px 20px 1px #999999;*/
+	transition: .3s;
+	background-color: transparent;
+	border-color: transparent;
+	margin-right: 10px;
+	margin-bottom: 5px;
+}
+
+#organizational-holder-kcast .card-body{
+	padding-bottom: 5px;
+}
+
+#organizational-holder-kcast .card:hover{
+	box-shadow: 0px 0px 0px 1px #111111;
+	transform: scale(1.1);
+}
+
+#organizational-holder-kcast p{
+	font-size: 10px;
+	color: #000000;
+}
+
+
+#organizational-holder-kcast img{
+/*	width: 250px;
+	height: 250px;*/
+	display: block;
+	margin-top: 3px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+#header-text-address {
+	font-family: 'Raleway', sans-serif;
+	font-size:12px;
+}
+
+#search-dropdown {
+	width: 250px;
+}
+
+.megamenu-li {
+	position: static;
+}
+
+
+.megamenu {
+	position: absolute;
+	width: 100%;
+	padding: 15px;
+	/*margin-top: -1px;*/
+	border-radius: 0px;
+	/*background-color: #E0E0E0;*/
+	/*box-shadow: 0px 3px 3px 0px #666666;*/
+}
+
+#slogan {
+	box-shadow: 0px 0px 20px 0px #666666;
+}
+
+#footer {
+	margin-top: 20px;
+	background-color: #217a16;
+	padding: 20px;
+	color: #ffffff;
+	font-size: 12px;
+}
+
+
+#cont-tourism {
+	background: url('../img/bg.png');
+	color: #999999;
+	font-size: 12px;
+	 -webkit-transition: background 0.5s linear;
+    -moz-transition: background 0.5s linear;
+    -o-transition: background 0.5s linear;
+    transition: background 0.5s linear;
+}
+
+#footer ul li {
+	list-style-type: none;
+	margin-left: -30px;
+}
+
+#footer ul li a {
+	color: #ffffff;
+
+}
+
+#footer h5 {
+	color: #ffffff;
+}
+
+
+#navbar ul li a {
+	/*color:black;*/
+	font-size: 14px;
+}
+
+#page-header {
+	/*height: 150px;*/
+	/*background-image: linear-gradient(to right , #00e0ff, #00ffcd);*/
+	/*background-color: #222222;*/
+	/*color: #ffffff;*/
+	padding:10px;
+	text-align: justify;
+}
+
+#corporate-holder {
+	/*height: 150px;*/
+	/*background-image: linear-gradient(to right , #00e0ff, #00ffcd);*/
+	/*background-color: #222222;*/
+	/*color: #ffffff;*/
+	padding:20px;
+	text-align: justify;
+	margin-bottom: 20px;
+}
+
+#lgu-logo {
+	margin-bottom: 30px;
+}
+
+/*#card-deck{
+	padding: 10px;
+	margin: 10px;
+}*/
+
+
+#organizational-holder{
+	padding: 20px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+#organizational-text{
+	font-family: 'Archivo Black', sans-serif;
+}
+
+#organizational-holder a{
+	color: #000000;
+}
+
+#organizational-holder .card{
+	box-shadow: 0px 0px 20px 1px #999999;
+	transition: .3s;
+
+}
+
+#organizational-holder .card-body{
+	padding-bottom: 10px;
+}
+
+#organizational-holder .card:hover{
+	box-shadow: 0px 0px 20px 1px #111111;
+	transform: scale(1.1);
+}
+
+#organizational-holder p{
+	font-size: 14px;
+}
+
+#organizational-holder img{
+/*	width: 250px;
+	height: 250px;*/
+	display: inline-block;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+#position-holder{
+	padding:20px;
+}
+
+#head-holder-img{
+	box-shadow: 0px 0px 20px 1px #c1c1c1;
+	padding: 10px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#head-holder-text {
+	padding: 10px;
+}
+
+#head-holder-bio {
+	text-align: justify;
+}
+
+#process-flow-text {
+	text-align: center;
+}
+
+#process-flow-text h1{
+
+}
