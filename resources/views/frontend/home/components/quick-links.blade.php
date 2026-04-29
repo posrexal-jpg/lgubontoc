@@ -1,139 +1,97 @@
-{{-- Quick Links / Services Highlights Component --}}
-
+{{-- Quick Links / E-Services Section --}}
 <style>
     .quick-links-section {
-        background: #f8f9fa;
-        padding: 35px 0;
-        border-top: 1px solid #dee2e6;
-        border-bottom: 1px solid #dee2e6;
+        background: var(--ph-navy);
+        padding: 28px 0;
     }
-    .quick-links-section .section-heading {
-        text-align: center;
-        margin-bottom: 25px;
+    .quick-links-section .section-label {
+        color: rgba(255,255,255,0.55);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 700;
+        margin-bottom: 4px;
     }
-    .quick-links-section .section-heading h4 {
-        font-family: Helvetica;
-        color: #155724;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-    .quick-links-section .section-heading p {
-        color: #6c757d;
-        font-size: 0.9rem;
-    }
-    .quick-link-card {
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-        padding: 25px 15px;
-        text-align: center;
-        text-decoration: none;
-        display: block;
-        color: #212529;
-        transition: all 0.25s;
+    .quick-links-section .section-title {
+        color: #fff;
+        font-family: 'Lato', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 900;
         margin-bottom: 20px;
-        border-bottom: 4px solid transparent;
     }
-    .quick-link-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-        border-bottom-color: #28a745;
-        color: #155724;
-        text-decoration: none;
-    }
-    .quick-link-card .icon-circle {
-        width: 65px;
-        height: 65px;
-        border-radius: 50%;
-        background: #e8f5e9;
+    .quick-links-section .section-title span { color: var(--ph-gold); }
+    .ql-card {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 14px;
-        font-size: 1.6rem;
-        color: #28a745;
-        transition: background 0.25s;
+        text-align: center;
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 8px;
+        padding: 16px 8px 12px;
+        text-decoration: none;
+        color: rgba(255,255,255,0.85);
+        transition: all .22s;
+        margin-bottom: 12px;
+        min-height: 96px;
     }
-    .quick-link-card:hover .icon-circle {
-        background: #28a745;
-        color: white;
+    .ql-card:hover {
+        background: var(--ph-gold);
+        border-color: var(--ph-gold);
+        color: #1a1a1a;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+        text-decoration: none;
     }
-    .quick-link-card h6 {
-        font-family: Helvetica;
-        font-weight: bold;
-        font-size: 0.88rem;
-        margin-bottom: 5px;
+    .ql-card .ql-icon {
+        width: 42px; height: 42px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.1rem; color: var(--ph-gold);
+        margin-bottom: 8px;
+        transition: background .22s, color .22s;
     }
-    .quick-link-card p {
-        font-size: 0.78rem;
-        color: #6c757d;
-        margin: 0;
-        line-height: 1.4;
+    .ql-card:hover .ql-icon { background: rgba(0,0,0,0.15); color: #1a1a1a; }
+    .ql-card .ql-label {
+        font-size: 0.77rem; font-weight: 700; line-height: 1.3;
+        text-transform: uppercase; letter-spacing: 0.3px;
     }
 </style>
 
 <div class="quick-links-section">
-    <div class="container">
-        <div class="section-heading">
-            <h4><i class="fa fa-th mr-2"></i>Quick Links</h4>
-            <p>Access municipal services and information quickly</p>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-6 col-md-3 col-lg-2">
-                <a href="{{ route('government.officials') }}" class="quick-link-card">
-                    <div class="icon-circle"><i class="fa fa-user-tie"></i></div>
-                    <h6>Officials</h6>
-                    <p>Elected &amp; appointed officials</p>
-                </a>
+    <div class="container-fluid px-3 px-md-4">
+        <div class="row align-items-center">
+            <div class="col-lg-2 d-none d-lg-block">
+                <div class="section-label">Quick Access</div>
+                <div class="section-title">E-Services &amp; <span>Links</span></div>
             </div>
-            <div class="col-6 col-md-3 col-lg-2">
-                <a href="{{ route('barangays.index') }}" class="quick-link-card">
-                    <div class="icon-circle"><i class="fa fa-map-marker-alt"></i></div>
-                    <h6>Barangays</h6>
-                    <p>List of all barangays</p>
-                </a>
-            </div>
-            <div class="col-6 col-md-3 col-lg-2">
-                <a href="{{ route('announcements.index') }}" class="quick-link-card">
-                    <div class="icon-circle"><i class="fa fa-bullhorn"></i></div>
-                    <h6>Announcements</h6>
-                    <p>Advisories &amp; notices</p>
-                </a>
-            </div>
-            <div class="col-6 col-md-3 col-lg-2">
-                <a href="{{ route('services.citizenscharter') }}" class="quick-link-card">
-                    <div class="icon-circle"><i class="fa fa-file-alt"></i></div>
-                    <h6>Citizen's Charter</h6>
-                    <p>Public service guide</p>
-                </a>
-            </div>
-            <div class="col-6 col-md-3 col-lg-2">
-                <a href="{{ route('transparency.budget') }}" class="quick-link-card">
-                    <div class="icon-circle"><i class="fa fa-money-bill-wave"></i></div>
-                    <h6>Budget</h6>
-                    <p>Financial transparency</p>
-                </a>
-            </div>
-            <div class="col-6 col-md-3 col-lg-2">
-                <a href="{{ route('others.downloadableforms') }}" class="quick-link-card">
-                    <div class="icon-circle"><i class="fa fa-download"></i></div>
-                    <h6>Forms</h6>
-                    <p>Downloadable forms</p>
-                </a>
-            </div>
-            <div class="col-6 col-md-3 col-lg-2">
-                <a href="{{ route('tourism.bontocattractions') }}" class="quick-link-card">
-                    <div class="icon-circle"><i class="fa fa-mountain"></i></div>
-                    <h6>Tourism</h6>
-                    <p>Attractions &amp; destinations</p>
-                </a>
-            </div>
-            <div class="col-6 col-md-3 col-lg-2">
-                <a href="{{ route('contact.index') }}" class="quick-link-card">
-                    <div class="icon-circle"><i class="fa fa-envelope"></i></div>
-                    <h6>Contact Us</h6>
-                    <p>Get in touch with us</p>
-                </a>
+            <div class="col-lg-10">
+                <div class="row">
+                    @php
+                        $links = [
+                            ['icon'=>'fa-user-tie',          'label'=>'Elected Officials',    'href'=>route('government.officials')],
+                            ['icon'=>'fa-map-marker-alt',    'label'=>'Barangays',            'href'=>route('barangays.index')],
+                            ['icon'=>'fa-bullhorn',          'label'=>'Announcements',        'href'=>route('announcements.index')],
+                            ['icon'=>'fa-file-alt',          'label'=>"Citizen's Charter",    'href'=>route('services.citizenscharter')],
+                            ['icon'=>'fa-money-bill-wave',   'label'=>'Budget & Finance',     'href'=>route('transparency.budget')],
+                            ['icon'=>'fa-download',          'label'=>'Forms',                'href'=>route('others.downloadableforms')],
+                            ['icon'=>'fa-mountain',          'label'=>'Tourism',              'href'=>route('tourism.bontocattractions')],
+                            ['icon'=>'fa-images',            'label'=>'Gallery',              'href'=>route('others.gallery')],
+                            ['icon'=>'fa-gavel',             'label'=>'Ordinances',           'href'=>route('transparency.municipalordinances')],
+                            ['icon'=>'fa-envelope',          'label'=>'Contact Us',           'href'=>route('contact.index')],
+                        ];
+                    @endphp
+                    @foreach($links as $link)
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-auto flex-lg-fill">
+                        <a href="{{ $link['href'] }}" class="ql-card">
+                            <div class="ql-icon"><i class="fa {{ $link['icon'] }}"></i></div>
+                            <div class="ql-label">{{ $link['label'] }}</div>
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

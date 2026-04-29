@@ -1,67 +1,87 @@
-{{-- Announcements Ticker Component --}}
-
+{{-- Announcements Ticker --}}
 @if(isset($announcements) && $announcements->isNotEmpty())
 <style>
     .announcements-ticker {
-        background: #155724;
-        color: white;
-        padding: 8px 0;
+        background: var(--ph-gold);
+        display: flex;
+        align-items: stretch;
         overflow: hidden;
-        position: relative;
+        height: 38px;
+        border-bottom: 2px solid var(--ph-gold2);
     }
-    .announcements-ticker .ticker-label {
-        background: #ffc107;
-        color: #212529;
-        font-weight: bold;
-        font-size: 0.82rem;
-        padding: 3px 12px;
-        white-space: nowrap;
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
+    .ticker-label {
+        background: var(--ph-navy);
+        color: #fff;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        padding: 0 16px;
         display: flex;
         align-items: center;
-        z-index: 2;
-    }
-    .announcements-ticker .ticker-wrap {
-        padding-left: 140px;
-        overflow: hidden;
         white-space: nowrap;
+        flex-shrink: 0;
+        gap: 6px;
+    }
+    .ticker-label i { color: var(--ph-gold); font-size: 0.8rem; }
+    .ticker-wrap {
+        overflow: hidden;
+        flex: 1;
+        display: flex;
+        align-items: center;
     }
     .ticker-move {
-        display: inline-block;
-        animation: ticker-scroll 40s linear infinite;
+        display: inline-flex;
+        align-items: center;
+        animation: ticker-scroll 45s linear infinite;
         white-space: nowrap;
+        gap: 0;
     }
-    .ticker-move:hover { animation-play-state: paused; cursor: pointer; }
-    .ticker-move .ticker-item {
-        display: inline-block;
-        margin-right: 50px;
-        font-size: 0.87rem;
+    .ticker-move:hover { animation-play-state: paused; }
+    .ticker-item {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #1a1a1a;
+        padding: 0 10px;
     }
-    .ticker-move .ticker-item a {
-        color: #fff;
-        text-decoration: none;
-    }
-    .ticker-move .ticker-item a:hover { text-decoration: underline; }
-    .ticker-move .ticker-sep { color: #ffc107; margin-right: 50px; }
+    .ticker-item a { color: #1a1a1a; }
+    .ticker-item a:hover { color: var(--ph-navy); text-decoration: underline; }
+    .ticker-sep { color: var(--ph-navy); opacity: 0.5; padding: 0 6px; }
     @keyframes ticker-scroll {
-        0%   { transform: translateX(100%); }
+        0%   { transform: translateX(60vw); }
         100% { transform: translateX(-100%); }
     }
+    .ticker-view-all {
+        background: var(--ph-navy);
+        color: #fff;
+        font-size: 0.72rem;
+        font-weight: 600;
+        padding: 0 14px;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        flex-shrink: 0;
+        text-decoration: none;
+        transition: background .2s;
+    }
+    .ticker-view-all:hover { background: var(--ph-red); color: #fff; }
 </style>
 <div class="announcements-ticker">
-    <span class="ticker-label"><i class="fa fa-bullhorn mr-1"></i> ANNOUNCEMENTS</span>
+    <div class="ticker-label">
+        <i class="fa fa-bullhorn"></i> ANNOUNCEMENTS
+    </div>
     <div class="ticker-wrap">
         <div class="ticker-move">
             @foreach($announcements as $item)
                 <span class="ticker-item">
                     <a href="{{ route('announcements.index') }}">{{ $item->title }}</a>
                 </span>
-                @if(!$loop->last)<span class="ticker-sep">|</span>@endif
+                <span class="ticker-sep">&#9679;</span>
             @endforeach
         </div>
     </div>
+    <a href="{{ route('announcements.index') }}" class="ticker-view-all">
+        View All <i class="fa fa-angle-right ml-1"></i>
+    </a>
 </div>
 @endif
