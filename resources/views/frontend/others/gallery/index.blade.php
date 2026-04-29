@@ -23,7 +23,12 @@
           <p class="section-title px-5">
             <span class="px-2">Gallery</span>
           </p>
-          <h1 class="mb-4">Galleries</h1>
+          <h1 class="mb-4">{{ $gallery->title ?? 'Galleries' }}</h1>
+          @if(isset($gallery->description))
+            <div class="siteorigin-widget-tinymce textwidget mb-4">
+              {!! $gallery->description !!}
+            </div>
+          @endif
         </div>
         <div class="row pb-3">
           <div class="col-lg-4 mb-4">

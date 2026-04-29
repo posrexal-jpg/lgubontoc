@@ -77,6 +77,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('home/add', [HomepageController::class, 'home_add']);
         Route::post('home/add', [HomepageController::class, 'home_add_post']);
         Route::post('home/add', [HomepageController::class, 'home_add_post']);
+        Route::get('home/read/{id}', [HomepageController::class, 'home_show']);
         Route::get('home/edit/{id}', [HomepageController::class, 'home_edit']);
         Route::post('home/edit/{id}', [HomepageController::class, 'home_edit_post']);
         Route::get('home/delete/{id}', [HomepageController::class, 'home_delete']);
@@ -84,24 +85,45 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         //Admin Dashboard About Us
         Route::get('/aboutus/history', 'AboutusController@indexhistory')->name('admin.aboutus.history');
         Route::post('/aboutus/history/add', 'AboutusController@addhistory')->name('admin.aboutus.history.add');
+        Route::get('/aboutus/history/read/{id}', 'AboutusController@showhistory')->name('admin.aboutus.history.show');
+        Route::get('/aboutus/history/edit/{id}', 'AboutusController@edithistory')->name('admin.aboutus.history.edit');
+        Route::get('/aboutus/history/delete/{id}', 'AboutusController@deletehistory')->name('admin.aboutus.history.delete');
 
         Route::get('/aboutus/location', 'AboutusController@indexlocation')->name('admin.aboutus.location');
         Route::post('/aboutus/location/add', 'AboutusController@addlocation')->name('admin.aboutus.location.add');
+        Route::get('/aboutus/location/read/{id}', 'AboutusController@showlocation')->name('admin.aboutus.location.show');
+        Route::get('/aboutus/location/edit/{id}', 'AboutusController@editlocation')->name('admin.aboutus.location.edit');
+        Route::get('/aboutus/location/delete/{id}', 'AboutusController@deletelocation')->name('admin.aboutus.location.delete');
     
         Route::get('/aboutus/missionandvision', 'AboutusController@indexmissionandvision')->name('admin.aboutus.missionandvision');
         Route::post('/aboutus/missionandvision/add', 'AboutusController@addmissionandvision')->name('admin.aboutus.missionandvision.add');
+        Route::get('/aboutus/missionandvision/read/{id}', 'AboutusController@showmissionandvision')->name('admin.aboutus.missionandvision.show');
+        Route::get('/aboutus/missionandvision/edit/{id}', 'AboutusController@editmissionandvision')->name('admin.aboutus.missionandvision.edit');
+        Route::get('/aboutus/missionandvision/delete/{id}', 'AboutusController@deletemissionandvision')->name('admin.aboutus.missionandvision.delete');
                  
         Route::get('/aboutus/municipalityseal', 'AboutusController@indexmunicipalityseal')->name('admin.aboutus.municipalityseal');
         Route::post('/aboutus/municipalityseal/add', 'AboutusController@addmunicipalityseal')->name('admin.aboutus.municipalityseal.add');
+        Route::get('/aboutus/municipalityseal/read/{id}', 'AboutusController@showmunicipalityseal')->name('admin.aboutus.municipalityseal.show');
+        Route::get('/aboutus/municipalityseal/edit/{id}', 'AboutusController@editmunicipalityseal')->name('admin.aboutus.municipalityseal.edit');
+        Route::get('/aboutus/municipalityseal/delete/{id}', 'AboutusController@deletemunicipalityseal')->name('admin.aboutus.municipalityseal.delete');
 
         Route::get('/aboutus/servicepledge', 'AboutusController@indexservicepledge')->name('admin.aboutus.servicepledge');
         Route::post('/aboutus/servicepledge/add', 'AboutusController@addservicepledge')->name('admin.aboutus.servicepledge.add');
+        Route::get('/aboutus/servicepledge/read/{id}', 'AboutusController@showservicepledge')->name('admin.aboutus.servicepledge.show');
+        Route::get('/aboutus/servicepledge/edit/{id}', 'AboutusController@editservicepledge')->name('admin.aboutus.servicepledge.edit');
+        Route::get('/aboutus/servicepledge/delete/{id}', 'AboutusController@deleteservicepledge')->name('admin.aboutus.servicepledge.delete');
 
         Route::get('/aboutus/mandate', 'AboutusController@indexmandate')->name('admin.aboutus.mandate');
         Route::post('/aboutus/mandate/add', 'AboutusController@addmandate')->name('admin.aboutus.mandate.add');
+        Route::get('/aboutus/mandate/read/{id}', 'AboutusController@showmandate')->name('admin.aboutus.mandate.show');
+        Route::get('/aboutus/mandate/edit/{id}', 'AboutusController@editmandate')->name('admin.aboutus.mandate.edit');
+        Route::get('/aboutus/mandate/delete/{id}', 'AboutusController@deletemandate')->name('admin.aboutus.mandate.delete');
 
         Route::get('/aboutus/directory', 'AboutusController@indexdirectory')->name('admin.aboutus.directory');
         Route::post('/aboutus/directory/add', 'AboutusController@adddirectory')->name('admin.aboutus.directory.add');
+        Route::get('/aboutus/directory/read/{id}', 'AboutusController@showdirectory')->name('admin.aboutus.directory.show');
+        Route::get('/aboutus/directory/edit/{id}', 'AboutusController@editdirectory')->name('admin.aboutus.directory.edit');
+        Route::get('/aboutus/directory/delete/{id}', 'AboutusController@deletedirectory')->name('admin.aboutus.directory.delete');
 
         //Admin Dashboard Careers
         Route::get('/careers/jobvacancies', 'CareersController@indexjobvacancies')->name('admin.careers.jobvacancies');
@@ -113,6 +135,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         //Admin Dashboard Services
         Route::get('/services/mayorsoffice', 'ServicesController@indexmayorsoffice')->name('admin.services.mayorsoffice');
         Route::post('/services/mayorsoffice/add', 'ServicesController@addmayorsoffice')->name('admin.services.mayorsoffice.add');
+        Route::get('/services/mayorsoffice/read/{id}', 'ServicesController@showmayorsoffice')->name('admin.services.mayorsoffice.show');
+        Route::get('/services/mayorsoffice/edit/{id}', 'ServicesController@editmayorsoffice')->name('admin.services.mayorsoffice.edit');
+        Route::get('/services/mayorsoffice/delete/{id}', 'ServicesController@deletemayorsoffice')->name('admin.services.mayorsoffice.delete');
 
         //Admin Dashboard Tourism
         Route::get('/tourism/bontocattractions', 'TourismController@indexbontocattractions')->name('admin.tourism.bontocattractions');
@@ -147,18 +172,33 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         //Admin Dashboard Transparency
         Route::get('/transparency/municipalordinances', 'TransparencyController@indexmunicipalordinances')->name('admin.transparency.municipalordinances');
         Route::post('/transparency/municipalordinances/add', 'TransparencyController@addmunicipalordinances')->name('admin.transparency.municipalordinances.add');
+        Route::get('/transparency/municipalordinances/read/{id}', 'TransparencyController@showmunicipalordinances')->name('admin.transparency.municipalordinances.show');
+        Route::get('/transparency/municipalordinances/edit/{id}', 'TransparencyController@editmunicipalordinances')->name('admin.transparency.municipalordinances.edit');
+        Route::get('/transparency/municipalordinances/delete/{id}', 'TransparencyController@deletemunicipalordinances')->name('admin.transparency.municipalordinances.delete');
         Route::get('/transparency/resolutions', 'TransparencyController@indexresolutions')->name('admin.transparency.resolutions');
         Route::post('/transparency/resolutions/add', 'TransparencyController@addresolutions')->name('admin.transparency.resolutions.add');
+        Route::get('/transparency/resolutions/read/{id}', 'TransparencyController@showresolutions')->name('admin.transparency.resolutions.show');
+        Route::get('/transparency/resolutions/edit/{id}', 'TransparencyController@editresolutions')->name('admin.transparency.resolutions.edit');
+        Route::get('/transparency/resolutions/delete/{id}', 'TransparencyController@deleteresolutions')->name('admin.transparency.resolutions.delete');
 
         //Admin Dashboard Others
         Route::get('/others/downloadableforms', 'OthersController@indexdownloadableforms')->name('admin.others.downloadableforms');
         Route::post('/others/downloadableforms/add', 'OthersController@adddownloadableforms')->name('admin.others.downloadableforms.add');
+        Route::get('/others/downloadableforms/read/{id}', 'OthersController@showdownloadableforms')->name('admin.others.downloadableforms.show');
+        Route::get('/others/downloadableforms/edit/{id}', 'OthersController@editdownloadableforms')->name('admin.others.downloadableforms.edit');
+        Route::get('/others/downloadableforms/delete/{id}', 'OthersController@deletedownloadableforms')->name('admin.others.downloadableforms.delete');
 
         Route::get('/others/gallery', 'OthersController@indexgallery')->name('admin.others.gallery');
         Route::post('/others/gallery/add', 'OthersController@addgallery')->name('admin.others.gallery.add');
+        Route::get('/others/gallery/read/{id}', 'OthersController@showgallery')->name('admin.others.gallery.show');
+        Route::get('/others/gallery/edit/{id}', 'OthersController@editgallery')->name('admin.others.gallery.edit');
+        Route::get('/others/gallery/delete/{id}', 'OthersController@deletegallery')->name('admin.others.gallery.delete');
 
         Route::get('/others/memorandom', 'OthersController@indexmemorandom')->name('admin.others.memorandom');
         Route::post('/others/memorandom/add', 'OthersController@addmemorandom')->name('admin.others.memorandom.add');
+        Route::get('/others/memorandom/read/{id}', 'OthersController@showmemorandom')->name('admin.others.memorandom.show');
+        Route::get('/others/memorandom/edit/{id}', 'OthersController@editmemorandom')->name('admin.others.memorandom.edit');
+        Route::get('/others/memorandom/delete/{id}', 'OthersController@deletememorandom')->name('admin.others.memorandom.delete');
 
         // Gallery
 

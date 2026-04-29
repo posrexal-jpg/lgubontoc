@@ -6,9 +6,10 @@
             <div class="card-body">
               @include('layouts.partials.message')
               <h5 class="card-title">
-                News
+                Browse Home
                 <a href="{{ url('admin/home/add') }}" class="btn btn-success text-white" style="float: right; margin-top: 5px;">Add News</a>
-              </h5><br><br>
+              </h5>
+              <p>BREAD: Browse, Read, Edit, Add, Delete</p><br>
               <table class="table table-light">
                 <thead>
                   <tr>
@@ -42,6 +43,7 @@
                     <td>{{ $value->date_posted }}</td>
                     <td></td>
                     <td>
+                      <a href="{{ url('admin/home/read/'.$value->id) }}" class="btn btn-info btn-sm text-white">Read</a>
                       <a href="{{ url('admin/home/edit/'.$value->id) }}" class="btn btn-success btn-sm text-white">Edit</a>
                       <a onclick="return confirm('Are you sure you want to delete records?');" href="{{ url('admin/home/delete/'.$value->id) }}" class="btn btn-danger btn-sm text-white">Delete</a>
                     </td>

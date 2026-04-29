@@ -12,7 +12,7 @@ class OthersController extends Controller
 {
     public function indexdownloadableforms()
     {
-        $downloadableforms = Others_downloadableforms::first();
+        $downloadableforms = Others_downloadableforms::latest()->first();
         return view('frontend.others.downloadableforms.index',[
                 'downloadableforms' => $downloadableforms
         ]);
@@ -21,7 +21,7 @@ class OthersController extends Controller
 
     public function indexgallery()
     {
-        $gallery = Others_gallery::first();
+        $gallery = Others_gallery::latest()->first();
         return view('frontend.others.gallery.index',[
                 'gallery' => $gallery
         ]);
@@ -30,7 +30,7 @@ class OthersController extends Controller
 
     public function indexmemorandom()
     {
-        $memorandom = Others_memorandom::first();
+        $memorandom = Others_memorandom::latest()->first();
         return view('frontend.others.memorandom.index',[
                 'memorandom' => $memorandom
         ]);

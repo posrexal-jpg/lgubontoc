@@ -27,6 +27,15 @@ class TourismController extends Controller
         ]);
     }
 
+    public function showbontocattractions($id)
+    {
+        $bontocattraction = Tourism_bontocattractions::findOrFail($id);
+
+        return view('admin.tourism.bontocattractions.show',[
+                'bontocattraction' => $bontocattraction,
+        ]);
+    }
+
     public function addbontocattractions(Request $request) 
     {
         if ($request->id) {

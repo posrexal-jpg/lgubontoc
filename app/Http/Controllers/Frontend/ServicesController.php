@@ -12,7 +12,7 @@ class ServicesController extends Controller
     
      public function indexmayorsoffice()
     {
-        $mayorsoffice = Services_mayorsoffice::first();
+        $mayorsoffice = Services_mayorsoffice::latest()->first();
         return view('frontend.services.mayorsoffice.index',[
                 'mayorsoffice' => $mayorsoffice
         ]);

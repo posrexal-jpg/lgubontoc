@@ -8,51 +8,40 @@ use App\Models\Transparency_resolution;
 
 class TransparencyController extends Controller
 {
+    private function routes(string $name): array
+    {
+        return [
+            'index' => "admin.transparency.$name",
+            'save' => "admin.transparency.$name.add",
+            'show' => "admin.transparency.$name.show",
+            'edit' => "admin.transparency.$name.edit",
+            'delete' => "admin.transparency.$name.delete",
+        ];
+    }
+
     public function indexmunicipalordinances() 
     {
-        $municipalordinances = Transparency_municipalordinance::first();
-        return view('admin.transparency.municipalordinances.index',[
-                'municipalordinances' => $municipalordinances
-        ]);
+        return $this->browseSimpleContent(Transparency_municipalordinance::class, 'Municipal Ordinances', $this->routes('municipalordinances'));
     }
 
    public function addmunicipalordinances(Request $request) 
     {
-        if ($request->id) {
-            $update = Transparency_municipalordinance::find($request->id);
-            $update->title = $request->title;
-            $update->description = $request->description;
-            $update->save();
-        } else {
-            $formsave = new Transparency_municipalordinance();
-            $formsave->title = $request->title;
-            $formsave->description = $request->description;
-            $formsave->save();
-        }
-        return redirect()->back();
+        return $this->saveSimpleContent($request, Transparency_municipalordinance::class, 'admin.transparency.municipalordinances');
     }
+    public function showmunicipalordinances($id) { return $this->readSimpleContent(Transparency_municipalordinance::class, 'Municipal Ordinances', $this->routes('municipalordinances'), $id); }
+    public function editmunicipalordinances($id) { return $this->browseSimpleContent(Transparency_municipalordinance::class, 'Municipal Ordinances', $this->routes('municipalordinances'), Transparency_municipalordinance::findOrFail($id)); }
+    public function deletemunicipalordinances($id) { return $this->deleteSimpleContent(Transparency_municipalordinance::class, 'admin.transparency.municipalordinances', $id); }
 
     public function indexresolutions() 
     {
-        $resolutions = Transparency_resolution::first();
-        return view('admin.transparency.resolutions.index',[
-                'resolutions' => $resolutions
-        ]);
+        return $this->browseSimpleContent(Transparency_resolution::class, 'Resolutions', $this->routes('resolutions'));
     }
 
    public function addresolutions(Request $request) 
     {
-        if ($request->id) {
-            $update = Transparency_resolution::find($request->id);
-            $update->title = $request->title;
-            $update->description = $request->description;
-            $update->save();
-        } else {
-            $formsave = new Transparency_resolution();
-            $formsave->title = $request->title;
-            $formsave->description = $request->description;
-            $formsave->save();
-        }
-        return redirect()->back();
+        return $this->saveSimpleContent($request, Transparency_resolution::class, 'admin.transparency.resolutions');
     }
+    public function showresolutions($id) { return $this->readSimpleContent(Transparency_resolution::class, 'Resolutions', $this->routes('resolutions'), $id); }
+    public function editresolutions($id) { return $this->browseSimpleContent(Transparency_resolution::class, 'Resolutions', $this->routes('resolutions'), Transparency_resolution::findOrFail($id)); }
+    public function deleteresolutions($id) { return $this->deleteSimpleContent(Transparency_resolution::class, 'admin.transparency.resolutions', $id); }
 }

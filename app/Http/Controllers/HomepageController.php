@@ -45,9 +45,15 @@ class HomepageController extends Controller
     	return redirect('admin/home')->with('success', "Home successfully save.");
     }
 
+    public function home_show($id)
+    {
+        $data['getrecord'] = HomepageModel::findOrFail($id);
+        return view('admin.home.show', $data);
+    }
+
     public function home_edit($id, Request $request)
     {
-        $data['getrecord'] = HomepageModel::find($id);
+        $data['getrecord'] = HomepageModel::findOrFail($id);
         return view('admin.home.edit', $data);
     }
 

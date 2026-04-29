@@ -6,9 +6,10 @@
             <div class="card-body">
               @include('layouts.partials.message')
               <h5 class="card-title">
-                Upcoming Updates
+                Browse Upcoming Updates
                 <a href="{{ route('admin.newsandupdates.upcomingupdates.add') }}" class="btn btn-success text-white" style="float: right; margin-top: 5px;">Add Upcoming Updates</a>
-              </h5><br><br>
+              </h5>
+              <p>BREAD: Browse, Read, Edit, Add, Delete</p><br>
               <table class="table table-light">
                 <thead>
                   <tr>
@@ -38,6 +39,7 @@
                     <td>{{ $value->date_posted }}</td>
                     <td></td>
                     <td>
+                      <a href="{{ route('admin.newsandupdates.upcomingupdates.show', $value->id) }}" class="btn btn-info btn-sm text-white">Read</a>
                       <a href="{{ route('admin.newsandupdates.upcomingupdates.edit', $value->id) }}" class="btn btn-success btn-sm text-white">Edit</a>
                       <a onclick="return confirm('Are you sure you want to delete records?');" href="{{ url('admin/newsandupdates/upcomingupdates/delete/'.$value->id) }}" class="btn btn-danger btn-sm text-white">Delete</a>
                     </td>

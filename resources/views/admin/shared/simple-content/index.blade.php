@@ -4,28 +4,28 @@
     <div class="container">
         @include('layouts.partials.message')
 
-        <form method="POST" action="{{ route('admin.careers.jobvacancies.add') }}">
+        <form method="POST" action="{{ route($routes['save']) }}">
             @csrf
-            <input type="hidden" name="id" value="{{ optional($jobvacancy)->id }}">
+            <input type="hidden" name="id" value="{{ optional($item)->id }}">
 
             <div class="row card p-5">
                 <div class="bg-light p-5 rounded">
-                    <h2>{{ $jobvacancy ? 'Edit Job Vacancy' : 'Add Job Vacancy' }}</h2>
+                    <h2>{{ $item ? 'Edit '.$heading : 'Add '.$heading }}</h2>
                     <p class="mb-0">BREAD: Browse, Read, Edit, Add, Delete</p>
                 </div>
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label>Title</label>
-                        <input type="text" name="title" value="{{ old('title', optional($jobvacancy)->title) }}" class="form-control" placeholder="Title" required>
+                        <input type="text" name="title" value="{{ old('title', optional($item)->title) }}" class="form-control" placeholder="Title">
                     </div><br>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea id="myTextarea" name="description" style="width: 100%;">{{ old('description', optional($jobvacancy)->description) }}</textarea>
+                        <textarea name="description" style="width: 100%;">{{ old('description', optional($item)->description) }}</textarea>
                     </div><br>
                     <div>
                         <button type="submit" class="btn btn-primary btn-sm">Save</button>
-                        @if($jobvacancy)
-                            <a href="{{ route('admin.careers.jobvacancies') }}" class="btn btn-secondary btn-sm">Cancel</a>
+                        @if($item)
+                            <a href="{{ route($routes['index']) }}" class="btn btn-secondary btn-sm">Cancel</a>
                         @endif
                     </div>
                 </div>
@@ -33,7 +33,7 @@
         </form>
 
         <div class="card p-4 mt-4">
-            <h5>Browse Job Vacancies</h5>
+            <h5>Browse {{ $heading }}</h5>
             <table class="table table-light">
                 <thead>
                     <tr>
@@ -44,20 +44,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($jobvacancies as $value)
+                    @forelse($items as $value)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $value->title }}</td>
                             <td>{!! $value->description !!}</td>
                             <td>
-                                <a href="{{ route('admin.careers.jobvacancies.show', $value->id) }}" class="btn btn-info btn-sm text-white">Read</a>
-                                <a href="{{ route('admin.careers.jobvacancies.edit', $value->id) }}" class="btn btn-success btn-sm text-white">Edit</a>
-                                <a onclick="return confirm('Are you sure you want to delete this record?');" href="{{ route('admin.careers.jobvacancies.delete', $value->id) }}" class="btn btn-danger btn-sm text-white">Delete</a>
+                                <a href="{{ route($routes['show'], $value->id) }}" class="btn btn-info btn-sm text-white">Read</a>
+                                <a href="{{ route($routes['edit'], $value->id) }}" class="btn btn-success btn-sm text-white">Edit</a>
+                                <a onclick="return confirm('Are you sure you want to delete this record?');" href="{{ route($routes['delete'], $value->id) }}" class="btn btn-danger btn-sm text-white">Delete</a>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="text-center">No job vacancies yet.</td>
+                            <td colspan="4" class="text-center">No records yet.</td>
                         </tr>
                     @endforelse
                 </tbody>

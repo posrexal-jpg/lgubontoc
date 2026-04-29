@@ -11,6 +11,7 @@
             <div class="row card p-5">
                 <div class="bg-light p-5 rounded">
                     <h2>{{ $bontocattraction ? 'Edit Bontoc Attraction' : 'Add Bontoc Attraction' }}</h2>
+                    <p class="mb-0">BREAD: Browse, Read, Edit, Add, Delete</p>
                 </div>
                 <div class="col-sm-12">
                     <div class="form-group">
@@ -32,7 +33,7 @@
         </form>
 
         <div class="card p-4 mt-4">
-            <h5>Bontoc Attractions</h5>
+            <h5>Browse Bontoc Attractions</h5>
             <table class="table table-light">
                 <thead>
                     <tr>
@@ -49,6 +50,7 @@
                             <td>{{ $value->title }}</td>
                             <td>{!! $value->description !!}</td>
                             <td>
+                                <a href="{{ route('admin.tourism.bontocattractions.show', $value->id) }}" class="btn btn-info btn-sm text-white">Read</a>
                                 <a href="{{ route('admin.tourism.bontocattractions.edit', $value->id) }}" class="btn btn-success btn-sm text-white">Edit</a>
                                 <a onclick="return confirm('Are you sure you want to delete this record?');" href="{{ route('admin.tourism.bontocattractions.delete', $value->id) }}" class="btn btn-danger btn-sm text-white">Delete</a>
                             </td>

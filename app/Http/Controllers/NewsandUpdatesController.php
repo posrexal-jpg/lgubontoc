@@ -27,9 +27,18 @@ class NewsandUpdatesController extends Controller
     public function editnews($id, Request $request) 
     {   
         // echo $id; die();
-        $data = NewsandUpdates_news::find($id);
+        $data = NewsandUpdates_news::findOrFail($id);
         return view('admin.newsandupdates.news.edit', [
                 'news' => $data
+        ]);
+    }
+
+    public function shownews($id)
+    {
+        $news = NewsandUpdates_news::findOrFail($id);
+
+        return view('admin.newsandupdates.news.show', [
+                'news' => $news
         ]);
     }
 
@@ -41,8 +50,8 @@ class NewsandUpdatesController extends Controller
 
         if(!empty($request->file('image_file'))){
 
-            if (!empty($updateRecord->image) && file_exists('uploads/'.$updateRecord->image)) {
-                unlink('uploads/'.$updateRecord->image);
+            if (!empty($updateRecord->image_file) && file_exists('uploads/'.$updateRecord->image_file)) {
+                unlink('uploads/'.$updateRecord->image_file);
             }
 
             $file = $request->file('image_file');
@@ -91,8 +100,8 @@ class NewsandUpdatesController extends Controller
     {
         $deleteRecord = NewsandUpdates_news::find($id);
 
-        if (!empty($deleteRecord->image) && file_exists('uploads/'.$deleteRecord->image)) {
-            unlink('public/uploads/'.$deleteRecord->image);
+        if (!empty($deleteRecord->image_file) && file_exists('uploads/'.$deleteRecord->image_file)) {
+            unlink('uploads/'.$deleteRecord->image_file);
         }
 
         $deleteRecord->delete();
@@ -119,9 +128,18 @@ class NewsandUpdatesController extends Controller
     public function editupcomingupdates($id, Request $request) 
     {   
         // echo $id; die();
-        $data = NewsandUpdates_upcomingupdates::find($id);
+        $data = NewsandUpdates_upcomingupdates::findOrFail($id);
         return view('admin.newsandupdates.upcomingupdates.edit', [
                 'upcomingupdates' => $data
+        ]);
+    }
+
+    public function showupcomingupdates($id)
+    {
+        $upcomingupdates = NewsandUpdates_upcomingupdates::findOrFail($id);
+
+        return view('admin.newsandupdates.upcomingupdates.show', [
+                'upcomingupdates' => $upcomingupdates
         ]);
     }
 

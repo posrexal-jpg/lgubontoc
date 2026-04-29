@@ -16,7 +16,7 @@ class AboutController extends Controller
 {
     public function indexhistory()
     {
-        $history = Aboutus_history::first();
+        $history = Aboutus_history::latest()->first();
         return view('frontend.about.history.index',[
                 'history' => $history
         ]);
@@ -24,7 +24,7 @@ class AboutController extends Controller
 
     public function indexlocation()
     {
-        $location = Aboutus_location::first();
+        $location = Aboutus_location::latest()->first();
         return view('frontend.about.location.index',[
                 'location' => $location
         ]);
@@ -33,7 +33,7 @@ class AboutController extends Controller
 
     public function indexmissionandvision()
     {
-        $missionandvision = Aboutus_missionandvision::first();
+        $missionandvision = Aboutus_missionandvision::latest()->first();
         return view('frontend.about.missionandvision.index',[
                 'missionandvision' => $missionandvision
         ]);
@@ -41,7 +41,7 @@ class AboutController extends Controller
 
      public function indexmunicipalityseal()
     {
-       $municipalityseal = Aboutus_municipalityseal::first();
+       $municipalityseal = Aboutus_municipalityseal::latest()->first();
         return view('frontend.about.municipalityseal.index',[
                 'municipalityseal' => $municipalityseal
         ]);
@@ -49,7 +49,7 @@ class AboutController extends Controller
 
     public function indexmandate() 
     {
-        $mandate = Aboutus_mandate::first();
+        $mandate = Aboutus_mandate::latest()->first();
         return view('frontend.about.mandate.index',[
                 'mandate' => $mandate
         ]);
@@ -57,7 +57,7 @@ class AboutController extends Controller
 
     public function indexservicepledge() 
     {
-        $servicepledge = Aboutus_servicepledge::first();
+        $servicepledge = Aboutus_servicepledge::latest()->first();
         return view('frontend.about.servicepledge.index',[
                 'servicepledge' => $servicepledge
         ]);
@@ -65,7 +65,7 @@ class AboutController extends Controller
 
      public function indexdirectory() 
     {
-       $directory = Aboutus_directory::first();
+       $directory = Aboutus_directory::latest()->first();
         return view('frontend.about.directory.index',[
                 'directory' => $directory
         ]);
