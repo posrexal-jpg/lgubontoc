@@ -1,65 +1,44 @@
-{{-- Call-to-Action Component --}}
+{{-- GOV-style Quick Links / Services Tile Section --}}
 
-<div class="cta-section">
-    <div class="container-fluid">
+<div class="cta-section py-4" id="services">
+    <div class="container">
         <div class="row">
-            @forelse($items ?? [] as $item)
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="cta-item">
-                        <div class="cta-icon">
-                            <i class="fa {{ $item['icon'] ?? 'fa-star' }}"></i>
-                        </div>
-                        <h5>{{ $item['title'] ?? 'Learn More' }}</h5>
-                        <p>{{ $item['description'] ?? '' }}</p>
-                        @if(isset($item['link']))
-                            <a href="{{ $item['link'] }}">Explore →</a>
-                        @endif
-                    </div>
-                </div>
-            @empty
-                {{-- Default CTA items if none provided --}}
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="cta-item">
-                        <div class="cta-icon">
-                            <i class="fa fa-building"></i>
-                        </div>
-                        <h5>About Bontoc</h5>
-                        <p>Learn about our municipality's rich history</p>
-                        <a href="{{ route('about.history') }}">Explore →</a>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="cta-item">
-                        <div class="cta-icon">
-                            <i class="fa fa-mountain"></i>
-                        </div>
-                        <h5>Tourism</h5>
-                        <p>Discover beautiful attractions and destinations</p>
-                        <a href="{{ route('tourism.bontocattractions') }}">Explore →</a>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="cta-item">
-                        <div class="cta-icon">
-                            <i class="fa fa-briefcase"></i>
-                        </div>
-                        <h5>Services</h5>
-                        <p>Access municipal services and information</p>
-                        <a href="{{ route('services.mayorsoffice') }}">Explore →</a>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-12">
-                    <div class="cta-item">
-                        <div class="cta-icon">
-                            <i class="fa fa-briefcase"></i>
-                        </div>
-                        <h5>Careers</h5>
-                        <p>Join our team and make a difference</p>
-                        <a href="{{ route('careers.jobvacancies') }}">Explore →</a>
-                    </div>
-                </div>
-            @endforelse
+            <div class="col-12 mb-3">
+                <h4 style="font-weight:700;">Quick Links</h4>
+                <p class="text-muted">Common services and resources — access the most requested services quickly.</p>
+            </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-3 col-sm-6 mb-3">
+                <a href="{{ route('services.mayorsoffice') }}" class="d-block text-center p-3" style="background:#f1f5f9;border-radius:8px;color:#003366;text-decoration:none;">
+                    <div style="font-size:28px; margin-bottom:8px;"><i class="fa fa-file-alt"></i></div>
+                    <div style="font-weight:700;">Apply for Documents</div>
+                    <div class="text-muted" style="font-size:0.9rem;">Birth, Marriage, Barangay permits</div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <a href="{{ route('transparency.resolutions') }}" class="d-block text-center p-3" style="background:#f1f5f9;border-radius:8px;color:#003366;text-decoration:none;">
+                    <div style="font-size:28px; margin-bottom:8px;"><i class="fa fa-gavel"></i></div>
+                    <div style="font-weight:700;">Transparency & Documents</div>
+                    <div class="text-muted" style="font-size:0.9rem;">Resolutions, Ordinances, Budgets</div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <a href="{{ route('newsandupdates.news') }}" class="d-block text-center p-3" style="background:#f1f5f9;border-radius:8px;color:#003366;text-decoration:none;">
+                    <div style="font-size:28px; margin-bottom:8px;"><i class="fa fa-newspaper"></i></div>
+                    <div style="font-weight:700;">News & Announcements</div>
+                    <div class="text-muted" style="font-size:0.9rem;">Latest updates from the LGU</div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <a href="{{ route('about.directory') }}" class="d-block text-center p-3" style="background:#f1f5f9;border-radius:8px;color:#003366;text-decoration:none;">
+                    <div style="font-size:28px; margin-bottom:8px;"><i class="fa fa-phone"></i></div>
+                    <div style="font-weight:700;">Contact Directory</div>
+                    <div class="text-muted" style="font-size:0.9rem;">Offices and telephone numbers</div>
+                </a>
+            </div>
+        </div>
+
     </div>
 </div>
-
