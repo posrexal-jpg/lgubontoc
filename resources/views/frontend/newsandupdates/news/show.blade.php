@@ -246,6 +246,64 @@
         font-weight: 700;
     }
 
+    .article-navigation {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+        margin-top: 1.25rem;
+    }
+
+    .article-navigation__item {
+        display: flex;
+        align-items: center;
+        gap: .85rem;
+        min-height: 112px;
+        padding: 1rem;
+        background: #fff;
+        border: 1px solid #dce3ea;
+        color: #143226;
+        box-shadow: 0 10px 24px rgba(11, 61, 42, .07);
+    }
+
+    .article-navigation__item:hover {
+        color: #143226;
+        border-color: #1f7a3f;
+        text-decoration: none;
+    }
+
+    .article-navigation__item--next {
+        justify-content: flex-end;
+        text-align: right;
+    }
+
+    .article-navigation__icon {
+        flex: 0 0 42px;
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        background: #edf8e7;
+        color: #1f7a3f;
+    }
+
+    .article-navigation__label {
+        display: block;
+        margin-bottom: .25rem;
+        color: #60726a;
+        font-size: .78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+    }
+
+    .article-navigation__title {
+        display: block;
+        color: #143226;
+        font-size: 1rem;
+        font-weight: 900;
+        line-height: 1.25;
+    }
+
     @media (max-width: 991.98px) {
         .article-layout {
             grid-template-columns: 1fr;
@@ -253,6 +311,21 @@
 
         .article-sidebar {
             position: static;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .article-navigation {
+            grid-template-columns: 1fr;
+        }
+
+        .article-navigation__item--next {
+            text-align: left;
+            justify-content: flex-start;
+        }
+
+        .article-navigation__item--next .article-navigation__icon {
+            order: -1;
         }
     }
 </style>
@@ -295,6 +368,30 @@
                     </div>
                 </div>
             </article>
+
+            @if($previousNews || $nextNews)
+                <nav class="article-navigation" aria-label="News article navigation">
+                    @if($previousNews)
+                        <a class="article-navigation__item" href="{{ route('newsandupdates.news.show', $previousNews->id) }}">
+                            <span class="article-navigation__icon"><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
+                            <span>
+                                <span class="article-navigation__label">Previous News</span>
+                                <span class="article-navigation__title">{{ \Illuminate\Support\Str::limit($previousNews->title, 82) }}</span>
+                            </span>
+                        </a>
+                    @endif
+
+                    @if($nextNews)
+                        <a class="article-navigation__item article-navigation__item--next" href="{{ route('newsandupdates.news.show', $nextNews->id) }}">
+                            <span>
+                                <span class="article-navigation__label">Next News</span>
+                                <span class="article-navigation__title">{{ \Illuminate\Support\Str::limit($nextNews->title, 82) }}</span>
+                            </span>
+                            <span class="article-navigation__icon"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+                        </a>
+                    @endif
+                </nav>
+            @endif
         </main>
 
         <aside class="article-sidebar" aria-label="News information">

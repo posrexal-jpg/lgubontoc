@@ -28,6 +28,34 @@ class NewsandUpdatesController extends Controller
     public function shownews($id)
     {
         $news = NewsandUpdates_news::findOrFail($id);
+        $postedDate = $news->date_posted ?: $news->created_at;
+
+        $previousNews = NewsandUpdates_news::where('status', 1)
+            ->whereKeyNot($news->getKey())
+            ->where(function ($query) use ($news, $postedDate) {
+                $query->where('date_posted', '>', $postedDate)
+                    ->orWhere(function ($query) use ($news, $postedDate) {
+                        $query->where('date_posted', $postedDate)
+                            ->where('id', '>', $news->id);
+                    });
+            })
+            ->orderBy('date_posted')
+            ->orderBy('id')
+            ->first();
+
+        $nextNews = NewsandUpdates_news::where('status', 1)
+            ->whereKeyNot($news->getKey())
+            ->where(function ($query) use ($news, $postedDate) {
+                $query->where('date_posted', '<', $postedDate)
+                    ->orWhere(function ($query) use ($news, $postedDate) {
+                        $query->where('date_posted', $postedDate)
+                            ->where('id', '<', $news->id);
+                    });
+            })
+            ->orderByDesc('date_posted')
+            ->orderByDesc('id')
+            ->first();
+
         $relatedNews = NewsandUpdates_news::whereKeyNot($news->getKey())
             ->latest()
             ->take(3)
@@ -35,6 +63,8 @@ class NewsandUpdatesController extends Controller
 
         return view('frontend.newsandupdates.news.show', [
             'news' => $news,
+            'previousNews' => $previousNews,
+            'nextNews' => $nextNews,
             'relatedNews' => $relatedNews,
         ]);
     }
