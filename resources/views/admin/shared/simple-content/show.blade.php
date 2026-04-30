@@ -9,9 +9,30 @@
             </div>
 
             <h4>{{ $item->title }}</h4>
-            <div class="siteorigin-widget-tinymce textwidget">
-                {!! $item->description !!}
-            </div>
+            @if($supportsMissionVision ?? false)
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="border rounded p-3 h-100">
+                            <h5>Mission</h5>
+                            <div class="siteorigin-widget-tinymce textwidget">
+                                {!! $item->mission ?: $item->description !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="border rounded p-3 h-100">
+                            <h5>Vision</h5>
+                            <div class="siteorigin-widget-tinymce textwidget">
+                                {!! $item->vision ?: $item->description !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @else
+                <div class="siteorigin-widget-tinymce textwidget">
+                    {!! $item->description !!}
+                </div>
+            @endif
 
             <div class="mt-4">
                 <button type="button" class="btn btn-success btn-sm text-white" data-bs-toggle="modal" data-bs-target="#editContentModal">Edit</button>
@@ -34,10 +55,21 @@
                                 <label>Title</label>
                                 <input type="text" name="title" value="{{ $item->title }}" class="form-control" placeholder="Title">
                             </div>
-                            <div class="form-group">
-                                <label>Description</label>
-                                <textarea name="description" class="form-control">{{ $item->description }}</textarea>
-                            </div>
+                            @if($supportsMissionVision ?? false)
+                                <div class="form-group mb-3">
+                                    <label>Mission</label>
+                                    <textarea name="mission" class="form-control">{{ old('mission', $item->mission ?: $item->description) }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Vision</label>
+                                    <textarea name="vision" class="form-control">{{ old('vision', $item->vision ?: $item->description) }}</textarea>
+                                </div>
+                            @else
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="description" class="form-control">{{ $item->description }}</textarea>
+                                </div>
+                            @endif
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

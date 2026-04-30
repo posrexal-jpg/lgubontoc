@@ -271,7 +271,15 @@
   flex-direction: column;
 }
 
+.admin-shell .modal-dialog-scrollable .modal-content > form {
+  display: flex;
+  min-height: 0;
+  max-height: inherit;
+  flex-direction: column;
+}
+
 .admin-shell .modal-dialog-scrollable .modal-body {
+  min-height: 0;
   overflow-y: auto;
 }
 

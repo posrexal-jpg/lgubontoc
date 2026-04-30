@@ -42,6 +42,14 @@ class ContentSeeder extends Seeder
             );
         }
 
+        if (Schema::hasColumn('aboutus_missionandvisions', 'mission')) {
+            DB::table('aboutus_missionandvisions')->where('id', 1)->update([
+                'mission' => '<p>To deliver responsive, transparent, and accountable public service through inclusive programs, efficient governance, and active partnership with the people of Bontoc.</p>',
+                'vision' => '<p>A progressive, resilient, and service-oriented municipality where communities are empowered, public trust is strengthened, and development benefits every Bontocanon.</p>',
+                'updated_at' => $now,
+            ]);
+        }
+
         if (Schema::hasTable('transparency_fdp_reports')) {
             DB::table('transparency_fdp_reports')->updateOrInsert(
                 ['id' => 1],

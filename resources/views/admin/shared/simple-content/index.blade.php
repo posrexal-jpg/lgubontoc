@@ -16,7 +16,7 @@
                     <tr>
                         <th>#</th>
                         <th>Title</th>
-                        <th>Description</th>
+                        <th>{{ $supportsMissionVision ?? false ? 'Mission / Vision' : 'Description' }}</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -25,7 +25,14 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $value->title }}</td>
-                            <td>{!! $value->description !!}</td>
+                            <td>
+                                @if($supportsMissionVision ?? false)
+                                    <strong>Mission:</strong> {{ \Illuminate\Support\Str::limit(strip_tags($value->mission ?: $value->description), 80) }}<br>
+                                    <strong>Vision:</strong> {{ \Illuminate\Support\Str::limit(strip_tags($value->vision ?: $value->description), 80) }}
+                                @else
+                                    {!! $value->description !!}
+                                @endif
+                            </td>
                             <td>
                                 <a href="{{ route($routes['show'], $value->id) }}" class="btn btn-info btn-sm text-white">Read</a>
                                 <button type="button" class="btn btn-success btn-sm text-white" data-bs-toggle="modal" data-bs-target="#editContentModal{{ $value->id }}">Edit</button>
@@ -55,10 +62,21 @@
                                 <label>Title</label>
                                 <input type="text" name="title" value="{{ old('title') }}" class="form-control" placeholder="Title">
                             </div>
-                            <div class="form-group">
-                                <label>Description</label>
-                                <textarea name="description" class="form-control">{{ old('description') }}</textarea>
-                            </div>
+                            @if($supportsMissionVision ?? false)
+                                <div class="form-group mb-3">
+                                    <label>Mission</label>
+                                    <textarea name="mission" class="form-control">{{ old('mission') }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Vision</label>
+                                    <textarea name="vision" class="form-control">{{ old('vision') }}</textarea>
+                                </div>
+                            @else
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="description" class="form-control">{{ old('description') }}</textarea>
+                                </div>
+                            @endif
                             @if($supportsMap ?? false)
                                 <div class="form-group mt-3">
                                     <label>Address</label>
@@ -106,10 +124,21 @@
                                     <label>Title</label>
                                     <input type="text" name="title" value="{{ $value->title }}" class="form-control" placeholder="Title">
                                 </div>
-                                <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea name="description" class="form-control">{{ $value->description }}</textarea>
-                                </div>
+                                @if($supportsMissionVision ?? false)
+                                    <div class="form-group mb-3">
+                                        <label>Mission</label>
+                                        <textarea name="mission" class="form-control">{{ old('mission', $value->mission ?: $value->description) }}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Vision</label>
+                                        <textarea name="vision" class="form-control">{{ old('vision', $value->vision ?: $value->description) }}</textarea>
+                                    </div>
+                                @else
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea name="description" class="form-control">{{ $value->description }}</textarea>
+                                    </div>
+                                @endif
                                 @if($supportsMap ?? false)
                                     <div class="form-group mt-3">
                                         <label>Address</label>

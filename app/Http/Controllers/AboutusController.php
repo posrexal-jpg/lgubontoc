@@ -72,14 +72,41 @@ class AboutusController extends Controller
 
     public function indexmissionandvision() 
     {
-       return $this->browseSimpleContent(Aboutus_missionandvision::class, 'Mission and Vision', $this->routes('missionandvision'));
+       return view('admin.shared.simple-content.index', [
+            'items' => Aboutus_missionandvision::latest()->get(),
+            'item' => null,
+            'heading' => 'Mission and Vision',
+            'routes' => $this->routes('missionandvision'),
+            'supportsMissionVision' => true,
+        ]);
     }
     public function addmissionandvision(Request $request) 
     {
-        return $this->saveSimpleContent($request, Aboutus_missionandvision::class, 'admin.aboutus.missionandvision');
+        $data = $request->validate([
+            'title' => ['nullable', 'string', 'max:255'],
+            'mission' => ['nullable', 'string'],
+            'vision' => ['nullable', 'string'],
+        ]);
+
+        $record = $request->id ? Aboutus_missionandvision::findOrFail($request->id) : new Aboutus_missionandvision();
+        $record->title = $data['title'] ?? 'Mission and Vision';
+        $record->mission = $data['mission'] ?? null;
+        $record->vision = $data['vision'] ?? null;
+        $record->description = trim(($record->mission ?? '')."\n\n".($record->vision ?? ''));
+        $record->save();
+
+        return redirect()->route('admin.aboutus.missionandvision')->with('success', 'Mission and Vision successfully saved.');
     }
-    public function showmissionandvision($id) { return $this->readSimpleContent(Aboutus_missionandvision::class, 'Mission and Vision', $this->routes('missionandvision'), $id); }
-    public function editmissionandvision($id) { return $this->browseSimpleContent(Aboutus_missionandvision::class, 'Mission and Vision', $this->routes('missionandvision'), Aboutus_missionandvision::findOrFail($id)); }
+    public function showmissionandvision($id)
+    {
+        return view('admin.shared.simple-content.show', [
+            'item' => Aboutus_missionandvision::findOrFail($id),
+            'heading' => 'Mission and Vision',
+            'routes' => $this->routes('missionandvision'),
+            'supportsMissionVision' => true,
+        ]);
+    }
+    public function editmissionandvision($id) { return $this->indexmissionandvision(); }
     public function deletemissionandvision($id) { return $this->deleteSimpleContent(Aboutus_missionandvision::class, 'admin.aboutus.missionandvision', $id); }
 
     public function indexmunicipalityseal() 

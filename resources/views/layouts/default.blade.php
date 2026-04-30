@@ -48,7 +48,7 @@
     <script>
       if (window.tinymce) {
         tinymce.init({
-          selector: 'textarea[name="description"]',
+          selector: 'textarea[name="description"], textarea[name="mission"], textarea[name="vision"]',
           branding: false,
           promotion: false,
           menubar: false,

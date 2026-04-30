@@ -191,21 +191,18 @@
         <div class="mv-card-grid">
             <article class="mv-content-card">
                 <h2><i class="fa fa-bullseye"></i> Mission</h2>
-                <p>Deliver responsive, transparent, and accountable public service for every resident and stakeholder of Bontoc.</p>
+                <div class="siteorigin-widget-tinymce textwidget">
+                    {!! $missionandvision->mission ?: $missionandvision->description !!}
+                </div>
             </article>
 
             <article class="mv-content-card">
                 <h2><i class="fa fa-eye"></i> Vision</h2>
-                <p>A progressive and resilient municipality guided by inclusive development, good governance, and community trust.</p>
+                <div class="siteorigin-widget-tinymce textwidget">
+                    {!! $missionandvision->vision ?: $missionandvision->description !!}
+                </div>
             </article>
         </div>
-
-        <article class="mv-content-card mv-content-card--official">
-            <h2><i class="fa fa-file-alt"></i> Official Statement</h2>
-            <div class="siteorigin-widget-tinymce textwidget">
-                {!! $missionandvision->description !!}
-            </div>
-        </article>
     @endif
 </section>
 
