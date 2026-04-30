@@ -4,14 +4,28 @@
     // Dropdown on mouse hover
     $(document).ready(function () {
         function toggleNavbarMethod() {
+            var $dropdowns = $('.navbar .dropdown');
+
+            $dropdowns.off('mouseenter.navHover mouseleave.navHover');
+
             if ($(window).width() > 992) {
-                $('.navbar .dropdown').on('mouseover', function () {
-                    $('.dropdown-toggle', this).trigger('click');
-                }).on('mouseout', function () {
-                    $('.dropdown-toggle', this).trigger('click').blur();
+                $dropdowns.on('mouseenter.navHover', function () {
+                    var $dropdown = $(this);
+
+                    $dropdown.addClass('show');
+                    $dropdown.children('.dropdown-toggle').attr('aria-expanded', 'true');
+                    $dropdown.children('.dropdown-menu').addClass('show');
+                }).on('mouseleave.navHover', function () {
+                    var $dropdown = $(this);
+
+                    $dropdown.removeClass('show');
+                    $dropdown.children('.dropdown-toggle').attr('aria-expanded', 'false').blur();
+                    $dropdown.children('.dropdown-menu').removeClass('show');
                 });
             } else {
-                $('.navbar .dropdown').off('mouseover').off('mouseout');
+                $dropdowns.removeClass('show');
+                $dropdowns.children('.dropdown-toggle').attr('aria-expanded', 'false');
+                $dropdowns.children('.dropdown-menu').removeClass('show');
             }
         }
         toggleNavbarMethod();
@@ -99,4 +113,3 @@
     });
     
 })(jQuery);
-
