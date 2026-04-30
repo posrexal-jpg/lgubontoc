@@ -27,24 +27,53 @@
                     <li @class(['active' => $isRoute('home')])><a href="{{ route('home') }}">Home</a></li>
                     <li class="divider"></li>
 
-                    <li @class(['has-dropdown dropdown', 'active' => $isRoute('government.*', 'about.directory', 'about.mandate', 'about.missionandvision', 'about.servicepledge')])>
+                    <li @class(['has-dropdown dropdown', 'active' => $isRoute('government.*')])>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Government</a>
                         <ul class="dropdown-menu dropdown">
                             <li><a class="dropdown-item" href="{{ route('government.elected-officials') }}">Elected Officials</a></li>
                             <li><a class="dropdown-item" href="{{ route('government.legislative') }}">Legislative</a></li>
-                            <li><a class="dropdown-item" href="{{ route('about.directory') }}">Directory</a></li>
-                            <li><a class="dropdown-item" href="{{ route('about.mandate') }}">Mandate</a></li>
+                        </ul>
+                    </li>
+                    <li class="divider"></li>
+
+                    <li @class(['has-dropdown dropdown', 'active' => $isRoute('about.*', 'careers.*')])>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About Us</a>
+                        <ul class="dropdown-menu dropdown">
+                            <li><a class="dropdown-item" href="{{ route('about.history') }}">History</a></li>
+                            <li><a class="dropdown-item" href="{{ route('about.location') }}">Location</a></li>
                             <li><a class="dropdown-item" href="{{ route('about.missionandvision') }}">Mission and Vision</a></li>
+                            <li><a class="dropdown-item" href="{{ route('about.municipalityseal') }}">Municipality Seal</a></li>
                             <li><a class="dropdown-item" href="{{ route('about.servicepledge') }}">Service Pledge</a></li>
+                            <li><a class="dropdown-item" href="{{ route('about.mandate') }}">Mandate</a></li>
+                            <li><a class="dropdown-item" href="{{ route('about.directory') }}">Directory</a></li>
+                            <li><a class="dropdown-item" href="{{ route('careers.jobvacancies') }}">Careers</a></li>
+                        </ul>
+                    </li>
+                    <li class="divider"></li>
+
+                    <li @class(['has-dropdown dropdown', 'active' => $isRoute('newsandupdates.*')])>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">News and Updates</a>
+                        <ul class="dropdown-menu dropdown">
+                            <li><a class="dropdown-item" href="{{ route('newsandupdates.news') }}">News</a></li>
+                            <li><a class="dropdown-item" href="{{ route('newsandupdates.upcomingupdates') }}">Announcements</a></li>
+                        </ul>
+                    </li>
+                    <li class="divider"></li>
+
+                    <li @class(['has-dropdown dropdown', 'active' => $isRoute('transparency.*')])>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Transparency</a>
+                        <ul class="dropdown-menu dropdown">
+                            <li><a class="dropdown-item" href="{{ route('transparency.fdp-reports') }}">FDP Reports</a></li>
+                            <li><a class="dropdown-item" href="{{ route('transparency.municipalordinances') }}">Municipal Ordinances</a></li>
                         </ul>
                     </li>
                     <li class="divider"></li>
 
                     <li @class(['has-dropdown dropdown', 'active' => $isRoute('services.*')])>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Transactions</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services and Transactions</a>
                         <ul class="dropdown-menu dropdown">
-                            <li><a class="dropdown-item" href="{{ route('services.citizenscharter') }}">Citizen's Charter</a></li>
                             <li><a class="dropdown-item" href="{{ route('services.mayorsoffice') }}">Mayor's Office</a></li>
+                            <li><a class="dropdown-item" href="{{ route('services.citizenscharter') }}">Citizen's Charter</a></li>
                             @foreach($transactionLinks as $transactionLink)
                                 <li>
                                     <a class="dropdown-item" href="{{ $transactionLink->url }}" @if($transactionLink->opens_new_tab) target="_blank" rel="noopener" @endif>
@@ -56,30 +85,15 @@
                     </li>
                     <li class="divider"></li>
 
-                    <li @class(['has-dropdown dropdown', 'active' => $isRoute('transparency.*', 'others.downloadableforms')])>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Transparency</a>
-                        <ul class="dropdown-menu dropdown">
-                            <li><a class="dropdown-item" href="{{ route('transparency.fdp-reports') }}">Full Disclosure Policy Reports</a></li>
-                            <li><a class="dropdown-item" href="{{ route('others.downloadableforms') }}">Downloadable Forms</a></li>
-                        </ul>
-                    </li>
-                    <li class="divider"></li>
-
-                    <li @class(['active' => $isRoute('newsandupdates.news', 'newsandupdates.news.show')])><a href="{{ route('newsandupdates.news') }}">News</a></li>
-                    <li class="divider"></li>
-                    <li @class(['active' => $isRoute('newsandupdates.upcomingupdates', 'newsandupdates.upcomingupdates.show')])><a href="{{ route('newsandupdates.upcomingupdates') }}">Announcements</a></li>
-                    <li class="divider"></li>
                     <li @class(['active' => $isRoute('tourism.*')])><a href="{{ route('tourism.index') }}">Tourism</a></li>
                     <li class="divider"></li>
 
-                    <li @class(['has-dropdown dropdown', 'active' => $isRoute('about.history', 'about.location', 'about.municipalityseal', 'others.gallery', 'others.gallery.show', 'careers.*')])>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About us</a>
+                    <li @class(['has-dropdown dropdown', 'active' => $isRoute('others.*')])>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Others</a>
                         <ul class="dropdown-menu dropdown">
-                            <li><a class="dropdown-item" href="{{ route('about.history') }}">History</a></li>
-                            <li><a class="dropdown-item" href="{{ route('about.location') }}">Location</a></li>
-                            <li><a class="dropdown-item" href="{{ route('about.municipalityseal') }}">Municipality Seal</a></li>
+                            <li><a class="dropdown-item" href="{{ route('others.downloadableforms') }}">Downloadable Forms</a></li>
                             <li><a class="dropdown-item" href="{{ route('others.gallery') }}">Gallery</a></li>
-                            <li><a class="dropdown-item" href="{{ route('careers.jobvacancies') }}">Careers</a></li>
+                            <li><a class="dropdown-item" href="{{ route('others.memorandom') }}">Memorandum</a></li>
                         </ul>
                     </li>
                     <li class="divider"></li>
