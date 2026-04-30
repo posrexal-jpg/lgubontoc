@@ -44,7 +44,7 @@
     </div>
 
     <header class="site-header">
-        <div class="container site-header__inner">
+        <div class="container-fluid site-header__inner">
             <a href="{{ route('home') }}" class="site-brand" aria-label="Municipality of Bontoc homepage">
                 <img src="{{ asset('resources/bontoclogonobg.png') }}" alt="Municipality of Bontoc seal">
                 <span>
