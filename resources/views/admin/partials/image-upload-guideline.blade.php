@@ -1,6 +1,7 @@
 @php
     $guidelines = [
         'header_banner' => 'Recommended size: 1200 x 240 px. JPG, PNG, or WebP. Max file size: 4MB.',
+        'carousel' => 'Recommended size: 1600 x 700 px. Use a wide landscape image. JPG, PNG, or WebP. Max file size: 4MB.',
         'hero' => 'Recommended size: 1600 x 700 px. Use a wide landscape image. JPG, PNG, or WebP. Max file size: 4MB.',
         'homepage' => 'Recommended size: 1200 x 675 px. Use a 16:9 landscape image.',
         'news' => 'Recommended size: 1200 x 675 px. Use a 16:9 landscape image.',

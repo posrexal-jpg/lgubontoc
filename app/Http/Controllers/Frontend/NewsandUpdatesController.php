@@ -28,9 +28,14 @@ class NewsandUpdatesController extends Controller
     public function shownews($id)
     {
         $news = NewsandUpdates_news::findOrFail($id);
+        $relatedNews = NewsandUpdates_news::whereKeyNot($news->getKey())
+            ->latest()
+            ->take(3)
+            ->get();
 
         return view('frontend.newsandupdates.news.show', [
             'news' => $news,
+            'relatedNews' => $relatedNews,
         ]);
     }
 
@@ -45,9 +50,14 @@ class NewsandUpdatesController extends Controller
     public function showupcomingupdates($id)
     {
         $upcomingupdate = NewsandUpdates_upcomingupdates::findOrFail($id);
+        $relatedUpdates = NewsandUpdates_upcomingupdates::whereKeyNot($upcomingupdate->getKey())
+            ->latest()
+            ->take(3)
+            ->get();
 
         return view('frontend.newsandupdates.upcomingupdates.show', [
             'upcomingupdate' => $upcomingupdate,
+            'relatedUpdates' => $relatedUpdates,
         ]);
     }
 

@@ -2,7 +2,38 @@
 
 @section('content')
 <section class="home-hero">
-    <div class="home-hero__media" style="background-image: url('{{ $heroImageUrl }}');"></div>
+    <div id="homepageHeroCarousel" class="carousel slide home-hero__carousel" data-ride="carousel" data-interval="6500">
+        @if(!empty($carouselItems) && count($carouselItems) > 1)
+            <ol class="carousel-indicators">
+                @foreach($carouselItems as $index => $item)
+                    <li data-target="#homepageHeroCarousel" data-slide-to="{{ $index }}" @if($index === 0) class="active" @endif></li>
+                @endforeach
+            </ol>
+        @endif
+
+        <div class="carousel-inner">
+            @forelse($carouselItems as $index => $item)
+                <div class="carousel-item @if($index === 0) active @endif">
+                    <div class="home-hero__media" style="background-image: url('{{ asset($item['image']) }}');"></div>
+                </div>
+            @empty
+                <div class="carousel-item active">
+                    <div class="home-hero__media" style="background-image: url('{{ $heroImageUrl }}');"></div>
+                </div>
+            @endforelse
+        </div>
+
+        @if(!empty($carouselItems) && count($carouselItems) > 1)
+            <a class="carousel-control-prev" href="#homepageHeroCarousel" role="button" data-slide="prev" aria-label="Previous slide">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#homepageHeroCarousel" role="button" data-slide="next" aria-label="Next slide">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        @endif
+    </div>
     <div class="container home-hero__content">
         <div class="home-hero__copy">
             <span class="eyebrow">Official LGU Portal</span>

@@ -57,7 +57,7 @@ class LogAdminActivity
         return match (true) {
             str_starts_with($routeName, 'admin.users.') || str_starts_with($path, 'admin/users') => 'Users',
             str_starts_with($routeName, 'admin.profile.') || str_starts_with($path, 'admin/profile') => 'Profile',
-            str_starts_with($routeName, 'admin.hero-images') || str_starts_with($routeName, 'admin.header-banner') || str_starts_with($path, 'admin/home') => 'Homepage',
+            str_starts_with($routeName, 'admin.carousel') || str_starts_with($routeName, 'admin.hero-images') || str_starts_with($routeName, 'admin.header-banner') || str_starts_with($path, 'admin/home') => 'Homepage',
             str_starts_with($routeName, 'admin.aboutus.') => 'About Us',
             str_starts_with($routeName, 'admin.government.') => 'Government',
             str_starts_with($routeName, 'admin.newsandupdates.') => 'News and Updates',

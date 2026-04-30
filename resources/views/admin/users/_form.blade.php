@@ -71,11 +71,9 @@
     </div>
 @endif
 
-<div class="mt-4">
-    <button type="submit" class="btn btn-primary">Save Account</button>
-    @if(!empty($modal))
-        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-    @else
+@if(empty($modal))
+    <div class="mt-4">
+        <button type="submit" class="btn btn-primary">Save Account</button>
         <a href="{{ route('admin.users.index') }}" class="btn btn-light">Cancel</a>
-    @endif
-</div>
+    </div>
+@endif

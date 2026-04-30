@@ -19,7 +19,7 @@ class UserManagementController extends Controller
     {
         return [
             'Home' => [
-                'home' => 'Banners, hero images, and homepage items',
+                'home' => 'Carousel, banners, hero images, and homepage items',
             ],
             'Government' => [
                 'government' => 'Government officials and legislative',

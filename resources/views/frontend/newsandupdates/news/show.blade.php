@@ -7,6 +7,8 @@
     $author = $news->author ?: 'Bontoc LGU';
     $postedOn = !empty($news->date_posted) ? \Carbon\Carbon::parse($news->date_posted)->format('F j, Y') : 'Not specified';
     $plainDescription = trim(strip_tags((string) $news->description));
+    $shareUrl = route('newsandupdates.news.show', $news->id);
+    $shareTitle = $news->title;
 @endphp
 
 <style>
@@ -182,6 +184,68 @@
         gap: .65rem;
     }
 
+    .share-buttons,
+    .related-articles {
+        display: grid;
+        gap: .7rem;
+    }
+
+    .share-button,
+    .copy-share-link {
+        display: flex;
+        align-items: center;
+        gap: .6rem;
+        width: 100%;
+        border: 1px solid #dce3ea;
+        padding: .7rem .85rem;
+        background: #fff;
+        color: #143226;
+        font-weight: 800;
+        text-align: left;
+    }
+
+    .share-button i,
+    .copy-share-link i {
+        width: 22px;
+        color: #1f7a3f;
+        text-align: center;
+    }
+
+    .related-article-card {
+        display: grid;
+        grid-template-columns: 86px minmax(0, 1fr);
+        gap: .8rem;
+        align-items: center;
+        color: #143226;
+    }
+
+    .related-article-card__media {
+        width: 86px;
+        height: 72px;
+        overflow: hidden;
+        background: #edf8e7;
+    }
+
+    .related-article-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .related-article-card strong {
+        display: block;
+        color: #143226;
+        font-size: .98rem;
+        line-height: 1.25;
+    }
+
+    .related-article-card span {
+        color: #5f6b76;
+        font-size: .88rem;
+        font-weight: 700;
+    }
+
     @media (max-width: 991.98px) {
         .article-layout {
             grid-template-columns: 1fr;
@@ -258,6 +322,48 @@
                     <a href="{{ route('newsandupdates.upcomingupdates') }}" class="btn btn-outline-secondary">View Announcements</a>
                 </div>
             </section>
+            <section class="article-panel">
+                <h2>Share This News</h2>
+                <div class="share-buttons">
+                    <a class="share-button" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($shareUrl) }}">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook
+                    </a>
+                    <a class="share-button" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url={{ urlencode($shareUrl) }}&text={{ urlencode($shareTitle) }}">
+                        <i class="fab fa-twitter" aria-hidden="true"></i> X / Twitter
+                    </a>
+                    <a class="share-button" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?text={{ urlencode($shareTitle.' '.$shareUrl) }}">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp
+                    </a>
+                    <a class="share-button" href="mailto:?subject={{ rawurlencode($shareTitle) }}&body={{ rawurlencode($shareUrl) }}">
+                        <i class="fa fa-envelope" aria-hidden="true"></i> Email
+                    </a>
+                    <button class="copy-share-link" type="button" data-copy-share-link="{{ $shareUrl }}">
+                        <i class="fa fa-link" aria-hidden="true"></i> Copy Link
+                    </button>
+                </div>
+            </section>
+            @if($relatedNews->isNotEmpty())
+                <section class="article-panel">
+                    <h2>Related Articles</h2>
+                    <div class="related-articles">
+                        @foreach($relatedNews as $related)
+                            <a class="related-article-card" href="{{ route('newsandupdates.news.show', $related->id) }}">
+                                <span class="related-article-card__media">
+                                    @if(!empty($related->image_file))
+                                        <img src="{{ url('uploads/'.$related->image_file) }}" alt="{{ $related->title }}">
+                                    @else
+                                        <img src="{{ asset('resources/bontoclogonobg.png') }}" alt="Municipality of Bontoc seal">
+                                    @endif
+                                </span>
+                                <span>
+                                    <strong>{{ $related->title }}</strong>
+                                    <span>{{ !empty($related->date_posted) ? \Carbon\Carbon::parse($related->date_posted)->format('M d, Y') : 'News' }}</span>
+                                </span>
+                            </a>
+                        @endforeach
+                    </div>
+                </section>
+            @endif
         </aside>
     </div>
 </section>

@@ -96,6 +96,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('hero-images', 'HeroImageController@index')->name('admin.hero-images.index');
         Route::post('hero-images', 'HeroImageController@update')->name('admin.hero-images.update');
         Route::get('header-banner', 'HeroImageController@index')->name('admin.header-banner.index');
+        Route::get('carousel', 'CarouselItemController@index')->name('admin.carousel.index');
+        Route::post('carousel', 'CarouselItemController@store')->name('admin.carousel.store');
+        Route::post('carousel/{id}', 'CarouselItemController@update')->name('admin.carousel.update');
+        Route::get('carousel/delete/{id}', 'CarouselItemController@destroy')->name('admin.carousel.delete');
         Route::get('home', [HomepageController::class, 'home']);
         Route::get('home/add', [HomepageController::class, 'home_add']);
         Route::post('home/add', [HomepageController::class, 'home_add_post']);

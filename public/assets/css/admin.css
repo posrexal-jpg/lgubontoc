@@ -264,6 +264,13 @@
   max-height: calc(100vh - 3.5rem);
 }
 
+.admin-shell .admin-modal-form {
+  display: flex;
+  min-height: 0;
+  max-height: inherit;
+  flex-direction: column;
+}
+
 .admin-shell .modal-dialog-scrollable .modal-body {
   overflow-y: auto;
 }

@@ -20,7 +20,10 @@ class ContentSeeder extends Seeder
             'aboutus_mandates' => ['Mandate', 'The municipal government delivers basic services, promotes public welfare, and implements programs for sustainable local development.'],
             'aboutus_servicepledges' => ['Service Pledge', 'We commit to serve the people with integrity, courtesy, accountability, and timely public service.'],
             'aboutus_directories' => ['Directory', 'Municipal offices and personnel are available to assist residents with services, documents, and public concerns.'],
-            'services_mayorsoffices' => ["Mayor's Office", 'The Office of the Municipal Mayor leads local governance, public service delivery, and community development programs.'],
+            'services_mayorsoffices' => [
+                "Mayor's Office",
+                '<p>The Office of the Municipal Mayor serves as the chief executive office of the Municipality of Bontoc. It leads the implementation of local programs, coordinates public service delivery, and responds to the needs and concerns of residents, barangays, organizations, and partner agencies.</p><h3>Services and Assistance</h3><ul><li>Receiving and endorsement of requests, concerns, and letters addressed to the Municipal Mayor</li><li>Coordination of municipal programs, projects, and community activities</li><li>Public assistance referrals to the appropriate municipal offices</li><li>Support for barangay concerns, civic activities, and local development initiatives</li><li>Information on mayor-led programs, announcements, and official activities</li></ul><h3>Office Reminders</h3><p>Residents are encouraged to bring a valid ID, complete supporting documents, and a clear written request when visiting the office for assistance or follow-up. For concerns that require action from a specific department, the Mayor\'s Office may refer the request to the proper office for evaluation and processing.</p><h3>Office Hours</h3><p>Monday to Friday, 8:00 AM to 5:00 PM, except holidays and official non-working days.</p>',
+            ],
             'transparency_resolutions' => ['Resolutions', 'Approved resolutions are published to keep residents informed about local legislative actions.'],
             'others_downloadableforms' => ['Downloadable Forms', 'Common municipal forms and documents are available for convenient public access.'],
             'others_galleries' => ['Gallery', 'Photos and updates from municipal events, programs, and community activities.'],
@@ -95,6 +98,7 @@ class ContentSeeder extends Seeder
         $this->seedCarouselItems($now);
         $this->seedFeaturedItems($now);
         $this->seedTransactionLinks($now);
+        $this->seedGovernmentOfficials($now);
     }
 
     private function seedList(string $table, array $items, $now): void
@@ -220,6 +224,66 @@ class ContentSeeder extends Seeder
                     'sort_order' => $index + 1,
                     'opens_new_tab' => true,
                     'is_active' => true,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ]
+            );
+        }
+    }
+
+    private function seedGovernmentOfficials($now): void
+    {
+        if (! Schema::hasTable('government_officials')) {
+            return;
+        }
+
+        if (DB::table('government_officials')->exists()) {
+            return;
+        }
+
+        $officials = [
+            ['elected', 'Hon. Sample Municipal Mayor', 'Municipal Mayor', 'Leads the executive branch of the municipal government and oversees local programs, services, and development priorities.'],
+            ['elected', 'Hon. Sample Municipal Vice Mayor', 'Municipal Vice Mayor', 'Presides over the Sangguniang Bayan and supports legislative work and municipal governance.'],
+            ['elected', 'Hon. Sample SB Member 1', 'Sangguniang Bayan Member', 'Participates in crafting ordinances, approving resolutions, and reviewing local development programs.'],
+            ['elected', 'Hon. Sample SB Member 2', 'Sangguniang Bayan Member', 'Supports policy-making, committee work, and public consultations for municipal concerns.'],
+            ['elected', 'Hon. Sample SB Member 3', 'Sangguniang Bayan Member', 'Works with the legislative body on ordinances, resolutions, and community development measures.'],
+            ['elected', 'Hon. Sample SB Member 4', 'Sangguniang Bayan Member', 'Represents public concerns through committee hearings, local legislation, and council deliberations.'],
+            ['elected', 'Hon. Sample SB Member 5', 'Sangguniang Bayan Member', 'Assists in reviewing municipal programs and supporting responsive local governance.'],
+            ['elected', 'Hon. Sample SB Member 6', 'Sangguniang Bayan Member', 'Helps enact local policies and supports priority programs for residents and barangays.'],
+            ['elected', 'Hon. Sample SB Member 7', 'Sangguniang Bayan Member', 'Contributes to legislative discussions, public hearings, and community-oriented ordinances.'],
+            ['elected', 'Hon. Sample SB Member 8', 'Sangguniang Bayan Member', 'Supports municipal legislation, resolutions, and public welfare initiatives.'],
+            ['elected', 'Hon. Sample ABC President', 'ABC President', 'Represents barangay interests in the municipal legislative body.'],
+            ['elected', 'Hon. Sample SK Federation President', 'SK Federation President', 'Represents youth concerns and programs in the municipal legislative body.'],
+
+            ['legislative', 'Hon. Sample Municipal Vice Mayor', 'Presiding Officer', 'Leads sessions of the Sangguniang Bayan and guides the legislative agenda.'],
+            ['legislative', 'Hon. Sample SB Member 1', 'Chairperson, Committee on Rules', 'Handles legislative procedures, committee coordination, and council rules.'],
+            ['legislative', 'Hon. Sample SB Member 2', 'Chairperson, Committee on Finance', 'Reviews budgetary matters, appropriations, and fiscal policies.'],
+            ['legislative', 'Hon. Sample SB Member 3', 'Chairperson, Committee on Health', 'Supports policies and programs related to public health and community wellness.'],
+            ['legislative', 'Hon. Sample SB Member 4', 'Chairperson, Committee on Education', 'Works on measures supporting education, youth development, and learning programs.'],
+            ['legislative', 'Hon. Sample SB Member 5', 'Chairperson, Committee on Infrastructure', 'Reviews public works, infrastructure priorities, and development projects.'],
+            ['legislative', 'Hon. Sample SB Member 6', 'Chairperson, Committee on Agriculture', 'Supports legislation for agriculture, livelihood, and local productivity.'],
+            ['legislative', 'Hon. Sample SB Member 7', 'Chairperson, Committee on Environment', 'Promotes environmental protection, sanitation, and sustainability policies.'],
+            ['legislative', 'Hon. Sample SB Member 8', 'Chairperson, Committee on Peace and Order', 'Supports policies related to public safety, disaster readiness, and local order.'],
+            ['legislative', 'Hon. Sample ABC President', 'Ex-Officio Member', 'Brings barangay-level concerns and priorities to the Sangguniang Bayan.'],
+            ['legislative', 'Hon. Sample SK Federation President', 'Ex-Officio Member', 'Brings youth programs and concerns to the Sangguniang Bayan.'],
+        ];
+
+        $sortOrders = [];
+
+        foreach ($officials as [$category, $name, $position, $description]) {
+            $sortOrders[$category] = ($sortOrders[$category] ?? 0) + 1;
+
+            DB::table('government_officials')->updateOrInsert(
+                [
+                    'category' => $category,
+                    'sort_order' => $sortOrders[$category],
+                ],
+                [
+                    'name' => $name,
+                    'position' => $position,
+                    'photo' => null,
+                    'description' => $description,
+                    'is_published' => true,
                     'created_at' => $now,
                     'updated_at' => $now,
                 ]

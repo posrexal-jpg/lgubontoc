@@ -68,7 +68,7 @@
 <div class="modal fade" id="addAccountModal" tabindex="-1" aria-labelledby="addAccountModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
         <div class="modal-content">
-            <form action="{{ route('admin.users.store') }}" method="POST">
+            <form action="{{ route('admin.users.store') }}" method="POST" class="admin-modal-form">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="addAccountModalLabel">Add Account</h5>
@@ -76,6 +76,10 @@
                 </div>
                 <div class="modal-body">
                     @include('admin.users._form', ['user' => null, 'modal' => true])
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Account</button>
                 </div>
             </form>
         </div>
@@ -86,7 +90,7 @@
     <div class="modal fade" id="editAccountModal{{ $user->id }}" tabindex="-1" aria-labelledby="editAccountModalLabel{{ $user->id }}" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content">
-                <form action="{{ route('admin.users.update', $user) }}" method="POST">
+                <form action="{{ route('admin.users.update', $user) }}" method="POST" class="admin-modal-form">
                     @csrf
                     @method('PUT')
                     <div class="modal-header">
@@ -95,6 +99,10 @@
                     </div>
                     <div class="modal-body">
                         @include('admin.users._form', ['user' => $user, 'modal' => true])
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Account</button>
                     </div>
                 </form>
             </div>

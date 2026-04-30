@@ -237,5 +237,103 @@
             applySettings();
         })();
     </script>
+    <script>
+        (function () {
+            var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var selectors = [
+                'main > section',
+                '.section-title',
+                '.section-header',
+                '.service-card',
+                '.explore-card',
+                '.news-card',
+                '.news-featured',
+                '.news-list-item',
+                '.news-sidebar-box',
+                '.featured-update',
+                '.update-card',
+                '.article-card',
+                '.article-panel',
+                '.announcement-card',
+                '.announcement-panel',
+                '.tourism-card',
+                '.search-result-card',
+                '.related-article-card'
+            ];
+
+            document.body.classList.add('motion-ready');
+
+            if (reducedMotion) {
+                return;
+            }
+
+            var elements = Array.prototype.slice.call(document.querySelectorAll(selectors.join(',')));
+
+            elements.forEach(function (element, index) {
+                element.classList.add('reveal-on-scroll');
+                element.style.setProperty('--reveal-delay', Math.min(index % 6, 5) * 55 + 'ms');
+            });
+
+            if (!('IntersectionObserver' in window)) {
+                elements.forEach(function (element) {
+                    element.classList.add('is-visible');
+                });
+                return;
+            }
+
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -8% 0px'
+            });
+
+            elements.forEach(function (element) {
+                observer.observe(element);
+            });
+        })();
+    </script>
+    <script>
+        (function () {
+            var copyButtons = document.querySelectorAll('[data-copy-share-link]');
+
+            copyButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var link = button.getAttribute('data-copy-share-link');
+                    var originalText = button.innerHTML;
+
+                    function markCopied() {
+                        button.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i> Copied';
+                        setTimeout(function () {
+                            button.innerHTML = originalText;
+                        }, 1800);
+                    }
+
+                    if (navigator.clipboard && window.isSecureContext) {
+                        navigator.clipboard.writeText(link).then(markCopied);
+                        return;
+                    }
+
+                    var input = document.createElement('input');
+                    input.value = link;
+                    input.setAttribute('readonly', 'readonly');
+                    input.style.position = 'absolute';
+                    input.style.left = '-9999px';
+                    document.body.appendChild(input);
+                    input.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(input);
+                    markCopied();
+                });
+            });
+        })();
+    </script>
 </body>
 </html>

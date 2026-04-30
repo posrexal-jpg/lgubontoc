@@ -63,6 +63,11 @@
                         <span class="nav-link-text">Banners & Hero Images</span>
                     </a>
 
+                    <a class="nav-link" href="{{ route('admin.carousel.index') }}">
+                        <span class="nav-icon"><i class="fas fa-photo-film"></i></span>
+                        <span class="nav-link-text">Homepage Carousel</span>
+                    </a>
+
                     <a class="nav-link" href="{{ url('admin/home') }}">
                         <span class="nav-icon"><i class="fas fa-house"></i></span>
                         <span class="nav-link-text">Homepage Items</span>
