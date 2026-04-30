@@ -1245,7 +1245,7 @@ body.accessibility-high-contrast .search-result-card {
     }
 
     .site-header-banner {
-        width: min(420px, 100%);
+        width: min(478px, 100%);
         aspect-ratio: 5 / 1;
     }
 
