@@ -109,8 +109,8 @@
     }
 
     .official-card__photo {
-        width: 92%;
-        height: 92%;
+        width: 80%;
+        height: 80%;
         display: block;
         object-fit: contain;
         object-position: center top;
