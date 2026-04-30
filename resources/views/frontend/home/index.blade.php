@@ -122,7 +122,7 @@
                     'items' => $featuredItems->toArray()
                 ])
 
-                @if($pagination->hasPages())
+                @if($pagination && $pagination->hasPages())
                     <div class="pagination-wrapper">
                         {{ $pagination->links() }}
                     </div>

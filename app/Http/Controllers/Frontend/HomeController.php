@@ -8,6 +8,8 @@ use App\Models\HomepageModel;
 use App\Models\CarouselItem;
 use App\Models\FeaturedItem;
 use App\Models\HeroImage;
+use App\Models\NewsandUpdates_news;
+use App\Models\NewsandUpdates_upcomingupdates;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
 
@@ -33,27 +35,13 @@ class HomeController extends Controller
                 ->toArray();
         });
 
-        // Get featured items with pagination (6 items per page)
-        $featuredItems = HomepageModel::orderBy('date_posted', 'desc')
-            ->paginate(6);
-
-        // Transform featured items for component
-        $featuredItemsData = $featuredItems->map(function ($item) {
-            return [
-                'title' => $item->title,
-                'date' => $item->date_posted,
-                'description' => $item->description,
-                'image' => 'public/home/' . $item->image,
-                'link' => route('home.show', $item->id),
-                'category' => 'News'
-            ];
-        });
+        $featuredItemsData = $this->latestNewsAndAnnouncements();
 
         $data = [
             'carouselItems' => $carouselItems,
             'featuredItems' => $featuredItemsData,
             'getrecord' => $featuredItemsData, // For backward compatibility
-            'pagination' => $featuredItems, // For pagination links
+            'pagination' => null,
             'heroImageUrl' => Schema::hasTable('hero_images')
                 ? HeroImage::imageUrlFor('home', 'uploads/m1KQTRPgOCyDRFpmPxdKqjcs5rYeBN.jfif')
                 : asset('uploads/m1KQTRPgOCyDRFpmPxdKqjcs5rYeBN.jfif'),
@@ -69,5 +57,57 @@ class HomeController extends Controller
         return view('frontend.home.show', [
             'item' => $item,
         ]);
+    }
+
+    private function latestNewsAndAnnouncements()
+    {
+        $items = collect();
+
+        if (Schema::hasTable('newsand_updates_news')) {
+            $items = $items->merge(
+                NewsandUpdates_news::where('status', 1)
+                    ->latest('date_posted')
+                    ->latest()
+                    ->take(6)
+                    ->get()
+                    ->map(fn ($item) => $this->newsCardData($item, 'News', route('newsandupdates.news.show', $item->id)))
+            );
+        }
+
+        if (Schema::hasTable('newsand_updates_upcomingupdates')) {
+            $items = $items->merge(
+                NewsandUpdates_upcomingupdates::where('status', 1)
+                    ->latest('date_posted')
+                    ->latest()
+                    ->take(6)
+                    ->get()
+                    ->map(fn ($item) => $this->newsCardData($item, 'Announcement', route('newsandupdates.upcomingupdates.show', $item->id)))
+            );
+        }
+
+        return $items
+            ->sortByDesc(fn ($item) => $item['sort_date'])
+            ->take(6)
+            ->values()
+            ->map(function ($item) {
+                unset($item['sort_date']);
+
+                return $item;
+            });
+    }
+
+    private function newsCardData($item, string $category, string $link): array
+    {
+        $date = $item->date_posted ?: $item->created_at;
+
+        return [
+            'title' => $item->title,
+            'date' => $date ? \Carbon\Carbon::parse($date)->format('M d, Y') : '',
+            'description' => strip_tags((string) $item->description),
+            'image' => ! empty($item->image_file) ? 'uploads/'.$item->image_file : 'resources/bontoclogonobg.png',
+            'link' => $link,
+            'category' => $category,
+            'sort_date' => $date ? \Carbon\Carbon::parse($date)->timestamp : 0,
+        ];
     }
 }

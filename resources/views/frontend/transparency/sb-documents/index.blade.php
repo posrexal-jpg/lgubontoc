@@ -102,6 +102,12 @@
         gap: .65rem;
     }
 
+    .sb-document-card__empty-file {
+        color: #6a776f;
+        font-size: .9rem;
+        font-weight: 700;
+    }
+
     .sb-archive-card {
         position: sticky;
         top: 1rem;
@@ -191,7 +197,14 @@
                         @endif
                         <div class="sb-document-card__actions">
                             @if($document->file_url)
-                                <a href="{{ $document->file_url }}" target="_blank" rel="noopener" class="btn btn-primary">View Document</a>
+                                <a href="{{ $document->file_url }}" target="_blank" rel="noopener" class="btn btn-primary">
+                                    <i class="fa fa-eye" aria-hidden="true"></i> View Document
+                                </a>
+                                <a href="{{ $document->file_url }}" download="{{ $document->file_name ?: basename($document->file_path) }}" class="btn btn-outline-secondary">
+                                    <i class="fa fa-download" aria-hidden="true"></i> Download
+                                </a>
+                            @else
+                                <span class="sb-document-card__empty-file">No downloadable file has been uploaded for this record.</span>
                             @endif
                         </div>
                     </article>
