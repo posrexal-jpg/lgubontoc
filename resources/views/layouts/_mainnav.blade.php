@@ -1,4 +1,10 @@
 {{-- Adapted from iGovPhil/gwt-static P2.0.0 top-bar navigation structure. --}}
+@php
+    $transactionLinks = \Illuminate\Support\Facades\Schema::hasTable('transaction_links')
+        ? \App\Models\TransactionLink::where('is_active', true)->orderBy('sort_order')->orderBy('title')->get()
+        : collect();
+@endphp
+
 <div id="main-nav" class="gwt-main-nav">
     <div class="gwt-nav-row">
         <nav class="top-bar navbar navbar-expand-lg" aria-label="Primary navigation">
@@ -37,7 +43,7 @@
                         <ul class="dropdown-menu dropdown">
                             <li><a class="dropdown-item" href="{{ route('services.citizenscharter') }}">Citizen's Charter</a></li>
                             <li><a class="dropdown-item" href="{{ route('services.mayorsoffice') }}">Mayor's Office</a></li>
-                            @foreach(\App\Models\TransactionLink::where('is_active', true)->orderBy('sort_order')->orderBy('title')->get() as $transactionLink)
+                            @foreach($transactionLinks as $transactionLink)
                                 <li>
                                     <a class="dropdown-item" href="{{ $transactionLink->url }}" @if($transactionLink->opens_new_tab) target="_blank" rel="noopener" @endif>
                                         {{ $transactionLink->title }}
