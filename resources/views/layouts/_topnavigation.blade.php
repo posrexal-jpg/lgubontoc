@@ -136,6 +136,8 @@
                     <div id="submenu-transparency" class="collapse submenu" data-bs-parent="#app-nav-main">
                         <ul class="submenu-list list-unstyled">
                             <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.transparency.fdp-reports.index') }}">FDP Reports</a></li>
+                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.transparency.resolutions') }}">SB Resolutions</a></li>
+                            <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.transparency.municipalordinances') }}">SB Ordinances</a></li>
                         </ul>
                     </div>
                 @endif

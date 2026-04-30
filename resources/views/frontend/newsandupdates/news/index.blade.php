@@ -98,6 +98,176 @@
         font-weight: 700;
     }
 
+    .news-sidebar-card {
+        overflow: hidden;
+        padding: 0;
+    }
+
+    .news-sidebar-card__header {
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+        padding: 1rem 1.15rem;
+        background: #0b3d2a;
+        color: #fff;
+    }
+
+    .news-sidebar-card__header i {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        background: rgba(255, 255, 255, .14);
+        border: 1px solid rgba(255, 255, 255, .22);
+        border-radius: 50%;
+        color: #f2b705;
+    }
+
+    .news-sidebar-card__header h4 {
+        margin: 0;
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 800;
+    }
+
+    .news-sidebar-card__header span {
+        color: rgba(255, 255, 255, .78);
+        font-size: .86rem;
+        font-weight: 700;
+    }
+
+    .news-sidebar-card__body {
+        padding: 1.15rem;
+    }
+
+    .weather-current {
+        display: grid;
+        gap: .25rem;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: linear-gradient(135deg, #edf8e7, #ffffff);
+        border: 1px solid #dcebd6;
+        border-radius: 8px;
+    }
+
+    .weather-current strong {
+        color: #143226;
+        font-size: 1.45rem;
+        font-weight: 900;
+        line-height: 1;
+    }
+
+    .weather-current span {
+        color: #4f6258;
+        font-weight: 800;
+    }
+
+    .weather-metrics {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .7rem;
+        margin-bottom: .85rem;
+    }
+
+    .weather-metric {
+        padding: .8rem;
+        background: #f8fbf6;
+        border: 1px solid #e2eadf;
+        border-radius: 8px;
+    }
+
+    .weather-metric span {
+        display: block;
+        color: #6a776f;
+        font-size: .78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: .05em;
+    }
+
+    .weather-metric strong {
+        display: block;
+        color: #143226;
+        font-size: 1.05rem;
+        font-weight: 900;
+    }
+
+    .weather-source {
+        display: flex;
+        align-items: center;
+        gap: .4rem;
+        color: #6a776f;
+        font-size: .86rem;
+        font-weight: 700;
+    }
+
+    .advisory-list--cards {
+        display: grid;
+        gap: .75rem;
+    }
+
+    .advisory-list--cards li {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    .advisory-list--cards li + li {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: 0;
+    }
+
+    .advisory-card {
+        display: grid;
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: .75rem;
+        align-items: center;
+        padding: .85rem;
+        background: #f8fbf6;
+        border: 1px solid #e2eadf;
+        border-radius: 8px;
+        color: #143226;
+    }
+
+    .advisory-card:hover {
+        border-color: #1f7a3f;
+        color: #143226;
+        text-decoration: none;
+    }
+
+    .advisory-card__date {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        background: #fff;
+        border: 1px solid #dcebd6;
+        border-radius: 8px;
+        color: #1f7a3f;
+        font-size: .78rem;
+        font-weight: 900;
+        line-height: 1.05;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .advisory-card strong {
+        display: block;
+        color: #143226;
+        font-size: .98rem;
+        font-weight: 900;
+        line-height: 1.25;
+    }
+
+    .advisory-card span {
+        display: block;
+        margin-top: .2rem;
+        color: #6a776f;
+        font-size: .86rem;
+        font-weight: 700;
+    }
+
     @media (max-width: 991.98px) {
         .news-layout {
             grid-template-columns: 1fr;
@@ -182,35 +352,76 @@
                 </main>
 
                 <aside class="news-sidebar">
-                    <section class="news-sidebar-box">
-                        <h4>Weather Updates</h4>
+                    <section class="news-sidebar-box news-sidebar-card">
+                        <div class="news-sidebar-card__header">
+                            <i class="fa fa-cloud-sun" aria-hidden="true"></i>
+                            <div>
+                                <h4>Weather Updates</h4>
+                                <span>Bontoc, Southern Leyte</span>
+                            </div>
+                        </div>
+                        <div class="news-sidebar-card__body">
                         @if($weather)
-                            <p class="mb-2"><strong>Bontoc, Southern Leyte</strong></p>
-                            <p class="mb-1">{{ $weather['condition'] }} · {{ $weather['temperature'] }}&deg;C</p>
-                            <p class="mb-1">Humidity: {{ $weather['humidity'] }}%</p>
-                            <p class="mb-0">Wind: {{ $weather['wind_speed'] }} km/h</p>
-                            <small class="text-muted">Source: Open-Meteo</small>
+                            <div class="weather-current">
+                                <strong>{{ $weather['temperature'] }}&deg;C</strong>
+                                <span>{{ $weather['condition'] }}</span>
+                            </div>
+                            <div class="weather-metrics">
+                                <div class="weather-metric">
+                                    <span>Humidity</span>
+                                    <strong>{{ $weather['humidity'] }}%</strong>
+                                </div>
+                                <div class="weather-metric">
+                                    <span>Wind</span>
+                                    <strong>{{ $weather['wind_speed'] }} km/h</strong>
+                                </div>
+                            </div>
+                            <div class="weather-source">
+                                <i class="fa fa-database" aria-hidden="true"></i>
+                                Source: Open-Meteo
+                            </div>
                         @else
                             <p class="mb-0">Weather updates for Bontoc, Southern Leyte are temporarily unavailable. Monitor official advisories for urgent bulletins.</p>
                         @endif
+                        </div>
                     </section>
 
-                    <section class="news-sidebar-box">
-                        <h4>Announcements</h4>
+                    <section class="news-sidebar-box news-sidebar-card">
+                        <div class="news-sidebar-card__header">
+                            <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                            <div>
+                                <h4>Announcements</h4>
+                                <span>Latest municipal advisories</span>
+                            </div>
+                        </div>
+                        <div class="news-sidebar-card__body">
                         @if($advisories->isNotEmpty())
-                            <ul class="advisory-list">
+                            <ul class="advisory-list advisory-list--cards">
                                 @foreach($advisories as $advisory)
                                     <li>
-                                        <a href="{{ route('newsandupdates.upcomingupdates.show', $advisory->id) }}">{{ $advisory->title }}</a>
-                                        @if(!empty($advisory->date_posted))
-                                            <div class="news-meta mb-0">on {{ $advisory->date_posted }}</div>
-                                        @endif
+                                        @php
+                                            $advisoryDate = !empty($advisory->date_posted) ? \Carbon\Carbon::parse($advisory->date_posted) : null;
+                                        @endphp
+                                        <a class="advisory-card" href="{{ route('newsandupdates.upcomingupdates.show', $advisory->id) }}">
+                                            <span class="advisory-card__date">
+                                                {{ $advisoryDate ? $advisoryDate->format('M') : 'LGU' }}
+                                                <br>
+                                                {{ $advisoryDate ? $advisoryDate->format('d') : 'Info' }}
+                                            </span>
+                                            <span>
+                                                <strong>{{ $advisory->title }}</strong>
+                                                @if($advisoryDate)
+                                                    <span>on {{ $advisoryDate->format('Y-m-d') }}</span>
+                                                @endif
+                                            </span>
+                                        </a>
                                     </li>
                                 @endforeach
                             </ul>
                         @else
                             <p class="mb-0">No advisories have been published yet.</p>
                         @endif
+                        </div>
                     </section>
                 </aside>
             </div>

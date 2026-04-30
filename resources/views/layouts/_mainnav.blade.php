@@ -64,7 +64,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Transparency</a>
                         <ul class="dropdown-menu dropdown">
                             <li><a class="dropdown-item" href="{{ route('transparency.fdp-reports') }}">FDP Reports</a></li>
-                            <li><a class="dropdown-item" href="{{ route('transparency.municipalordinances') }}">Municipal Ordinances</a></li>
+                            <li><a class="dropdown-item" href="{{ route('transparency.resolutions') }}">SB Resolutions</a></li>
+                            <li><a class="dropdown-item" href="{{ route('transparency.municipalordinances') }}">SB Ordinances</a></li>
                         </ul>
                     </li>
                     <li class="divider"></li>

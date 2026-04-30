@@ -47,7 +47,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
      //Transparency
      Route::get('/transparency/fdp-reports', 'Frontend\TransparencyController@indexFdpReports')->name('transparency.fdp-reports');
      Route::get('/transparency/municipalordinances', 'Frontend\TransparencyController@indexmunicipalordinances')->name('transparency.municipalordinances');
-     Route::redirect('/transparency/resolutions', '/transparency/fdp-reports');
+     Route::get('/transparency/resolutions', 'Frontend\TransparencyController@indexresolutions')->name('transparency.resolutions');
 
      //Tourism
      Route::get('/tourism', 'Frontend\TourismController@indexbontocattractions')->name('tourism.index');
