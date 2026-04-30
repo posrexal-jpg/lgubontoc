@@ -100,7 +100,10 @@
         height: 148px;
         margin: 0 auto .75rem;
         overflow: hidden;
-        background: #eef2ea;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(180deg, #f5f7f2, #e8eee6);
         border: 1px solid #d6dfd8;
         border-radius: 5px;
     }
@@ -108,8 +111,9 @@
     .official-card__photo {
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        object-position: center top;
+        display: block;
+        object-fit: contain;
+        object-position: center center;
     }
 
     .official-card__body {
