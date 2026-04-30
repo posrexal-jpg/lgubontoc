@@ -168,7 +168,7 @@
                         <h2>{{ $official->name }}</h2>
                         <div class="official-position">{{ $official->position }}</div>
                         @if(!empty($official->description))
-                            <p>{{ $official->description }}</p>
+                            <p>{{ \Illuminate\Support\Str::limit(strip_tags($official->description), 95) }}</p>
                         @endif
                     </div>
                 </article>

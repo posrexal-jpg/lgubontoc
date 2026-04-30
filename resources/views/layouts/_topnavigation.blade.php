@@ -149,7 +149,7 @@
                     <div id="submenu-services" class="collapse submenu" data-bs-parent="#app-nav-main">
                         <ul class="submenu-list list-unstyled">
                             @if($can('services'))
-                                <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.services.mayorsoffice') }}">Services</a></li>
+                                <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.services.mayorsoffice') }}">Mayor's Office</a></li>
                             @endif
                             @if($can('transaction_links'))
                                 <li class="submenu-item"><a class="submenu-link" href="{{ route('admin.transactions.links.index') }}">Transaction Links</a></li>
