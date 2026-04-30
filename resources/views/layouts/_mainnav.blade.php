@@ -3,6 +3,8 @@
     $transactionLinks = \Illuminate\Support\Facades\Schema::hasTable('transaction_links')
         ? \App\Models\TransactionLink::where('is_active', true)->orderBy('sort_order')->orderBy('title')->get()
         : collect();
+
+    $isRoute = fn (...$patterns) => request()->routeIs(...$patterns);
 @endphp
 
 <div id="main-nav" class="gwt-main-nav">
@@ -22,10 +24,10 @@
             <section class="top-bar-section collapse navbar-collapse" id="gwtNavbar">
                 <ul class="left">
                     <li class="divider"></li>
-                    <li class="active"><a href="{{ route('home') }}">Home</a></li>
+                    <li @class(['active' => $isRoute('home')])><a href="{{ route('home') }}">Home</a></li>
                     <li class="divider"></li>
 
-                    <li class="has-dropdown dropdown">
+                    <li @class(['has-dropdown dropdown', 'active' => $isRoute('government.*', 'about.directory', 'about.mandate', 'about.missionandvision', 'about.servicepledge')])>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Government</a>
                         <ul class="dropdown-menu dropdown">
                             <li><a class="dropdown-item" href="{{ route('government.elected-officials') }}">Elected Officials</a></li>
@@ -38,7 +40,7 @@
                     </li>
                     <li class="divider"></li>
 
-                    <li class="has-dropdown dropdown">
+                    <li @class(['has-dropdown dropdown', 'active' => $isRoute('services.*')])>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Transactions</a>
                         <ul class="dropdown-menu dropdown">
                             <li><a class="dropdown-item" href="{{ route('services.citizenscharter') }}">Citizen's Charter</a></li>
@@ -54,7 +56,7 @@
                     </li>
                     <li class="divider"></li>
 
-                    <li class="has-dropdown dropdown">
+                    <li @class(['has-dropdown dropdown', 'active' => $isRoute('transparency.*', 'others.downloadableforms')])>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Transparency</a>
                         <ul class="dropdown-menu dropdown">
                             <li><a class="dropdown-item" href="{{ route('transparency.fdp-reports') }}">Full Disclosure Policy Reports</a></li>
@@ -63,14 +65,14 @@
                     </li>
                     <li class="divider"></li>
 
-                    <li><a href="{{ route('newsandupdates.news') }}">News</a></li>
+                    <li @class(['active' => $isRoute('newsandupdates.news', 'newsandupdates.news.show')])><a href="{{ route('newsandupdates.news') }}">News</a></li>
                     <li class="divider"></li>
-                    <li><a href="{{ route('newsandupdates.upcomingupdates') }}">Announcements</a></li>
+                    <li @class(['active' => $isRoute('newsandupdates.upcomingupdates', 'newsandupdates.upcomingupdates.show')])><a href="{{ route('newsandupdates.upcomingupdates') }}">Announcements</a></li>
                     <li class="divider"></li>
-                    <li><a href="{{ route('tourism.index') }}">Tourism</a></li>
+                    <li @class(['active' => $isRoute('tourism.*')])><a href="{{ route('tourism.index') }}">Tourism</a></li>
                     <li class="divider"></li>
 
-                    <li class="has-dropdown dropdown">
+                    <li @class(['has-dropdown dropdown', 'active' => $isRoute('about.history', 'about.location', 'about.municipalityseal', 'others.gallery', 'others.gallery.show', 'careers.*')])>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About us</a>
                         <ul class="dropdown-menu dropdown">
                             <li><a class="dropdown-item" href="{{ route('about.history') }}">History</a></li>

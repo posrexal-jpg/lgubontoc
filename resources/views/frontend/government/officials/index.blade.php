@@ -38,39 +38,67 @@
 
     .officials-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
-        gap: .9rem;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 1rem;
+    }
+
+    .official-featured {
+        margin-bottom: 1.25rem;
+    }
+
+    .official-card--featured {
+        max-width: 430px;
+        margin: 0 auto;
+        padding: 1rem;
+        border-left: 0;
+        border-top: 5px solid #d4af37;
+        background: linear-gradient(180deg, #fff, #f7fbf4);
+        text-align: center;
+    }
+
+    .official-card--featured .official-card__photo-wrap {
+        width: 150px;
+        height: 185px;
+        margin: 0 auto .9rem;
+    }
+
+    .official-card--featured h2 {
+        font-size: 1.25rem;
+    }
+
+    .official-card--featured .official-position {
+        font-size: .85rem;
     }
 
     .official-card {
         position: relative;
         overflow: hidden;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: .9rem;
         min-height: 100%;
-        padding: .7rem;
+        padding: .85rem;
         background: #fff;
         border: 1px solid #dce3ea;
-        border-left: 4px solid #1f7a3f;
+        border-top: 4px solid #1f7a3f;
         border-radius: 6px;
         box-shadow: 0 8px 18px rgba(11, 61, 42, .055);
+        text-align: center;
         transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
     }
 
     .official-card:hover {
         transform: translateY(-2px);
         border-color: #bfd3c5;
-        border-left-color: #d4af37;
+        border-top-color: #d4af37;
         box-shadow: 0 12px 22px rgba(11, 61, 42, .09);
     }
 
     .official-card__photo-wrap {
-        flex: 0 0 76px;
         position: relative;
-        width: 76px;
-        height: 92px;
-        margin: 0;
+        width: 120px;
+        height: 148px;
+        margin: 0 auto .75rem;
         overflow: hidden;
         background: #eef2ea;
         border: 1px solid #d6dfd8;
@@ -85,6 +113,7 @@
     }
 
     .official-card__body {
+        width: 100%;
         min-width: 0;
         padding: 0;
     }
@@ -130,7 +159,7 @@
 
     @media (max-width: 991.98px) {
         .officials-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
         }
     }
 
@@ -153,13 +182,35 @@
 
 <section class="container frontend-page-content">
     @if($officials->isNotEmpty())
+        @php
+            $headOfficial = $officials->first();
+            $otherOfficials = $officials->skip(1);
+        @endphp
+
         <div class="officials-directory-head">
             <h2>Official Directory</h2>
             <span>{{ $officials->count() }} officials currently serving</span>
         </div>
 
+        @if($headOfficial)
+            <div class="official-featured">
+                <article class="official-card official-card--featured">
+                    <div class="official-card__photo-wrap">
+                        <img class="official-card__photo" src="{{ $headOfficial->photo_url }}" alt="{{ $headOfficial->name }}">
+                    </div>
+                    <div class="official-card__body">
+                        <h2>{{ $headOfficial->name }}</h2>
+                        <div class="official-position">{{ $headOfficial->position }}</div>
+                        @if(!empty($headOfficial->description))
+                            <p>{{ \Illuminate\Support\Str::limit(strip_tags($headOfficial->description), 120) }}</p>
+                        @endif
+                    </div>
+                </article>
+            </div>
+        @endif
+
         <div class="officials-grid">
-            @foreach($officials as $official)
+            @foreach($otherOfficials as $official)
                 <article class="official-card">
                     <div class="official-card__photo-wrap">
                         <img class="official-card__photo" src="{{ $official->photo_url }}" alt="{{ $official->name }}">
