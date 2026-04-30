@@ -10,6 +10,11 @@ use App\Http\Controllers\HomepageController;
 
 Route::group(['namespace' => 'App\Http\Controllers'], function()
 { 
+      // Load balancer health checks
+      Route::get('/health', 'HealthCheckController@live')->name('health');
+      Route::get('/health/live', 'HealthCheckController@live')->name('health.live');
+      Route::get('/health/ready', 'HealthCheckController@ready')->name('health.ready');
+
       //Homepage Routes
       Route::get('/', 'Frontend\HomeController@home')->name('home');
       Route::get('/updates/{id}', 'Frontend\HomeController@show')->name('home.show');
