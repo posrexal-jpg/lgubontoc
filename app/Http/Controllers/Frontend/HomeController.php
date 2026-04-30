@@ -9,6 +9,7 @@ use App\Models\CarouselItem;
 use App\Models\FeaturedItem;
 use App\Models\HeroImage;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Schema;
 
 class HomeController extends Controller
 {
@@ -22,6 +23,10 @@ class HomeController extends Controller
     {
         // Get carousel items (cache for 1 day)
         $carouselItems = Cache::remember('carousel_items', 86400, function () {
+            if (! Schema::hasTable('carousel_items')) {
+                return [];
+            }
+
             return CarouselItem::where('active', true)
                 ->orderBy('sort_order', 'asc')
                 ->get()
@@ -49,7 +54,9 @@ class HomeController extends Controller
             'featuredItems' => $featuredItemsData,
             'getrecord' => $featuredItemsData, // For backward compatibility
             'pagination' => $featuredItems, // For pagination links
-            'heroImageUrl' => HeroImage::imageUrlFor('home', 'uploads/m1KQTRPgOCyDRFpmPxdKqjcs5rYeBN.jfif'),
+            'heroImageUrl' => Schema::hasTable('hero_images')
+                ? HeroImage::imageUrlFor('home', 'uploads/m1KQTRPgOCyDRFpmPxdKqjcs5rYeBN.jfif')
+                : asset('uploads/m1KQTRPgOCyDRFpmPxdKqjcs5rYeBN.jfif'),
         ];
 
         return view('frontend.home.index', $data);

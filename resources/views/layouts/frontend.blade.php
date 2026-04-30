@@ -19,9 +19,11 @@
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
     @php
-        $headerBanner = \App\Models\HeroImage::where('page_key', 'header_banner')
-            ->where('is_active', true)
-            ->first();
+        $headerBanner = \Illuminate\Support\Facades\Schema::hasTable('hero_images')
+            ? \App\Models\HeroImage::where('page_key', 'header_banner')
+                ->where('is_active', true)
+                ->first()
+            : null;
     @endphp
 
     <div class="govph-bar">
