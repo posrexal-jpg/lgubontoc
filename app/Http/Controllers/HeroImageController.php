@@ -12,7 +12,6 @@ class HeroImageController extends Controller
     private array $pages = [
         'header_banner' => 'Header Banner',
         'home' => 'Homepage',
-        'tourism' => 'Tourism',
     ];
 
     private function uploadPath(?string $filename = null): string

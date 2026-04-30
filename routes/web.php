@@ -183,6 +183,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
         //Admin Dashboard Tourism
         Route::get('/tourism/bontocattractions', 'TourismController@indexbontocattractions')->name('admin.tourism.bontocattractions');
+        Route::post('/tourism/hero', 'TourismController@updateHero')->name('admin.tourism.hero.update');
         Route::get('/tourism/bontocattractions/read/{id}', 'TourismController@showbontocattractions')->name('admin.tourism.bontocattractions.show');
         Route::get('/tourism/bontocattractions/edit/{id}', 'TourismController@editbontocattractions')->name('admin.tourism.bontocattractions.edit');
         Route::post('/tourism/bontocattractions/add', 'TourismController@addbontocattractions')->name('admin.tourism.bontocattractions.add');

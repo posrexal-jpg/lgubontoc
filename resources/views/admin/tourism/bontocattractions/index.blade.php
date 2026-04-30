@@ -14,6 +14,43 @@
     <div class="container">
         @include('layouts.partials.message')
 
+        <div class="card p-4 mb-4">
+            <h5 class="card-title">Tourism Hero</h5>
+            <p class="text-muted mb-3">Upload the wide banner image used at the top of the public Tourism page.</p>
+
+            <div class="row g-4 align-items-start">
+                <div class="col-lg-6">
+                    @if($tourismHero)
+                        <img src="{{ $tourismHero->image_url }}" alt="{{ $tourismHero->title }}" class="img-fluid border" style="width: 100%; max-height: 260px; object-fit: cover;">
+                    @else
+                        <div class="text-muted p-4 border">No hero image uploaded yet.</div>
+                    @endif
+                </div>
+                <div class="col-lg-6">
+                    <form action="{{ route('admin.tourism.hero.update') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
+                            <input type="text" name="title" class="form-control" value="{{ old('title', $tourismHero->title ?? 'Tourism Hero') }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Hero Image</label>
+                            <input type="file" name="image" class="form-control" accept="image/*">
+                            @include('admin.partials.image-upload-guideline', ['type' => 'hero'])
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Is Active</label>
+                            <select name="is_active" class="form-control" required>
+                                <option value="1" @selected(old('is_active', $tourismHero->is_active ?? true) == 1)>Yes</option>
+                                <option value="0" @selected(old('is_active', $tourismHero->is_active ?? true) == 0)>No</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Tourism Hero</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="card p-4">
             <h5 class="card-title">
                 Manage Tourism Destinations

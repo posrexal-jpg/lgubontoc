@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\HeroImage;
 use App\Models\TourismAttractionPhoto;
 use App\Models\Tourism_bontocattractions;
 use Illuminate\Support\Str;
@@ -24,12 +25,28 @@ class TourismController extends Controller
         return $filename ? $path.DIRECTORY_SEPARATOR.$filename : $path;
     }
 
+    private function heroUploadPath(?string $filename = null): string
+    {
+        $path = public_path('uploads/hero-images');
+
+        if (!is_dir($path)) {
+            mkdir($path, 0755, true);
+        }
+
+        if (!is_writable($path)) {
+            @chmod($path, 0775);
+        }
+
+        return $filename ? $path.DIRECTORY_SEPARATOR.$filename : $path;
+    }
+
     public function indexbontocattractions() 
     {
         $bontocattractions = Tourism_bontocattractions::with('photos')->latest()->get();
         return view('admin.tourism.bontocattractions.index',[
                 'bontocattractions' => $bontocattractions,
                 'bontocattraction' => null,
+                'tourismHero' => HeroImage::where('page_key', 'tourism')->first(),
         ]);
     }
 
@@ -41,7 +58,40 @@ class TourismController extends Controller
         return view('admin.tourism.bontocattractions.index',[
                 'bontocattractions' => $bontocattractions,
                 'bontocattraction' => $bontocattraction,
+                'tourismHero' => HeroImage::where('page_key', 'tourism')->first(),
         ]);
+    }
+
+    public function updateHero(Request $request)
+    {
+        $data = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'image' => ['nullable', 'image', 'max:4096'],
+            'is_active' => ['required', 'boolean'],
+        ]);
+
+        $heroImage = HeroImage::firstOrNew(['page_key' => 'tourism']);
+        $heroImage->title = $data['title'];
+        $heroImage->is_active = $data['is_active'];
+
+        if ($request->hasFile('image')) {
+            if ($heroImage->image && file_exists($this->heroUploadPath($heroImage->image))) {
+                unlink($this->heroUploadPath($heroImage->image));
+            }
+
+            $file = $request->file('image');
+            $filename = Str::random(30).'.'.$file->getClientOriginalExtension();
+            $file->move($this->heroUploadPath(), $filename);
+            $heroImage->image = $filename;
+        }
+
+        if (!$heroImage->image) {
+            return redirect()->route('admin.tourism.bontocattractions')->with('error', 'Please upload a tourism hero image first.');
+        }
+
+        $heroImage->save();
+
+        return redirect()->route('admin.tourism.bontocattractions')->with('success', 'Tourism hero image successfully saved.');
     }
 
     public function showbontocattractions($id)
