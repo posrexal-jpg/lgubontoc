@@ -277,9 +277,11 @@ a:hover {
 
 .site-header-banner {
     flex: 1 1 420px;
+    width: min(520px, 100%);
     max-width: 520px;
     aspect-ratio: 5 / 1;
-    min-height: 86px;
+    height: auto;
+    min-height: 0;
     background: #eef4ec;
     border: 1px dashed #b9ccb5;
     border-radius: 4px;
@@ -1155,8 +1157,9 @@ body.accessibility-high-contrast .search-result-card {
     }
 
     .site-header-banner {
-        width: 100%;
-        max-width: none;
+        width: min(520px, 100%);
+        max-width: 100%;
+        flex: 0 0 auto;
     }
 
     .home-hero__content,
@@ -1239,6 +1242,11 @@ body.accessibility-high-contrast .search-result-card {
     .site-brand img {
         width: 62px;
         height: 62px;
+    }
+
+    .site-header-banner {
+        width: min(420px, 100%);
+        aspect-ratio: 5 / 1;
     }
 
     .home-hero {
