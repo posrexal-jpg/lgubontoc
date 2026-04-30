@@ -109,10 +109,10 @@
     }
 
     .official-card__photo {
-        width: 100%;
-        height: 100%;
+        width: 92%;
+        height: 92%;
         display: block;
-        object-fit: cover;
+        object-fit: contain;
         object-position: center top;
     }
 
