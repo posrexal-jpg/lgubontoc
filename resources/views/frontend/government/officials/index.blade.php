@@ -47,23 +47,23 @@
     }
 
     .official-card--featured {
-        max-width: 430px;
+        max-width: 340px;
         margin: 0 auto;
-        padding: 1rem;
+        padding: 0;
         border-left: 0;
         border-top: 5px solid #d4af37;
-        background: linear-gradient(180deg, #fff, #f7fbf4);
+        background: #f5f7f2;
         text-align: center;
     }
 
     .official-card--featured .official-card__photo-wrap {
-        width: 150px;
-        height: 185px;
-        margin: 0 auto .9rem;
+        width: 100%;
+        height: 340px;
+        margin: 0;
     }
 
     .official-card--featured h2 {
-        font-size: 1.25rem;
+        font-size: 1.35rem;
     }
 
     .official-card--featured .official-position {
@@ -77,8 +77,8 @@
         flex-direction: column;
         align-items: center;
         min-height: 100%;
-        padding: .85rem;
-        background: #fff;
+        padding: 0;
+        background: #f5f7f2;
         border: 1px solid #dce3ea;
         border-top: 4px solid #1f7a3f;
         border-radius: 6px;
@@ -96,46 +96,51 @@
 
     .official-card__photo-wrap {
         position: relative;
-        width: 120px;
-        height: 148px;
-        margin: 0 auto .75rem;
+        width: 100%;
+        height: 260px;
+        margin: 0;
         overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(180deg, #f5f7f2, #e8eee6);
-        border: 1px solid #d6dfd8;
-        border-radius: 5px;
+        background: #f5f7f2;
+        border: 0;
+        border-radius: 0;
     }
 
     .official-card__photo {
         width: 100%;
         height: 100%;
         display: block;
-        object-fit: contain;
-        object-position: center center;
+        object-fit: cover;
+        object-position: center top;
     }
 
     .official-card__body {
         width: 100%;
         min-width: 0;
-        padding: 0;
+        margin-top: -104px;
+        padding: 4.4rem .8rem .85rem;
+        background: linear-gradient(180deg, rgba(245, 247, 242, 0) 0%, rgba(245, 247, 242, .9) 30%, #f5f7f2 100%);
+        position: relative;
+        z-index: 1;
     }
 
     .official-card h2 {
-        color: #143226;
-        font-size: .98rem;
-        font-weight: 800;
-        line-height: 1.2;
-        margin-bottom: .22rem;
+        color: #053827;
+        font-size: 1.05rem;
+        font-weight: 900;
+        line-height: 1.05;
+        margin-bottom: .34rem;
         overflow-wrap: anywhere;
+        text-transform: uppercase;
     }
 
     .official-position {
         display: block;
-        color: #1f7a3f;
+        color: #00853f;
         font-size: .78rem;
-        font-weight: 800;
+        font-weight: 900;
         line-height: 1.2;
         margin-bottom: .45rem;
         text-transform: uppercase;
@@ -144,7 +149,7 @@
     }
 
     .official-card p {
-        color: #5f6b76;
+        color: #66737f;
         display: -webkit-box;
         overflow: hidden;
         font-size: .85rem;
