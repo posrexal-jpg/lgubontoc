@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Str;
 
+use App\Models\HomepageHeroSetting;
 use App\Models\HomepageModel;
 
 
@@ -14,7 +15,31 @@ class HomepageController extends Controller
     public function home()
     {
         $data['getrecord'] = HomepageModel::get();
+        $data['heroSetting'] = HomepageHeroSetting::firstOrCreate([], HomepageHeroSetting::defaults());
     	return view('admin.home.list', $data);
+    }
+
+    public function updateHero(Request $request)
+    {
+        $data = $request->validate([
+            'eyebrow' => ['nullable', 'string', 'max:255'],
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'primary_button_label' => ['nullable', 'string', 'max:255'],
+            'primary_button_url' => ['nullable', 'string', 'max:255'],
+            'secondary_button_label' => ['nullable', 'string', 'max:255'],
+            'secondary_button_url' => ['nullable', 'string', 'max:255'],
+            'fact_1_title' => ['nullable', 'string', 'max:255'],
+            'fact_1_text' => ['nullable', 'string', 'max:255'],
+            'fact_2_title' => ['nullable', 'string', 'max:255'],
+            'fact_2_text' => ['nullable', 'string', 'max:255'],
+            'fact_3_title' => ['nullable', 'string', 'max:255'],
+            'fact_3_text' => ['nullable', 'string', 'max:255'],
+        ]);
+
+        HomepageHeroSetting::firstOrCreate([], HomepageHeroSetting::defaults())->update($data);
+
+        return redirect()->route('admin.home')->with('success', 'Homepage hero content successfully updated.');
     }
 
     public function home_add(Request $request)

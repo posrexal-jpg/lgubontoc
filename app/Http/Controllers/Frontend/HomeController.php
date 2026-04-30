@@ -8,6 +8,7 @@ use App\Models\HomepageModel;
 use App\Models\CarouselItem;
 use App\Models\FeaturedItem;
 use App\Models\HeroImage;
+use App\Models\HomepageHeroSetting;
 use App\Models\NewsandUpdates_news;
 use App\Models\NewsandUpdates_upcomingupdates;
 use Illuminate\Support\Facades\Cache;
@@ -39,6 +40,9 @@ class HomeController extends Controller
 
         $data = [
             'carouselItems' => $carouselItems,
+            'heroSetting' => Schema::hasTable('homepage_hero_settings')
+                ? HomepageHeroSetting::firstOrCreate([], HomepageHeroSetting::defaults())
+                : (object) HomepageHeroSetting::defaults(),
             'featuredItems' => $featuredItemsData,
             'getrecord' => $featuredItemsData, // For backward compatibility
             'pagination' => null,

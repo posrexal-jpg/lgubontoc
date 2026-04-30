@@ -36,26 +36,30 @@
     </div>
     <div class="container home-hero__content">
         <div class="home-hero__copy">
-            <span class="eyebrow">Official LGU Portal</span>
-            <h1>Municipality of Bontoc, Southern Leyte</h1>
-            <p>Access public services, announcements, transparency documents, tourism information, and municipal resources from one official source.</p>
+            <span class="eyebrow">{{ $heroSetting->eyebrow }}</span>
+            <h1>{{ $heroSetting->title }}</h1>
+            <p>{{ $heroSetting->description }}</p>
             <div class="home-hero__actions">
-                <a href="{{ route('services.citizenscharter') }}" class="btn btn-primary">Citizen's Charter</a>
-                <a href="{{ route('transparency.fdp-reports') }}" class="btn btn-outline-light">Transparency</a>
+                @if($heroSetting->primary_button_label && $heroSetting->primary_button_url)
+                    <a href="{{ url($heroSetting->primary_button_url) }}" class="btn btn-primary">{{ $heroSetting->primary_button_label }}</a>
+                @endif
+                @if($heroSetting->secondary_button_label && $heroSetting->secondary_button_url)
+                    <a href="{{ url($heroSetting->secondary_button_url) }}" class="btn btn-outline-light">{{ $heroSetting->secondary_button_label }}</a>
+                @endif
             </div>
         </div>
         <aside class="home-hero__panel" aria-label="Municipal quick facts">
             <div>
-                <strong>Public Service Desk</strong>
-                <span>Municipal Hall, Bontoc</span>
+                <strong>{{ $heroSetting->fact_1_title }}</strong>
+                <span>{{ $heroSetting->fact_1_text }}</span>
             </div>
             <div>
-                <strong>Emergency Hotline</strong>
-                <span>911 and local response offices</span>
+                <strong>{{ $heroSetting->fact_2_title }}</strong>
+                <span>{{ $heroSetting->fact_2_text }}</span>
             </div>
             <div>
-                <strong>Office Hours</strong>
-                <span>Monday to Friday, 8:00 AM - 5:00 PM</span>
+                <strong>{{ $heroSetting->fact_3_title }}</strong>
+                <span>{{ $heroSetting->fact_3_text }}</span>
             </div>
         </aside>
     </div>

@@ -105,7 +105,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::post('carousel', 'CarouselItemController@store')->name('admin.carousel.store');
         Route::post('carousel/{id}', 'CarouselItemController@update')->name('admin.carousel.update');
         Route::get('carousel/delete/{id}', 'CarouselItemController@destroy')->name('admin.carousel.delete');
-        Route::get('home', [HomepageController::class, 'home']);
+        Route::get('home', [HomepageController::class, 'home'])->name('admin.home');
+        Route::post('home/hero', [HomepageController::class, 'updateHero'])->name('admin.home.hero.update');
         Route::get('home/add', [HomepageController::class, 'home_add']);
         Route::post('home/add', [HomepageController::class, 'home_add_post']);
         Route::post('home/add', [HomepageController::class, 'home_add_post']);

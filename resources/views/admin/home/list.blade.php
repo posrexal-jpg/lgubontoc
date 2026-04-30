@@ -2,9 +2,61 @@
 
 @section('content')
     <div class="container">
+      @include('layouts.partials.message')
+
+      <div class="card p-4 mb-4">
+        <h5 class="card-title">Homepage Hero Content</h5>
+        <p class="text-muted">Edit the main homepage title, description, buttons, and quick facts shown over the hero banner.</p>
+        <form action="{{ route('admin.home.hero.update') }}" method="POST">
+          @csrf
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Eyebrow</label>
+              <input type="text" name="eyebrow" class="form-control" value="{{ old('eyebrow', $heroSetting->eyebrow) }}">
+            </div>
+            <div class="col-md-8 mb-3">
+              <label class="form-label">Main Title</label>
+              <input type="text" name="title" class="form-control" value="{{ old('title', $heroSetting->title) }}" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea name="description" class="form-control" rows="3">{{ old('description', $heroSetting->description) }}</textarea>
+          </div>
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <label class="form-label">Primary Button Label</label>
+              <input type="text" name="primary_button_label" class="form-control" value="{{ old('primary_button_label', $heroSetting->primary_button_label) }}">
+            </div>
+            <div class="col-md-3 mb-3">
+              <label class="form-label">Primary Button URL</label>
+              <input type="text" name="primary_button_url" class="form-control" value="{{ old('primary_button_url', $heroSetting->primary_button_url) }}">
+            </div>
+            <div class="col-md-3 mb-3">
+              <label class="form-label">Secondary Button Label</label>
+              <input type="text" name="secondary_button_label" class="form-control" value="{{ old('secondary_button_label', $heroSetting->secondary_button_label) }}">
+            </div>
+            <div class="col-md-3 mb-3">
+              <label class="form-label">Secondary Button URL</label>
+              <input type="text" name="secondary_button_url" class="form-control" value="{{ old('secondary_button_url', $heroSetting->secondary_button_url) }}">
+            </div>
+          </div>
+          <div class="row">
+            @for($i = 1; $i <= 3; $i++)
+              <div class="col-md-4 mb-3">
+                <label class="form-label">Quick Fact {{ $i }} Title</label>
+                <input type="text" name="fact_{{ $i }}_title" class="form-control" value="{{ old('fact_'.$i.'_title', $heroSetting->{'fact_'.$i.'_title'}) }}">
+                <label class="form-label mt-2">Quick Fact {{ $i }} Text</label>
+                <input type="text" name="fact_{{ $i }}_text" class="form-control" value="{{ old('fact_'.$i.'_text', $heroSetting->{'fact_'.$i.'_text'}) }}">
+              </div>
+            @endfor
+          </div>
+          <button type="submit" class="btn btn-primary">Save Hero Content</button>
+        </form>
+      </div>
+
       <form>
             <div class="card-body">
-              @include('layouts.partials.message')
               <h5 class="card-title">
                 Homepage News & Featured Items
                 <button type="button" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#addHomeModal">Add Homepage Item</button>
